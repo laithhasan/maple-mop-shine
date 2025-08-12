@@ -54,7 +54,7 @@ export default function Hero() {
   const [index, setIndex] = useState(0);
   const [prevIndex, setPrevIndex] = useState(0);
   const [paused, setPaused] = useState(false);
-  // Mark first slide as loaded initially to avoid any initial flash
+  // Mark first slide loaded to avoid initial flash
   const [loaded, setLoaded] = useState<boolean[]>([true, false]);
 
   // Refs
@@ -73,7 +73,7 @@ export default function Hero() {
     }
     if (!paused) {
       timerRef.current = window.setTimeout(() => {
-        setPrevIndex((p) => index);
+        setPrevIndex((_) => index);
         setIndex((i) => (i + 1) % slides.length);
       }, DURATION_MS);
     }
@@ -84,7 +84,7 @@ export default function Hero() {
     setIndex(i);
   };
 
-  // Autoplay (single-shot timeout to prevent drift)
+  // Autoplay
   useEffect(() => {
     scheduleNext();
     return () => {
@@ -92,11 +92,11 @@ export default function Hero() {
     };
   }, [index, paused]);
 
-  // Mark image loaded via onLoad
+  // Mark image loaded
   const markLoaded = (i: number) =>
     setLoaded((arr) => (arr[i] ? arr : arr.map((v, idx) => (idx === i ? true : v))));
 
-  // Preload the next image proactively
+  // Preload upcoming image
   useEffect(() => {
     const next = (index + 1) % slides.length;
     if (!loaded[next]) {
@@ -126,21 +126,12 @@ export default function Hero() {
     };
   }, []);
 
-  // Keyboard left/right
+  // Keyboard and touch
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === "ArrowRight") {
-      e.preventDefault();
-      goTo((index + 1) % slides.length);
-    } else if (e.key === "ArrowLeft") {
-      e.preventDefault();
-      goTo((index - 1 + slides.length) % slides.length);
-    }
+    if (e.key === "ArrowRight") { e.preventDefault(); goTo((index + 1) % slides.length); }
+    else if (e.key === "ArrowLeft") { e.preventDefault(); goTo((index - 1 + slides.length) % slides.length); }
   };
-
-  // Touch swipe
-  const onTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0].clientX;
-  };
+  const onTouchStart = (e: React.TouchEvent) => { touchStartX.current = e.touches[0].clientX; };
   const onTouchEnd = (e: React.TouchEvent) => {
     if (touchStartX.current == null) return;
     const dx = e.changedTouches[0].clientX - touchStartX.current;
@@ -150,11 +141,8 @@ export default function Hero() {
     touchStartX.current = null;
   };
 
-  // Visibility logic:
-  // Keep prev slide visible until the new active slide image has loaded (no white flash).
-  const isVisible = (i: number) =>
-    i === index ? loaded[i] : i === prevIndex && !loaded[index];
-
+  // Visibility logic: keep previous slide until new image is loaded (no flash)
+  const isVisible = (i: number) => (i === index ? loaded[i] : i === prevIndex && !loaded[index]);
   const isActive = (i: number) => i === index;
 
   return (
@@ -192,7 +180,6 @@ export default function Hero() {
                 onLoad={() => markLoaded(i)}
                 className="block h-full w-full object-cover will-change-[transform] [backface-visibility:hidden] [transform:translateZ(0)]"
                 style={{
-                  // Toggle animation name so it restarts cleanly on each activation (no remount).
                   animationName: active && loaded[i] ? "kenburns" : "none",
                   animationDuration: `${DURATION_MS}ms`,
                   animationTimingFunction: "ease-in-out",
@@ -202,7 +189,7 @@ export default function Hero() {
                 loading={i === 0 ? "eager" : "lazy"}
                 decoding="async"
               />
-              {/* Exact-bounds gradient overlay */}
+              {/* Exact-bounds image tint/gradient */}
               <div
                 className="absolute inset-0 bg-gradient-to-tr from-[#940400]/25 via-transparent to-transparent pointer-events-none"
                 aria-hidden
@@ -212,44 +199,46 @@ export default function Hero() {
         })}
       </div>
 
-      {/* Text block */}
+      {/* Text block with frosted blur panel */}
       <div className="pointer-events-none absolute inset-0">
         <div className="pointer-events-auto max-w-7xl mx-auto px-6 md:px-8 h-full">
           <div className="h-full grid grid-cols-1 md:grid-cols-12 items-center">
             <article className="md:col-span-8 lg:col-span-7 max-w-4xl">
-              {isTwoLine(slides[index]) ? (
-                <h1 className="font-extrabold tracking-tight leading-tight drop-shadow-md mb-1">
-                  <span className="block gradient-text text-4xl md:text-5xl">
-                    {slides[index].h1Top}
-                  </span>
-                  <span className="block gradient-text mt-1 text-4xl md:text-5xl">
-                    {slides[index].h1Bottom}
-                  </span>
-                </h1>
-              ) : (
-                <h1 className="font-extrabold tracking-tight leading-tight drop-shadow-md mb-1">
-                  {/* One line from md+; wraps on very small screens */}
-                  <span className="flex flex-wrap md:flex-nowrap md:whitespace-nowrap items-baseline gap-x-3 text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
-                    <span className="gradient-text">{slides[index].h1Parts[0]}</span>
-                    <span className="text-white/90">|</span>
-                    <span className="gradient-text">{slides[index].h1Parts[1]}</span>
-                    <span className="text-white/90">|</span>
-                    <span className="gradient-text">{slides[index].h1Parts[2]}</span>
-                  </span>
-                </h1>
-              )}
+              <div className="inline-block rounded-2xl bg-slate-900/20 supports-[backdrop-filter]:backdrop-blur-md supports-[backdrop-filter]:backdrop-saturate-150 ring-1 ring-white/10 shadow-lg p-4 sm:p-6">
+                {isTwoLine(slides[index]) ? (
+                  <h1 className="font-extrabold tracking-tight leading-tight drop-shadow-md mb-2">
+                    <span className="block gradient-text text-4xl md:text-5xl">
+                      {slides[index].h1Top}
+                    </span>
+                    <span className="block gradient-text mt-1 text-4xl md:text-5xl">
+                      {slides[index].h1Bottom}
+                    </span>
+                  </h1>
+                ) : (
+                  <h1 className="font-extrabold tracking-tight leading-tight drop-shadow-md mb-2">
+                    {/* One line from md+; wraps on very small screens */}
+                    <span className="flex flex-wrap md:flex-nowrap md:whitespace-nowrap items-baseline gap-x-2 sm:gap-x-3 text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
+                      <span className="gradient-text">{slides[index].h1Parts[0]}</span>
+                      <span aria-hidden className="sep mx-1 sm:mx-2 align-middle" />
+                      <span className="gradient-text">{slides[index].h1Parts[1]}</span>
+                      <span aria-hidden className="sep mx-1 sm:mx-2 align-middle" />
+                      <span className="gradient-text">{slides[index].h1Parts[2]}</span>
+                    </span>
+                  </h1>
+                )}
 
-              <p className="mt-2 text-white/90 drop-shadow-sm text-lg md:text-xl">
-                {slides[index].sub}
-              </p>
+                <p className="mt-1 text-white/90 drop-shadow-sm text-lg md:text-xl">
+                  {slides[index].sub}
+                </p>
 
-              <div className="mt-6 flex flex-wrap gap-3">
-                <Button asChild variant="hero">
-                  <Link to="/contact#quote">Get a Quote</Link>
-                </Button>
-                <Button asChild variant="outline">
-                  <a href="tel:14379917677">Call 437-991-7677</a>
-                </Button>
+                <div className="mt-4 flex flex-wrap gap-3">
+                  <Button asChild variant="hero">
+                    <Link to="/contact#quote">Get a Quote</Link>
+                  </Button>
+                  <Button asChild variant="outline">
+                    <a href="tel:14379917677">Call 437-991-7677</a>
+                  </Button>
+                </div>
               </div>
             </article>
           </div>
@@ -283,6 +272,7 @@ export default function Hero() {
           0%   { transform: scale(1.06) translateY(0); }
           100% { transform: scale(1.0) translateY(-1%); }
         }
+
         /* Animated gradient for headings: red -> dark red -> red */
         @keyframes gradientShift {
           0%   { background-position: 0% 50%; }
@@ -290,17 +280,37 @@ export default function Hero() {
           100% { background-position: 0% 50%; }
         }
         .gradient-text {
-          background-image: linear-gradient(90deg, #C30003, #940400, #C30003);
+          background-image: linear-gradient(90deg, #C30003, #7a0000, #C30003); /* red -> darker red -> red */
           background-size: 200% 200%;
           animation: gradientShift 6s ease-in-out infinite;
           -webkit-background-clip: text;
           background-clip: text;
           color: transparent;
         }
+
+        /* Animated separators */
+        @keyframes sepShift {
+          0%   { background-position: 0% 0%; box-shadow: 0 0 0 rgba(0,0,0,0); }
+          50%  { background-position: 0% 100%; box-shadow: 0 0 12px rgba(195,0,3,0.35); }
+          100% { background-position: 0% 0%; box-shadow: 0 0 0 rgba(0,0,0,0); }
+        }
+        .sep {
+          display: inline-block;
+          width: 2px;
+          height: 1.1em;
+          background-image: linear-gradient(180deg, #C30003, #7a0000, #C30003);
+          background-size: 100% 200%;
+          animation: sepShift 2.8s ease-in-out infinite;
+          border-radius: 9999px;
+          opacity: 0.9;
+        }
+
         /* Respect reduced motion */
         @media (prefers-reduced-motion: reduce) {
           .gradient-text { animation: none; }
-          .kenburns { animation: none !important; }
+          .sep { animation: none; }
+          /* No zoom */
+          img { animation: none !important; }
         }
       `}</style>
     </section>
