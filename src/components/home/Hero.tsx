@@ -149,7 +149,7 @@ export default function Hero() {
       tabIndex={0}
     >
       {/* Slides (stacked for crossfade) */}
-      <div className="relative w-full h-[64vh] md:h-[78vh]">
+      <div className="relative w-full h-[64vh] md:h-[78vh] overflow-hidden">
         {slides.map((s, i) => (
           <div
             key={s.id}
@@ -158,14 +158,14 @@ export default function Hero() {
             aria-roledescription="slide"
             aria-label={`${i + 1} of ${slides.length}`}
             aria-hidden={i !== index}
-            className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+            className={`absolute inset-0 overflow-hidden transition-opacity duration-700 ease-in-out ${
               i === index ? "opacity-100" : "opacity-0"
             }`}
           >
             <img
               src={s.img}
               alt={s.alt}
-              className="h-full w-full object-cover"
+              className="block h-full w-full object-cover"
               style={{
                 animation: `kenburns ${DURATION}ms ease-in-out both`,
                 animationPlayState: paused ? "paused" : "running",
@@ -173,9 +173,9 @@ export default function Hero() {
               loading={i === 0 ? "eager" : "lazy"}
               decoding="async"
             />
-            {/* Brand gradient overlay for contrast */}
+            {/* Brand gradient overlay for contrast (exactly image bounds) */}
             <div
-              className="absolute inset-0 bg-gradient-to-tr from-[#940400]/35 via-transparent to-transparent"
+              className="absolute inset-0 bg-gradient-to-tr from-[#940400]/35 via-transparent to-transparent pointer-events-none"
               aria-hidden
             />
           </div>
@@ -197,7 +197,7 @@ export default function Hero() {
                   </span>
                 </h1>
               ) : (
-                <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight leading-tight drop-shadow-md gradient-text">
+                <h1 className="gradient-text font-extrabold tracking-tight leading-tight drop-shadow-md whitespace-nowrap text-3xl sm:text-4xl md:text-5xl">
                   {(slides[index] as any).h1}
                 </h1>
               )}
@@ -266,7 +266,6 @@ export default function Hero() {
           100% { background-position: 0% 50%; }
         }
         .gradient-text {
-          /* Animated red->white->red gradient text */
           background-image: linear-gradient(90deg, #C30003, #ffffff, #C30003);
           background-size: 200% 200%;
           animation: gradientShift 6s ease-in-out infinite;
