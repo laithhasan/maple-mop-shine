@@ -4,24 +4,29 @@ import { Link } from "react-router-dom";
 import heroOffice from "@/assets/hero-office-clean.jpg";
 import cleanSurfaces from "@/assets/clean-surfaces.jpg";
 
-type Slide =
-  | {
-      id: string;
-      img: string;
-      alt: string;
-      layout: "twoLine";
-      h1Top: string;
-      h1Bottom: string;
-      sub: string;
-    }
-  | {
-      id: string;
-      img: string;
-      alt: string;
-      layout: "oneLine";
-      h1Parts: [string, string, string]; // ["Cleaner", "Brighter", "Stain-Free"]
-      sub: string;
-    };
+/** Slide types for safer JSX */
+type TwoLineSlide = {
+  id: string;
+  img: string;
+  alt: string;
+  layout: "twoLine";
+  h1Top: string;
+  h1Bottom: string;
+  sub: string;
+};
+type OneLineSlide = {
+  id: string;
+  img: string;
+  alt: string;
+  layout: "oneLine";
+  h1Parts: [string, string, string]; // e.g., ["Cleaner","Brighter","Stain-Free"]
+  sub: string;
+};
+type Slide = TwoLineSlide | OneLineSlide;
+
+function isTwoLine(s: Slide): s is TwoLineSlide {
+  return s.layout === "twoLine";
+}
 
 export default function Hero() {
   const slides = useMemo<Slide[]>(
@@ -40,7 +45,7 @@ export default function Hero() {
         img: cleanSurfaces,
         alt: "Clean, bright floors and surfaces",
         layout: "oneLine",
-        // keep “Stain-Free” glued together with a non-breaking hyphen
+        // keep “Stain-Free” non-breaking hyphen
         h1Parts: ["Cleaner", "Brighter", "Stain-Free"],
         sub: "Make Your Home Shine Crystal Clear!",
       },
@@ -48,83 +53,82 @@ export default function Hero() {
     []
   );
 
+  /** State */
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
 
+  /** Refs */
   const containerRef = useRef<HTMLDivElement | null>(null);
   const focusablesRef = useRef<HTMLButtonElement[]>([]);
-  const intervalRef = useRef<number | null>(null);
+  const timerRef = useRef<number | null>(null);
   const touchStartX = useRef<number | null>(null);
 
-  // 7s rotation
-  const DURATION = 7000;
+  /** Constants */
+  const DURATION_MS = 7000; // 7s rotate + kenburns duration
 
-  const next = () => setIndex((i) => (i + 1) % slides.length);
-  const prev = () => setIndex((i) => (i - 1 + slides.length) % slides.length);
+  /** Helpers */
+  const scheduleNext = () => {
+    if (timerRef.current) {
+      window.clearTimeout(timerRef.current);
+      timerRef.current = null;
+    }
+    if (!paused) {
+      timerRef.current = window.setTimeout(() => {
+        setIndex((i) => (i + 1) % slides.length);
+      }, DURATION_MS);
+    }
+  };
+
   const goTo = (i: number) => setIndex(i);
 
-  // Auto-rotate
+  /** Autoplay: schedule on index/paused change (prevents drift + double intervals) */
   useEffect(() => {
-    if (paused) return;
-    if (intervalRef.current) window.clearInterval(intervalRef.current);
-    intervalRef.current = window.setInterval(() => {
-      setIndex((i) => (i + 1) % slides.length);
-    }, DURATION);
+    scheduleNext();
     return () => {
-      if (intervalRef.current) window.clearInterval(intervalRef.current);
+      if (timerRef.current) window.clearTimeout(timerRef.current);
     };
-  }, [paused, slides.length]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [index, paused]);
 
-  // Prefetch next image
+  /** Prefetch upcoming image */
   useEffect(() => {
     const nextIndex = (index + 1) % slides.length;
     const img = new Image();
     img.src = slides[nextIndex].img;
   }, [index, slides]);
 
-  // Pause on hover/focus
+  /** Pause on hover/focus */
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
-    const onMouseEnter = () => setPaused(true);
-    const onMouseLeave = () => setPaused(false);
+    const onEnter = () => setPaused(true);
+    const onLeave = () => setPaused(false);
     const onFocusIn = () => setPaused(true);
     const onFocusOut = () => setPaused(false);
-    el.addEventListener("mouseenter", onMouseEnter);
-    el.addEventListener("mouseleave", onMouseLeave);
+    el.addEventListener("mouseenter", onEnter);
+    el.addEventListener("mouseleave", onLeave);
     el.addEventListener("focusin", onFocusIn);
     el.addEventListener("focusout", onFocusOut);
     return () => {
-      el.removeEventListener("mouseenter", onMouseEnter);
-      el.removeEventListener("mouseleave", onMouseLeave);
+      el.removeEventListener("mouseenter", onEnter);
+      el.removeEventListener("mouseleave", onLeave);
       el.removeEventListener("focusin", onFocusIn);
       el.removeEventListener("focusout", onFocusOut);
     };
   }, []);
 
-  // Keyboard + simple focus wrap
+  /** Keyboard: left/right for slide change */
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (e.key === "ArrowRight") {
       e.preventDefault();
-      next();
+      setIndex((i) => (i + 1) % slides.length);
     } else if (e.key === "ArrowLeft") {
       e.preventDefault();
-      prev();
-    } else if (e.key === "Tab" && focusablesRef.current.length) {
-      const focusables = focusablesRef.current;
-      const first = focusables[0];
-      const last = focusables[focusables.length - 1];
-      if (!e.shiftKey && document.activeElement === last) {
-        e.preventDefault();
-        first?.focus();
-      } else if (e.shiftKey && document.activeElement === first) {
-        e.preventDefault();
-        last?.focus();
-      }
+      setIndex((i) => (i - 1 + slides.length) % slides.length);
     }
   };
 
-  // Touch swipe
+  /** Touch swipe */
   const onTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
   };
@@ -132,8 +136,8 @@ export default function Hero() {
     if (touchStartX.current == null) return;
     const dx = e.changedTouches[0].clientX - touchStartX.current;
     const threshold = 40;
-    if (dx > threshold) prev();
-    else if (dx < -threshold) next();
+    if (dx > threshold) setIndex((i) => (i - 1 + slides.length) % slides.length);
+    else if (dx < -threshold) setIndex((i) => (i + 1) % slides.length);
     touchStartX.current = null;
   };
 
@@ -144,12 +148,12 @@ export default function Hero() {
       role="region"
       aria-roledescription="carousel"
       aria-label="Hero"
+      tabIndex={0}
       onKeyDown={handleKeyDown}
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}
-      tabIndex={0}
     >
-      {/* Slides (stacked for crossfade). Each active image is re-keyed so the zoom restarts. */}
+      {/* Slides (cross-fade). overflow-hidden ensures overlay matches image bounds */}
       <div className="relative w-full h-[64vh] md:h-[78vh] overflow-hidden">
         {slides.map((s, i) => {
           const active = i === index;
@@ -165,19 +169,21 @@ export default function Hero() {
                 active ? "opacity-100" : "opacity-0"
               }`}
             >
+              {/* Re-key active image so Ken Burns restarts each switch */}
               <img
-                key={active ? `${s.id}-${index}` : s.id} // remount on activate -> restart animation
+                key={active ? `${s.id}-${index}` : s.id}
                 src={s.img}
                 alt={s.alt}
                 className="block h-full w-full object-cover"
                 style={{
-                  animation: `kenburns ${DURATION}ms ease-in-out both`,
+                  animation: active
+                    ? `kenburns ${DURATION_MS}ms ease-in-out both`
+                    : undefined,
                   animationPlayState: paused ? "paused" : "running",
                 }}
                 loading={i === 0 ? "eager" : "lazy"}
                 decoding="async"
               />
-              {/* Exact-bounds gradient overlay */}
               <div
                 className="absolute inset-0 bg-gradient-to-tr from-[#940400]/35 via-transparent to-transparent pointer-events-none"
                 aria-hidden
@@ -187,33 +193,34 @@ export default function Hero() {
         })}
       </div>
 
-      {/* Text (balanced, responsive) */}
+      {/* Text block */}
       <div className="pointer-events-none absolute inset-0">
         <div className="pointer-events-auto max-w-7xl mx-auto px-6 md:px-8 h-full">
           <div className="h-full grid grid-cols-1 md:grid-cols-12 items-center">
             <article className="md:col-span-7 lg:col-span-6 max-w-3xl">
-              {slides[index].layout === "twoLine" ? (
-                <h1 className="font-extrabold tracking-tight leading-tight drop-shadow-md">
-                  <span className="block gradient-text text-[clamp(2rem,5vw,3.25rem)] md:text-[clamp(2.5rem,4.5vw,4rem)]">
-                    {(slides[index] as any).h1Top}
+              {isTwoLine(slides[index]) ? (
+                <h1 className="font-extrabold tracking-tight leading-tight drop-shadow-md mb-1">
+                  <span className="block gradient-text text-[clamp(2rem,5vw,3.25rem)] md:text-[clamp(2.25rem,4.5vw,3.75rem)]">
+                    {slides[index].h1Top}
                   </span>
-                  <span className="block gradient-text mt-1 text-[clamp(2rem,5vw,3.25rem)] md:text-[clamp(2.5rem,4.5vw,4rem)]">
-                    {(slides[index] as any).h1Bottom}
+                  <span className="block gradient-text mt-1 text-[clamp(2rem,5vw,3.25rem)] md:text-[clamp(2.25rem,4.5vw,3.75rem)]">
+                    {slides[index].h1Bottom}
                   </span>
                 </h1>
               ) : (
-                <h1 className="font-extrabold tracking-tight leading-tight drop-shadow-md">
-                  <span className="flex flex-wrap md:flex-nowrap items-baseline gap-x-2 text-[clamp(1.75rem,4.5vw,3.25rem)] md:text-[clamp(2.5rem,4vw,4rem)]">
-                    <span className="gradient-text">{(slides[index] as any).h1Parts[0]}</span>
+                // Second hero: reduced size + perfect alignment above sub/CTAs
+                <h1 className="font-extrabold tracking-tight leading-tight drop-shadow-md mb-1">
+                  <span className="flex flex-wrap md:flex-nowrap items-baseline gap-x-2 text-[clamp(1.5rem,4.2vw,2.5rem)] md:text-[clamp(2rem,3.8vw,3.25rem)]">
+                    <span className="gradient-text">{slides[index].h1Parts[0]}</span>
                     <span className="text-white/90">|</span>
-                    <span className="gradient-text">{(slides[index] as any).h1Parts[1]}</span>
+                    <span className="gradient-text">{slides[index].h1Parts[1]}</span>
                     <span className="text-white/90">|</span>
-                    <span className="gradient-text">{(slides[index] as any).h1Parts[2]}</span>
+                    <span className="gradient-text">{slides[index].h1Parts[2]}</span>
                   </span>
                 </h1>
               )}
 
-              <p className="mt-4 text-white/90 drop-shadow-sm text-lg md:text-xl">
+              <p className="mt-2 text-white/90 drop-shadow-sm text-lg md:text-xl">
                 {slides[index].sub}
               </p>
 
@@ -242,7 +249,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Dots only (centered) */}
+      {/* Dots (centered) */}
       <div className="absolute inset-x-0 bottom-6 flex items-center justify-center gap-2 px-6">
         {slides.map((s, i) => (
           <button
@@ -265,7 +272,7 @@ export default function Hero() {
         ))}
       </div>
 
-      {/* Local styles for animations */}
+      {/* Local styles */}
       <style>{`
         @keyframes kenburns {
           0%   { transform: scale(1.06) translateY(0); }
@@ -277,13 +284,18 @@ export default function Hero() {
           100% { background-position: 0% 50%; }
         }
         .gradient-text {
-          /* animated red -> white -> red gradient text */
           background-image: linear-gradient(90deg, #C30003, #ffffff, #C30003);
           background-size: 200% 200%;
           animation: gradientShift 6s ease-in-out infinite;
           -webkit-background-clip: text;
           background-clip: text;
           color: transparent;
+        }
+
+        /* Motion-friendly fallback */
+        @media (prefers-reduced-motion: reduce) {
+          .gradient-text { animation: none; }
+          img[style*="kenburns"] { animation: none !important; }
         }
       `}</style>
     </section>
