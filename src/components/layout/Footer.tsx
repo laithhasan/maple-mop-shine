@@ -5,10 +5,13 @@ export default function Footer() {
     <footer className="mt-20 border-t">
       <div className="container mx-auto px-4 py-10 grid gap-8 md:grid-cols-4">
         <div>
-          <div className="font-heading text-lg heading">Maple Mop Cleaning</div>
-          <p className="text-sm text-muted-foreground mt-2">
-            Reliable, excellent cleaning—first time and every time.
-          </p>
+          <img
+            src="/images/NEGOT.png"
+            alt="Maple Mop Cleaning logo"
+            className="h-10 w-auto"
+            loading="lazy"
+            decoding="async"
+          />
         </div>
         <nav aria-label="Footer" className="grid gap-2">
           <Link to="/">HOME</Link>

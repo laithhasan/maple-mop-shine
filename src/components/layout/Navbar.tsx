@@ -40,12 +40,13 @@ export default function Navbar() {
     >
       <div className="glass">
         <div className="container mx-auto flex h-16 items-center justify-between px-4">
-          <Link to="/" className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-lg bg-primary" aria-hidden />
-            <div className="leading-tight">
-              <div className="font-heading font-semibold tracking-wide heading">Maple Mop</div>
-              <div className="text-xs text-foreground/60">we clean you grin</div>
-            </div>
+          <Link to="/" className="flex items-center gap-2" aria-label="Maple Mop Cleaning - Home">
+            <img
+              src="/images/NEGOT.png"
+              alt="Maple Mop Cleaning logo"
+              className="h-8 w-auto"
+              decoding="async"
+            />
           </Link>
 
           <nav className="hidden md:flex items-center gap-1" aria-label="Primary">
