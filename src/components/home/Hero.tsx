@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import heroOffice from "@/assets/hero-office-clean.jpg";
 import cleanSurfaces from "@/assets/clean-surfaces.jpg";
 
-/** Slide types for safer JSX */
+/** Slide types */
 type TwoLineSlide = {
   id: string;
   img: string;
@@ -19,14 +19,12 @@ type OneLineSlide = {
   img: string;
   alt: string;
   layout: "oneLine";
-  h1Parts: [string, string, string]; // e.g., ["Cleaner","Brighter","Stain-Free"]
+  h1Parts: [string, string, string]; // ["Cleaner","Brighter","Stain-Free"]
   sub: string;
 };
 type Slide = TwoLineSlide | OneLineSlide;
 
-function isTwoLine(s: Slide): s is TwoLineSlide {
-  return s.layout === "twoLine";
-}
+const isTwoLine = (s: Slide): s is TwoLineSlide => s.layout === "twoLine";
 
 export default function Hero() {
   const slides = useMemo<Slide[]>(
@@ -45,27 +43,31 @@ export default function Hero() {
         img: cleanSurfaces,
         alt: "Clean, bright floors and surfaces",
         layout: "oneLine",
-        h1Parts: ["Cleaner", "Brighter", "Stain-Free"],
+        h1Parts: ["Cleaner", "Brighter", "Stain-Free"], // non-breaking hyphen
         sub: "Make Your Home Shine Crystal Clear!",
       },
     ],
     []
   );
 
-  /** State */
+  // State
   const [index, setIndex] = useState(0);
+  const [prevIndex, setPrevIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [loaded, setLoaded] = useState<boolean[]>(
+    () => slides.map((_, i) => i === 0 ? false : false)
+  );
 
-  /** Refs */
+  // Refs
   const containerRef = useRef<HTMLDivElement | null>(null);
   const focusablesRef = useRef<HTMLButtonElement[]>([]);
   const timerRef = useRef<number | null>(null);
   const touchStartX = useRef<number | null>(null);
 
-  /** Constants */
-  const DURATION_MS = 7000; // 7s rotate + kenburns duration
+  // Constants
+  const DURATION_MS = 7000; // rotation + kenburns duration
 
-  /** Helpers */
+  // Helpers
   const scheduleNext = () => {
     if (timerRef.current) {
       window.clearTimeout(timerRef.current);
@@ -73,29 +75,39 @@ export default function Hero() {
     }
     if (!paused) {
       timerRef.current = window.setTimeout(() => {
+        setPrevIndex((p) => index);
         setIndex((i) => (i + 1) % slides.length);
       }, DURATION_MS);
     }
   };
 
-  const goTo = (i: number) => setIndex(i);
+  const goTo = (i: number) => {
+    setPrevIndex(index);
+    setIndex(i);
+  };
 
-  /** Autoplay: schedule on index/paused change (prevents drift + double intervals) */
+  // Autoplay (single-shot timeout to avoid drift)
   useEffect(() => {
     scheduleNext();
     return () => {
       if (timerRef.current) window.clearTimeout(timerRef.current);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [index, paused]);
 
-  /** Prefetch upcoming image */
+  // Mark image loaded via onLoad
+  const markLoaded = (i: number) =>
+    setLoaded((arr) => (arr[i] ? arr : arr.map((v, idx) => (idx === i ? true : v))));
+
+  // Preload the upcoming image proactively
   useEffect(() => {
-    const nextIndex = (index + 1) % slides.length;
+    const next = (index + 1) % slides.length;
     const img = new Image();
-    img.src = slides[nextIndex].img;
+    img.onload = () => markLoaded(next);
+    img.src = slides[next].img;
   }, [index, slides]);
 
-  /** Pause on hover/focus */
+  // Pause on hover/focus
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
@@ -115,18 +127,18 @@ export default function Hero() {
     };
   }, []);
 
-  /** Keyboard: left/right for slide change */
+  // Keyboard left/right
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (e.key === "ArrowRight") {
       e.preventDefault();
-      setIndex((i) => (i + 1) % slides.length);
+      goTo((index + 1) % slides.length);
     } else if (e.key === "ArrowLeft") {
       e.preventDefault();
-      setIndex((i) => (i - 1 + slides.length) % slides.length);
+      goTo((index - 1 + slides.length) % slides.length);
     }
   };
 
-  /** Touch swipe */
+  // Touch swipe
   const onTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
   };
@@ -134,10 +146,17 @@ export default function Hero() {
     if (touchStartX.current == null) return;
     const dx = e.changedTouches[0].clientX - touchStartX.current;
     const threshold = 40;
-    if (dx > threshold) setIndex((i) => (i - 1 + slides.length) % slides.length);
-    else if (dx < -threshold) setIndex((i) => (i + 1) % slides.length);
+    if (dx > threshold) goTo((index - 1 + slides.length) % slides.length);
+    else if (dx < -threshold) goTo((index + 1) % slides.length);
     touchStartX.current = null;
   };
+
+  // Helper: should this slide be visible?
+  // Keep the previous slide visible until the new active image has loaded.
+  const isVisible = (i: number) =>
+    i === index ? loaded[i] : i === prevIndex && !loaded[index];
+
+  const isActive = (i: number) => i === index;
 
   return (
     <section
@@ -151,10 +170,11 @@ export default function Hero() {
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}
     >
-      {/* Slides (cross-fade). overflow-hidden ensures overlay matches image bounds */}
+      {/* Slides */}
       <div className="relative w-full h-[64vh] md:h-[78vh] overflow-hidden">
         {slides.map((s, i) => {
-          const active = i === index;
+          const visible = isVisible(i);
+          const active = isActive(i);
           return (
             <div
               key={s.id}
@@ -162,26 +182,29 @@ export default function Hero() {
               role="group"
               aria-roledescription="slide"
               aria-label={`${i + 1} of ${slides.length}`}
-              aria-hidden={!active}
-              className={`absolute inset-0 overflow-hidden transition-opacity duration-700 ease-in-out ${
-                active ? "opacity-100" : "opacity-0"
+              aria-hidden={!visible}
+              className={`absolute inset-0 overflow-hidden transition-opacity duration-700 ease-out will-change-[opacity] ${
+                visible ? "opacity-100" : "opacity-0"
               }`}
             >
-              {/* Re-key active image so Ken Burns restarts each switch */}
+              {/* Re-key when active so Ken Burns restarts smoothly */}
               <img
                 key={active ? `${s.id}-${index}` : s.id}
                 src={s.img}
                 alt={s.alt}
-                className="block h-full w-full object-cover"
+                onLoad={() => markLoaded(i)}
+                className="block h-full w-full object-cover will-change-[transform,opacity] [backface-visibility:hidden] [transform:translateZ(0)]"
                 style={{
-                  animation: active
-                    ? `kenburns ${DURATION_MS}ms ease-in-out both`
-                    : undefined,
+                  animation:
+                    active && loaded[i]
+                      ? `kenburns ${DURATION_MS}ms ease-in-out both`
+                      : undefined,
                   animationPlayState: paused ? "paused" : "running",
                 }}
                 loading={i === 0 ? "eager" : "lazy"}
                 decoding="async"
               />
+              {/* Exact-bounds gradient overlay */}
               <div
                 className="absolute inset-0 bg-gradient-to-tr from-[#940400]/35 via-transparent to-transparent pointer-events-none"
                 aria-hidden
@@ -206,18 +229,15 @@ export default function Hero() {
                   </span>
                 </h1>
               ) : (
-                <>
-                  {/* SECOND HERO (one line, Tailwind sizes only) */}
-                  <h1 className="font-extrabold tracking-tight leading-tight drop-shadow-md mb-1">
-                    <span className="flex flex-wrap md:flex-nowrap items-baseline gap-x-3 text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
-                      <span className="gradient-text">{slides[index].h1Parts[0]}</span>
-                      <span className="text-white/90">|</span>
-                      <span className="gradient-text">{slides[index].h1Parts[1]}</span>
-                      <span className="text-white/90">|</span>
-                      <span className="gradient-text">{slides[index].h1Parts[2]}</span>
-                    </span>
-                  </h1>
-                </>
+                <h1 className="font-extrabold tracking-tight leading-tight drop-shadow-md mb-1">
+                  <span className="flex flex-wrap md:flex-nowrap md:whitespace-nowrap items-baseline gap-x-3 text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
+                    <span className="gradient-text">{slides[index].h1Parts[0]}</span>
+                    <span className="text-white/90">|</span>
+                    <span className="gradient-text">{slides[index].h1Parts[1]}</span>
+                    <span className="text-white/90">|</span>
+                    <span className="gradient-text">{slides[index].h1Parts[2]}</span>
+                  </span>
+                </h1>
               )}
 
               <p className="mt-2 text-white/90 drop-shadow-sm text-lg md:text-xl">
@@ -258,9 +278,6 @@ export default function Hero() {
             aria-controls={s.id}
             aria-current={i === index ? "true" : undefined}
             onClick={() => goTo(i)}
-            ref={(el) => {
-              if (el) focusablesRef.current[2 + i] = el as HTMLButtonElement;
-            }}
             className={`h-2.5 rounded-full border border-primary transition-all duration-300 ${
               i === index
                 ? "w-8 bg-primary shadow-[0_0_0_3px_rgba(2,241,255,0.25)]"
@@ -293,6 +310,7 @@ export default function Hero() {
         }
         @media (prefers-reduced-motion: reduce) {
           .gradient-text { animation: none; }
+          /* No zoom for reduced motion */
           img[style*="kenburns"] { animation: none !important; }
         }
       `}</style>
