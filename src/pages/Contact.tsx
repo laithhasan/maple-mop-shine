@@ -1,4 +1,3 @@
-import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -36,11 +35,6 @@ export default function Contact() {
 
   return (
     <main id="main-content" className="container mx-auto px-4 py-12">
-      <Helmet>
-        <title>Contact Us | Maple Mop Cleaning</title>
-        <meta name="description" content="Call 437-991-7677 or request a quote. Quick, dependable commercial cleaning across the GTA." />
-        <link rel="canonical" href="/contact" />
-      </Helmet>
 
       <h1 className="heading text-4xl font-bold">Contact Us</h1>
       <p className="mt-2 text-muted-foreground">Call 437-991-7677 • info@maplemopcleaning.com</p>

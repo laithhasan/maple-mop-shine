@@ -1,13 +1,8 @@
-import { Helmet } from "react-helmet-async";
+
 
 export default function About() {
   return (
     <main id="main-content" className="container mx-auto px-4 py-12">
-      <Helmet>
-        <title>About Us | Maple Mop Cleaning</title>
-        <meta name="description" content="Your trusted & dependable cleaning company serving the GTA. Insured, bonded, and committed to excellence." />
-        <link rel="canonical" href="/about" />
-      </Helmet>
 
       <h1 className="heading text-4xl font-bold">Your Trusted & Dependable Cleaning Company.</h1>
       <p className="mt-4 max-w-3xl text-foreground/80">

@@ -1,4 +1,3 @@
-import { Helmet } from "react-helmet-async";
 import hero from "@/assets/hero-office-clean.jpg";
 import surfaces from "@/assets/clean-surfaces.jpg";
 import TrustBar from "@/components/common/TrustBar";
@@ -6,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Building2, Calendar, Clock3, Leaf, Shield, Star } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const faqs = [
   { q: "Do you offer after-hours cleaning?", a: "Yes. We frequently clean late night or after hours to minimize disruption." },
@@ -19,29 +19,6 @@ const faqs = [
 export default function Index() {
   return (
     <main id="main-content">
-      <Helmet>
-        <title>Maple Mop Cleaning | GTA Commercial Cleaning</title>
-        <meta name="description" content="Get rid of dirt, stains & spills. Commercial cleaning for offices, retail, education, and more across the GTA." />
-        <link rel="canonical" href="/" />
-        <script type="application/ld+json">{`
-          {
-            "@context": "https://schema.org",
-            "@type": "LocalBusiness",
-            "name": "Maple Mop Cleaning",
-            "url": "/",
-            "telephone": "+1-437-991-7677",
-            "email": "info@maplemopcleaning.com",
-            "areaServed": "Greater Toronto Area",
-            "openingHours": "Mo-Sa 08:00-20:00",
-            "image": "/images/og-cover.jpg",
-            "offers": {
-              "@type": "Offer",
-              "name": "Commercial Cleaning",
-              "priceCurrency": "CAD"
-            }
-          }
-        `}</script>
-      </Helmet>
 
       {/* Hero */}
       <section className="relative isolate">
@@ -53,7 +30,7 @@ export default function Index() {
             <p className="mt-3 text-lg text-foreground/80">We clean the hard-to-reach corners—safely and thoroughly.</p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Button asChild variant="hero">
-                <a href="/contact#quote">Get a Quote</a>
+                <Link to="/contact#quote">Get a Quote</Link>
               </Button>
               <Button asChild variant="outline">
                 <a href="tel:14379917677">Call 437-991-7677</a>
@@ -77,7 +54,7 @@ export default function Index() {
                 Late night/after hours or during the day—we deliver spotless, stain-free surfaces that look welcoming to customers and staff.
               </p>
               <Button asChild variant="link" className="mt-2 px-0">
-                <a href="/commercial-cleaning">Read More →</a>
+                <Link to="/commercial-cleaning">Read More →</Link>
               </Button>
             </div>
             <img src={surfaces} alt="Sparkling clean glass and steel surfaces" className="rounded-lg border" loading="lazy" />
@@ -166,7 +143,7 @@ export default function Index() {
               <a href="tel:14379917677">Call 437-991-7677</a>
             </Button>
             <Button asChild variant="hero">
-              <a href="/contact#quote">Contact Us</a>
+              <Link to="/contact#quote">Contact Us</Link>
             </Button>
           </div>
         </div>

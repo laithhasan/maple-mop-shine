@@ -1,6 +1,6 @@
-import { Helmet } from "react-helmet-async";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const checklist = [
   {
@@ -20,11 +20,6 @@ const checklist = [
 export default function CommercialCleaning() {
   return (
     <main id="main-content" className="">
-      <Helmet>
-        <title>Commercial Cleaning | Maple Mop Cleaning</title>
-        <meta name="description" content="After-hours and day-time commercial cleaning for offices, retail, schools, and more across the GTA." />
-        <link rel="canonical" href="/commercial-cleaning" />
-      </Helmet>
 
       <section className="container mx-auto px-4 pt-12 pb-6 lg:pt-16">
         <h1 className="heading text-4xl lg:text-5xl font-bold">Commercial Cleaning</h1>
@@ -74,7 +69,7 @@ export default function CommercialCleaning() {
               <a href="tel:14379917677">Call 437-991-7677</a>
             </Button>
             <Button asChild variant="hero">
-              <a href="/contact#quote">Get a Quote</a>
+              <Link to="/contact#quote">Get a Quote</Link>
             </Button>
           </div>
         </div>
