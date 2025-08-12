@@ -10,14 +10,16 @@ export default function Hero() {
       {
         id: "slide-1",
         img: heroOffice,
-        heading: "Get Rid of Dirt, Stains & Spills.",
+        headingTop: "Get Rid of Dirt,",
+        headingBottom: "Stains & Spills.",
         sub: "We clean the hard-to-reach corners—safely and thoroughly.",
         alt: "Bright modern office being cleaned",
       },
       {
         id: "slide-2",
         img: cleanSurfaces,
-        heading: "Cleaner | Brighter | Stain-free",
+        headingTop: "Cleaner | Brighter",
+        headingBottom: "Stain\u2011free", // non-breaking hyphen
         sub: "Make Your Home Shine Crystal Clear!",
         alt: "Clean, bright floors and surfaces",
       },
@@ -27,13 +29,14 @@ export default function Hero() {
 
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+
   const containerRef = useRef<HTMLDivElement | null>(null);
   const focusablesRef = useRef<HTMLButtonElement[]>([]);
   const intervalRef = useRef<number | null>(null);
   const touchStartX = useRef<number | null>(null);
 
-  // 10s rotation
-  const DURATION = 10000;
+  // 7s rotation
+  const DURATION = 7000;
 
   const next = () => setIndex((i) => (i + 1) % slides.length);
   const prev = () => setIndex((i) => (i - 1 + slides.length) % slides.length);
@@ -153,15 +156,20 @@ export default function Hero() {
         ))}
       </div>
 
-      {/* Text (no glass) */}
+      {/* Text (aligned, no glass) */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="pointer-events-auto max-w-7xl mx-auto px-6 md:px-8 py-[14vh] grid grid-cols-1 md:grid-cols-4 items-center h-full">
-          <div className="md:col-span-2">
-            <article className="max-w-2xl" aria-live="polite">
-              <h1 className="text-white drop-shadow-md text-4xl md:text-5xl font-extrabold tracking-tight">
-                {slides[index].heading}
+        <div className="pointer-events-auto max-w-7xl mx-auto px-6 md:px-8 h-full">
+          <div className="h-full grid grid-cols-1 md:grid-cols-12 items-center">
+            <article className="md:col-span-6 lg:col-span-5 max-w-2xl">
+              <h1 className="text-white drop-shadow-md font-extrabold tracking-tight leading-tight">
+                <span className="block text-4xl md:text-5xl">
+                  {slides[index].headingTop}
+                </span>
+                <span className="block text-4xl md:text-5xl mt-1">
+                  {slides[index].headingBottom}
+                </span>
               </h1>
-              <p className="mt-3 text-white/90 drop-shadow-sm text-lg">
+              <p className="mt-4 text-white/90 drop-shadow-sm text-lg md:text-xl">
                 {slides[index].sub}
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
@@ -189,7 +197,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Dots only (no arrows) */}
+      {/* Dots only (no arrows, centered) */}
       <div className="absolute inset-x-0 bottom-6 flex items-center justify-center gap-2 px-6">
         {slides.map((s, i) => (
           <button
@@ -210,16 +218,6 @@ export default function Hero() {
             <span className="sr-only">Go to slide {i + 1}</span>
           </button>
         ))}
-      </div>
-
-      {/* 10s progress bar */}
-      <div className="absolute left-0 right-0 bottom-0">
-        <div
-          key={index}
-          className={`hero-progress ${paused ? "paused" : ""}`}
-          aria-hidden
-          style={{ animationDuration: `${DURATION}ms` }}
-        />
       </div>
     </section>
   );
