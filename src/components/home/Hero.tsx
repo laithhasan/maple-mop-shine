@@ -54,7 +54,7 @@ export default function Hero() {
   const [index, setIndex] = useState(0);
   const [prevIndex, setPrevIndex] = useState(0);
   const [paused, setPaused] = useState(false);
-  // Mark first slide loaded to avoid initial flash
+  // First slide marked loaded to avoid initial flash
   const [loaded, setLoaded] = useState<boolean[]>([true, false]);
 
   // Refs
@@ -73,7 +73,7 @@ export default function Hero() {
     }
     if (!paused) {
       timerRef.current = window.setTimeout(() => {
-        setPrevIndex((_) => index);
+        setPrevIndex(index);
         setIndex((i) => (i + 1) % slides.length);
       }, DURATION_MS);
     }
@@ -96,7 +96,7 @@ export default function Hero() {
   const markLoaded = (i: number) =>
     setLoaded((arr) => (arr[i] ? arr : arr.map((v, idx) => (idx === i ? true : v))));
 
-  // Preload upcoming image
+  // Preload the next image
   useEffect(() => {
     const next = (index + 1) % slides.length;
     if (!loaded[next]) {
@@ -126,7 +126,7 @@ export default function Hero() {
     };
   }, []);
 
-  // Keyboard and touch
+  // Keyboard & touch
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (e.key === "ArrowRight") { e.preventDefault(); goTo((index + 1) % slides.length); }
     else if (e.key === "ArrowLeft") { e.preventDefault(); goTo((index - 1 + slides.length) % slides.length); }
@@ -141,7 +141,7 @@ export default function Hero() {
     touchStartX.current = null;
   };
 
-  // Visibility logic: keep previous slide until new image is loaded (no flash)
+  // Visibility logic
   const isVisible = (i: number) => (i === index ? loaded[i] : i === prevIndex && !loaded[index]);
   const isActive = (i: number) => i === index;
 
@@ -189,7 +189,7 @@ export default function Hero() {
                 loading={i === 0 ? "eager" : "lazy"}
                 decoding="async"
               />
-              {/* Exact-bounds image tint/gradient */}
+              {/* Exact-bounds gradient tint */}
               <div
                 className="absolute inset-0 bg-gradient-to-tr from-[#940400]/25 via-transparent to-transparent pointer-events-none"
                 aria-hidden
@@ -207,10 +207,10 @@ export default function Hero() {
               <div className="inline-block rounded-2xl bg-slate-900/20 supports-[backdrop-filter]:backdrop-blur-md supports-[backdrop-filter]:backdrop-saturate-150 ring-1 ring-white/10 shadow-lg p-4 sm:p-6">
                 {isTwoLine(slides[index]) ? (
                   <h1 className="font-extrabold tracking-tight leading-tight drop-shadow-md mb-2">
-                    <span className="block gradient-text text-4xl md:text-5xl">
+                    <span className="block gradient-text title-glow text-4xl md:text-5xl">
                       {slides[index].h1Top}
                     </span>
-                    <span className="block gradient-text mt-1 text-4xl md:text-5xl">
+                    <span className="block gradient-text title-glow mt-1 text-4xl md:text-5xl">
                       {slides[index].h1Bottom}
                     </span>
                   </h1>
@@ -218,11 +218,11 @@ export default function Hero() {
                   <h1 className="font-extrabold tracking-tight leading-tight drop-shadow-md mb-2">
                     {/* One line from md+; wraps on very small screens */}
                     <span className="flex flex-wrap md:flex-nowrap md:whitespace-nowrap items-baseline gap-x-2 sm:gap-x-3 text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
-                      <span className="gradient-text">{slides[index].h1Parts[0]}</span>
+                      <span className="gradient-text title-glow">{slides[index].h1Parts[0]}</span>
                       <span aria-hidden className="sep mx-1 sm:mx-2 align-middle" />
-                      <span className="gradient-text">{slides[index].h1Parts[1]}</span>
+                      <span className="gradient-text title-glow">{slides[index].h1Parts[1]}</span>
                       <span aria-hidden className="sep mx-1 sm:mx-2 align-middle" />
-                      <span className="gradient-text">{slides[index].h1Parts[2]}</span>
+                      <span className="gradient-text title-glow">{slides[index].h1Parts[2]}</span>
                     </span>
                   </h1>
                 )}
@@ -280,12 +280,27 @@ export default function Hero() {
           100% { background-position: 0% 50%; }
         }
         .gradient-text {
-          background-image: linear-gradient(90deg, #C30003, #7a0000, #C30003); /* red -> darker red -> red */
+          background-image: linear-gradient(90deg, #C30003, #7a0000, #C30003);
           background-size: 200% 200%;
           animation: gradientShift 6s ease-in-out infinite;
           -webkit-background-clip: text;
           background-clip: text;
           color: transparent;
+        }
+
+        /* NEW: glowing effect for title text */
+        @keyframes titleGlowPulse {
+          0%   { text-shadow: 0 0 6px rgba(195,0,3,0.35), 0 0 18px rgba(122,0,0,0.25); }
+          50%  { text-shadow: 0 0 14px rgba(195,0,3,0.65), 0 0 36px rgba(122,0,0,0.5); }
+          100% { text-shadow: 0 0 6px rgba(195,0,3,0.35), 0 0 18px rgba(122,0,0,0.25); }
+        }
+        .title-glow {
+          animation-name: gradientShift, titleGlowPulse;
+          animation-duration: 6s, 3.6s;
+          animation-timing-function: ease-in-out, ease-in-out;
+          animation-iteration-count: infinite, infinite;
+          animation-direction: normal, alternate;
+          /* keep gradient clip rules inherited from .gradient-text */
         }
 
         /* Animated separators */
@@ -302,14 +317,14 @@ export default function Hero() {
           background-size: 100% 200%;
           animation: sepShift 2.8s ease-in-out infinite;
           border-radius: 9999px;
-          opacity: 0.9;
+          opacity: 0.95;
         }
 
-        /* Respect reduced motion */
+        /* Reduced motion */
         @media (prefers-reduced-motion: reduce) {
           .gradient-text { animation: none; }
+          .title-glow { animation: none; text-shadow: none; }
           .sep { animation: none; }
-          /* No zoom */
           img { animation: none !important; }
         }
       `}</style>
