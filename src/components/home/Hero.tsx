@@ -215,7 +215,7 @@ export default function Hero() {
                     </span>
                   </h1>
                 ) : (
-                  <h1 className="font-extrabold tracking-tight leading-[1.15] drop-shadow-md mb-2 pb-1 md:-translate-y-[2px] transform-gpu">
+                  <h1 className="font-extrabold tracking-tight leading-tight drop-shadow-md mb-2">
                     {/* One line from md+; wraps on very small screens */}
                     <span className="flex flex-wrap md:flex-nowrap md:whitespace-nowrap items-baseline gap-x-2 sm:gap-x-3 text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
                       <span className="gradient-text title-glow">{slides[index].h1Parts[0]}</span>
@@ -288,11 +288,11 @@ export default function Hero() {
           color: transparent;
         }
 
-        /* Glowing effect for title text — cyan #09ECF9 */
+        /* NEW: glowing effect for title text */
         @keyframes titleGlowPulse {
-          0%   { text-shadow: 0 0 6px rgba(9,236,249,0.35), 0 0 18px rgba(9,236,249,0.20); }
-          50%  { text-shadow: 0 0 14px rgba(9,236,249,0.70), 0 0 36px rgba(9,236,249,0.45); }
-          100% { text-shadow: 0 0 6px rgba(9,236,249,0.35), 0 0 18px rgba(9,236,249,0.20); }
+          0%   { text-shadow: 0 0 6px rgba(195,0,3,0.35), 0 0 18px rgba(122,0,0,0.25); }
+          50%  { text-shadow: 0 0 14px rgba(195,0,3,0.65), 0 0 36px rgba(122,0,0,0.5); }
+          100% { text-shadow: 0 0 6px rgba(195,0,3,0.35), 0 0 18px rgba(122,0,0,0.25); }
         }
         .title-glow {
           animation-name: gradientShift, titleGlowPulse;
@@ -300,9 +300,10 @@ export default function Hero() {
           animation-timing-function: ease-in-out, ease-in-out;
           animation-iteration-count: infinite, infinite;
           animation-direction: normal, alternate;
+          /* keep gradient clip rules inherited from .gradient-text */
         }
 
-        /* Animated separators (red tones) */
+        /* Animated separators */
         @keyframes sepShift {
           0%   { background-position: 0% 0%; box-shadow: 0 0 0 rgba(0,0,0,0); }
           50%  { background-position: 0% 100%; box-shadow: 0 0 12px rgba(195,0,3,0.35); }
