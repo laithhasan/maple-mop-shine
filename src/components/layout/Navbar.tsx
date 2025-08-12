@@ -44,7 +44,7 @@ export default function Navbar() {
             <img
               src="/images/NEGOT.png"
               alt="Maple Mop Cleaning logo"
-              className="h-12 md:h-14 w-auto object-contain block"
+              className="h-16 md:h-18 w-full object-contain block"
               decoding="async"
             />
           </Link>
