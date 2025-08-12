@@ -19,7 +19,7 @@ type Slide =
       img: string;
       alt: string;
       layout: "oneLine";
-      h1: string;
+      h1Parts: [string, string, string]; // ["Cleaner", "Brighter", "Stain-Free"]
       sub: string;
     };
 
@@ -40,7 +40,8 @@ export default function Hero() {
         img: cleanSurfaces,
         alt: "Clean, bright floors and surfaces",
         layout: "oneLine",
-        h1: "Cleaner | Brighter | Stain-Free",
+        // keep “Stain-Free” glued together with a non-breaking hyphen
+        h1Parts: ["Cleaner", "Brighter", "Stain-Free"],
         sub: "Make Your Home Shine Crystal Clear!",
       },
     ],
@@ -148,57 +149,67 @@ export default function Hero() {
       onTouchEnd={onTouchEnd}
       tabIndex={0}
     >
-      {/* Slides (stacked for crossfade) */}
+      {/* Slides (stacked for crossfade). Each active image is re-keyed so the zoom restarts. */}
       <div className="relative w-full h-[64vh] md:h-[78vh] overflow-hidden">
-        {slides.map((s, i) => (
-          <div
-            key={s.id}
-            id={s.id}
-            role="group"
-            aria-roledescription="slide"
-            aria-label={`${i + 1} of ${slides.length}`}
-            aria-hidden={i !== index}
-            className={`absolute inset-0 overflow-hidden transition-opacity duration-700 ease-in-out ${
-              i === index ? "opacity-100" : "opacity-0"
-            }`}
-          >
-            <img
-              src={s.img}
-              alt={s.alt}
-              className="block h-full w-full object-cover"
-              style={{
-                animation: `kenburns ${DURATION}ms ease-in-out both`,
-                animationPlayState: paused ? "paused" : "running",
-              }}
-              loading={i === 0 ? "eager" : "lazy"}
-              decoding="async"
-            />
-            {/* Brand gradient overlay for contrast (exactly image bounds) */}
+        {slides.map((s, i) => {
+          const active = i === index;
+          return (
             <div
-              className="absolute inset-0 bg-gradient-to-tr from-[#940400]/35 via-transparent to-transparent pointer-events-none"
-              aria-hidden
-            />
-          </div>
-        ))}
+              key={s.id}
+              id={s.id}
+              role="group"
+              aria-roledescription="slide"
+              aria-label={`${i + 1} of ${slides.length}`}
+              aria-hidden={!active}
+              className={`absolute inset-0 overflow-hidden transition-opacity duration-700 ease-in-out ${
+                active ? "opacity-100" : "opacity-0"
+              }`}
+            >
+              <img
+                key={active ? `${s.id}-${index}` : s.id} // remount on activate -> restart animation
+                src={s.img}
+                alt={s.alt}
+                className="block h-full w-full object-cover"
+                style={{
+                  animation: `kenburns ${DURATION}ms ease-in-out both`,
+                  animationPlayState: paused ? "paused" : "running",
+                }}
+                loading={i === 0 ? "eager" : "lazy"}
+                decoding="async"
+              />
+              {/* Exact-bounds gradient overlay */}
+              <div
+                className="absolute inset-0 bg-gradient-to-tr from-[#940400]/35 via-transparent to-transparent pointer-events-none"
+                aria-hidden
+              />
+            </div>
+          );
+        })}
       </div>
 
-      {/* Text (aligned, no glass) */}
+      {/* Text (balanced, responsive) */}
       <div className="pointer-events-none absolute inset-0">
         <div className="pointer-events-auto max-w-7xl mx-auto px-6 md:px-8 h-full">
           <div className="h-full grid grid-cols-1 md:grid-cols-12 items-center">
-            <article className="md:col-span-6 lg:col-span-5 max-w-2xl">
+            <article className="md:col-span-7 lg:col-span-6 max-w-3xl">
               {slides[index].layout === "twoLine" ? (
                 <h1 className="font-extrabold tracking-tight leading-tight drop-shadow-md">
-                  <span className="block text-4xl md:text-5xl gradient-text">
+                  <span className="block gradient-text text-[clamp(2rem,5vw,3.25rem)] md:text-[clamp(2.5rem,4.5vw,4rem)]">
                     {(slides[index] as any).h1Top}
                   </span>
-                  <span className="block text-4xl md:text-5xl mt-1 gradient-text">
+                  <span className="block gradient-text mt-1 text-[clamp(2rem,5vw,3.25rem)] md:text-[clamp(2.5rem,4.5vw,4rem)]">
                     {(slides[index] as any).h1Bottom}
                   </span>
                 </h1>
               ) : (
-                <h1 className="gradient-text font-extrabold tracking-tight leading-tight drop-shadow-md whitespace-nowrap text-3xl sm:text-4xl md:text-5xl">
-                  {(slides[index] as any).h1}
+                <h1 className="font-extrabold tracking-tight leading-tight drop-shadow-md">
+                  <span className="flex flex-wrap md:flex-nowrap items-baseline gap-x-2 text-[clamp(1.75rem,4.5vw,3.25rem)] md:text-[clamp(2.5rem,4vw,4rem)]">
+                    <span className="gradient-text">{(slides[index] as any).h1Parts[0]}</span>
+                    <span className="text-white/90">|</span>
+                    <span className="gradient-text">{(slides[index] as any).h1Parts[1]}</span>
+                    <span className="text-white/90">|</span>
+                    <span className="gradient-text">{(slides[index] as any).h1Parts[2]}</span>
+                  </span>
                 </h1>
               )}
 
@@ -257,7 +268,7 @@ export default function Hero() {
       {/* Local styles for animations */}
       <style>{`
         @keyframes kenburns {
-          0%   { transform: scale(1.05) translateY(0); }
+          0%   { transform: scale(1.06) translateY(0); }
           100% { transform: scale(1.0) translateY(-1%); }
         }
         @keyframes gradientShift {
@@ -266,6 +277,7 @@ export default function Hero() {
           100% { background-position: 0% 50%; }
         }
         .gradient-text {
+          /* animated red -> white -> red gradient text */
           background-image: linear-gradient(90deg, #C30003, #ffffff, #C30003);
           background-size: 200% 200%;
           animation: gradientShift 6s ease-in-out infinite;
