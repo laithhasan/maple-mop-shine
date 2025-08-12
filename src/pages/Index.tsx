@@ -1,4 +1,4 @@
-import hero from "@/assets/hero-office-clean.jpg";
+import Hero from "@/components/home/Hero";
 import surfaces from "@/assets/clean-surfaces.jpg";
 import TrustBar from "@/components/common/TrustBar";
 import { Button } from "@/components/ui/button";
@@ -21,24 +21,7 @@ export default function Index() {
     <main id="main-content">
 
       {/* Hero */}
-      <section className="relative isolate">
-        <img src={hero} alt="Pristine modern office interior" className="w-full h-[56vh] md:h-[72vh] object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent" />
-        <div className="container mx-auto px-4 absolute inset-x-0 bottom-8">
-          <div className="max-w-2xl animate-enter">
-            <h1 className="heading text-4xl md:text-5xl font-bold">Get Rid of Dirt, Stains & Spills.</h1>
-            <p className="mt-3 text-lg text-foreground/80">We clean the hard-to-reach corners—safely and thoroughly.</p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Button asChild variant="hero">
-                <Link to="/contact#quote">Get a Quote</Link>
-              </Button>
-              <Button asChild variant="outline">
-                <a href="tel:14379917677">Call 437-991-7677</a>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
+      <Hero />
 
       <TrustBar />
 

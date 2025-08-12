@@ -125,3 +125,51 @@
     @apply sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:bg-background focus:text-foreground focus:px-4 focus:py-2 focus:rounded-md focus:ring-2 focus:ring-ring;
   }
 }
+
+/* Hero specific utilities */
+@layer utilities {
+  .hero-gradient {
+    /* 45° gradient from primary-dark at 35% -> transparent */
+    background: linear-gradient(45deg, hsl(var(--primary-dark) / 0.35) 0%, hsl(var(--primary-dark) / 0.0) 60%);
+  }
+  .hero-kenburns {
+    animation: hero-kenburns 30s ease-out both;
+  }
+  .hero-kenburns.paused {
+    animation-play-state: paused;
+  }
+  .hero-progress {
+    height: 3px;
+    width: 100%;
+    background: transparent;
+    position: relative;
+  }
+  .hero-progress::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 0%;
+    background-color: hsl(var(--primary));
+    animation: hero-progress 30s linear forwards;
+  }
+  .hero-progress.paused::before {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes hero-kenburns {
+  0% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes hero-progress {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-kenburns { animation: none !important; }
+  .hero-progress::before { animation-duration: 0.001s; }
+}
