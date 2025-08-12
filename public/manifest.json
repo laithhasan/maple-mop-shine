@@ -1,0 +1,11 @@
+{
+  "name": "Maple Mop Cleaning",
+  "short_name": "Maple Mop",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#C30003",
+  "icons": [
+    { "src": "/favicon.ico", "sizes": "48x48 72x72 96x96 144x144 192x192", "type": "image/x-icon" }
+  ]
+}
