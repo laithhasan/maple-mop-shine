@@ -4,24 +4,44 @@ import { Link } from "react-router-dom";
 import heroOffice from "@/assets/hero-office-clean.jpg";
 import cleanSurfaces from "@/assets/clean-surfaces.jpg";
 
+type Slide =
+  | {
+      id: string;
+      img: string;
+      alt: string;
+      layout: "twoLine";
+      h1Top: string;
+      h1Bottom: string;
+      sub: string;
+    }
+  | {
+      id: string;
+      img: string;
+      alt: string;
+      layout: "oneLine";
+      h1: string;
+      sub: string;
+    };
+
 export default function Hero() {
-  const slides = useMemo(
+  const slides = useMemo<Slide[]>(
     () => [
       {
         id: "slide-1",
         img: heroOffice,
-        headingTop: "Get Rid of Dirt,",
-        headingBottom: "Stains & Spills.",
-        sub: "We clean the hard-to-reach corners—safely and thoroughly.",
         alt: "Bright modern office being cleaned",
+        layout: "twoLine",
+        h1Top: "Get Rid of Dirt,",
+        h1Bottom: "Stains & Spills.",
+        sub: "We clean the hard-to-reach corners—safely and thoroughly.",
       },
       {
         id: "slide-2",
         img: cleanSurfaces,
-        headingTop: "Cleaner | Brighter",
-        headingBottom: "Stain\u2011free", // non-breaking hyphen
-        sub: "Make Your Home Shine Crystal Clear!",
         alt: "Clean, bright floors and surfaces",
+        layout: "oneLine",
+        h1: "Cleaner | Brighter | Stain-Free",
+        sub: "Make Your Home Shine Crystal Clear!",
       },
     ],
     []
@@ -145,13 +165,19 @@ export default function Hero() {
             <img
               src={s.img}
               alt={s.alt}
-              className={`h-full w-full object-cover hero-kenburns ${paused ? "paused" : ""}`}
+              className="h-full w-full object-cover"
+              style={{
+                animation: `kenburns ${DURATION}ms ease-in-out both`,
+                animationPlayState: paused ? "paused" : "running",
+              }}
               loading={i === 0 ? "eager" : "lazy"}
               decoding="async"
-              style={{ animationDuration: `${DURATION}ms` }}
             />
             {/* Brand gradient overlay for contrast */}
-            <div className="absolute inset-0 hero-gradient" aria-hidden />
+            <div
+              className="absolute inset-0 bg-gradient-to-tr from-[#940400]/35 via-transparent to-transparent"
+              aria-hidden
+            />
           </div>
         ))}
       </div>
@@ -161,17 +187,25 @@ export default function Hero() {
         <div className="pointer-events-auto max-w-7xl mx-auto px-6 md:px-8 h-full">
           <div className="h-full grid grid-cols-1 md:grid-cols-12 items-center">
             <article className="md:col-span-6 lg:col-span-5 max-w-2xl">
-              <h1 className="text-white drop-shadow-md font-extrabold tracking-tight leading-tight">
-                <span className="block text-4xl md:text-5xl">
-                  {slides[index].headingTop}
-                </span>
-                <span className="block text-4xl md:text-5xl mt-1">
-                  {slides[index].headingBottom}
-                </span>
-              </h1>
+              {slides[index].layout === "twoLine" ? (
+                <h1 className="font-extrabold tracking-tight leading-tight drop-shadow-md">
+                  <span className="block text-4xl md:text-5xl gradient-text">
+                    {(slides[index] as any).h1Top}
+                  </span>
+                  <span className="block text-4xl md:text-5xl mt-1 gradient-text">
+                    {(slides[index] as any).h1Bottom}
+                  </span>
+                </h1>
+              ) : (
+                <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight leading-tight drop-shadow-md gradient-text">
+                  {(slides[index] as any).h1}
+                </h1>
+              )}
+
               <p className="mt-4 text-white/90 drop-shadow-sm text-lg md:text-xl">
                 {slides[index].sub}
               </p>
+
               <div className="mt-6 flex flex-wrap gap-3">
                 <Button
                   asChild
@@ -197,7 +231,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Dots only (no arrows, centered) */}
+      {/* Dots only (centered) */}
       <div className="absolute inset-x-0 bottom-6 flex items-center justify-center gap-2 px-6">
         {slides.map((s, i) => (
           <button
@@ -219,6 +253,28 @@ export default function Hero() {
           </button>
         ))}
       </div>
+
+      {/* Local styles for animations */}
+      <style>{`
+        @keyframes kenburns {
+          0%   { transform: scale(1.05) translateY(0); }
+          100% { transform: scale(1.0) translateY(-1%); }
+        }
+        @keyframes gradientShift {
+          0%   { background-position: 0% 50%; }
+          50%  { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        .gradient-text {
+          /* Animated red->white->red gradient text */
+          background-image: linear-gradient(90deg, #C30003, #ffffff, #C30003);
+          background-size: 200% 200%;
+          animation: gradientShift 6s ease-in-out infinite;
+          -webkit-background-clip: text;
+          background-clip: text;
+          color: transparent;
+        }
+      `}</style>
     </section>
   );
 }
