@@ -45,7 +45,6 @@ export default function Hero() {
         img: cleanSurfaces,
         alt: "Clean, bright floors and surfaces",
         layout: "oneLine",
-        // keep “Stain-Free” non-breaking hyphen
         h1Parts: ["Cleaner", "Brighter", "Stain-Free"],
         sub: "Make Your Home Shine Crystal Clear!",
       },
@@ -87,7 +86,6 @@ export default function Hero() {
     return () => {
       if (timerRef.current) window.clearTimeout(timerRef.current);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [index, paused]);
 
   /** Prefetch upcoming image */
@@ -200,27 +198,26 @@ export default function Hero() {
             <article className="md:col-span-7 lg:col-span-6 max-w-3xl">
               {isTwoLine(slides[index]) ? (
                 <h1 className="font-extrabold tracking-tight leading-tight drop-shadow-md mb-1">
-                  <span className="block gradient-text text-[clamp(2rem,5vw,3.25rem)] md:text-[clamp(2.25rem,4.5vw,3.75rem)]">
+                  <span className="block gradient-text text-4xl md:text-5xl">
                     {slides[index].h1Top}
                   </span>
-                  <span className="block gradient-text mt-1 text-[clamp(2rem,5vw,3.25rem)] md:text-[clamp(2.25rem,4.5vw,3.75rem)]">
+                  <span className="block gradient-text mt-1 text-4xl md:text-5xl">
                     {slides[index].h1Bottom}
                   </span>
                 </h1>
               ) : (
-                // Second hero: reduced size + perfect alignment above sub/CTAs
-                {/* SECOND HERO (one line, Tailwind sizes only) */}
-<h1 className="font-extrabold tracking-tight leading-tight drop-shadow-md mb-1">
-  <span className="flex flex-wrap md:flex-nowrap items-baseline gap-x-3
-                   text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
-    <span className="gradient-text">{slides[index].h1Parts[0]}</span>
-    <span className="text-white/90">|</span>
-    <span className="gradient-text">{slides[index].h1Parts[1]}</span>
-    <span className="text-white/90">|</span>
-    <span className="gradient-text">{slides[index].h1Parts[2]}</span>
-  </span>
-</h1>
-
+                <>
+                  {/* SECOND HERO (one line, Tailwind sizes only) */}
+                  <h1 className="font-extrabold tracking-tight leading-tight drop-shadow-md mb-1">
+                    <span className="flex flex-wrap md:flex-nowrap items-baseline gap-x-3 text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
+                      <span className="gradient-text">{slides[index].h1Parts[0]}</span>
+                      <span className="text-white/90">|</span>
+                      <span className="gradient-text">{slides[index].h1Parts[1]}</span>
+                      <span className="text-white/90">|</span>
+                      <span className="gradient-text">{slides[index].h1Parts[2]}</span>
+                    </span>
+                  </h1>
+                </>
               )}
 
               <p className="mt-2 text-white/90 drop-shadow-sm text-lg md:text-xl">
@@ -294,8 +291,6 @@ export default function Hero() {
           background-clip: text;
           color: transparent;
         }
-
-        /* Motion-friendly fallback */
         @media (prefers-reduced-motion: reduce) {
           .gradient-text { animation: none; }
           img[style*="kenburns"] { animation: none !important; }
