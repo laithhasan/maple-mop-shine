@@ -43,7 +43,7 @@ export default function Hero() {
         img: cleanSurfaces,
         alt: "Clean, bright floors and surfaces",
         layout: "oneLine",
-        h1Parts: ["Cleaner", "Brighter", "Stain-Free"], // non-breaking hyphen
+        h1Parts: ["Cleaner", "Brighter", "Stain-Free"],
         sub: "Make Your Home Shine Crystal Clear!",
       },
     ],
@@ -54,18 +54,16 @@ export default function Hero() {
   const [index, setIndex] = useState(0);
   const [prevIndex, setPrevIndex] = useState(0);
   const [paused, setPaused] = useState(false);
-  const [loaded, setLoaded] = useState<boolean[]>(
-    () => slides.map((_, i) => i === 0 ? false : false)
-  );
+  // Mark first slide as loaded initially to avoid any initial flash
+  const [loaded, setLoaded] = useState<boolean[]>([true, false]);
 
   // Refs
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const focusablesRef = useRef<HTMLButtonElement[]>([]);
   const timerRef = useRef<number | null>(null);
   const touchStartX = useRef<number | null>(null);
 
   // Constants
-  const DURATION_MS = 7000; // rotation + kenburns duration
+  const DURATION_MS = 7000; // rotate + kenburns duration
 
   // Helpers
   const scheduleNext = () => {
@@ -86,26 +84,27 @@ export default function Hero() {
     setIndex(i);
   };
 
-  // Autoplay (single-shot timeout to avoid drift)
+  // Autoplay (single-shot timeout to prevent drift)
   useEffect(() => {
     scheduleNext();
     return () => {
       if (timerRef.current) window.clearTimeout(timerRef.current);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [index, paused]);
 
   // Mark image loaded via onLoad
   const markLoaded = (i: number) =>
     setLoaded((arr) => (arr[i] ? arr : arr.map((v, idx) => (idx === i ? true : v))));
 
-  // Preload the upcoming image proactively
+  // Preload the next image proactively
   useEffect(() => {
     const next = (index + 1) % slides.length;
-    const img = new Image();
-    img.onload = () => markLoaded(next);
-    img.src = slides[next].img;
-  }, [index, slides]);
+    if (!loaded[next]) {
+      const img = new Image();
+      img.onload = () => markLoaded(next);
+      img.src = slides[next].img;
+    }
+  }, [index, slides, loaded]);
 
   // Pause on hover/focus
   useEffect(() => {
@@ -151,8 +150,8 @@ export default function Hero() {
     touchStartX.current = null;
   };
 
-  // Helper: should this slide be visible?
-  // Keep the previous slide visible until the new active image has loaded.
+  // Visibility logic:
+  // Keep prev slide visible until the new active slide image has loaded (no white flash).
   const isVisible = (i: number) =>
     i === index ? loaded[i] : i === prevIndex && !loaded[index];
 
@@ -187,26 +186,25 @@ export default function Hero() {
                 visible ? "opacity-100" : "opacity-0"
               }`}
             >
-              {/* Re-key when active so Ken Burns restarts smoothly */}
               <img
-                key={active ? `${s.id}-${index}` : s.id}
                 src={s.img}
                 alt={s.alt}
                 onLoad={() => markLoaded(i)}
-                className="block h-full w-full object-cover will-change-[transform,opacity] [backface-visibility:hidden] [transform:translateZ(0)]"
+                className="block h-full w-full object-cover will-change-[transform] [backface-visibility:hidden] [transform:translateZ(0)]"
                 style={{
-                  animation:
-                    active && loaded[i]
-                      ? `kenburns ${DURATION_MS}ms ease-in-out both`
-                      : undefined,
-                  animationPlayState: paused ? "paused" : "running",
+                  // Toggle animation name so it restarts cleanly on each activation (no remount).
+                  animationName: active && loaded[i] ? "kenburns" : "none",
+                  animationDuration: `${DURATION_MS}ms`,
+                  animationTimingFunction: "ease-in-out",
+                  animationFillMode: "both",
+                  animationPlayState: paused ? ("paused" as const) : ("running" as const),
                 }}
                 loading={i === 0 ? "eager" : "lazy"}
                 decoding="async"
               />
               {/* Exact-bounds gradient overlay */}
               <div
-                className="absolute inset-0 bg-gradient-to-tr from-[#940400]/35 via-transparent to-transparent pointer-events-none"
+                className="absolute inset-0 bg-gradient-to-tr from-[#940400]/25 via-transparent to-transparent pointer-events-none"
                 aria-hidden
               />
             </div>
@@ -218,7 +216,7 @@ export default function Hero() {
       <div className="pointer-events-none absolute inset-0">
         <div className="pointer-events-auto max-w-7xl mx-auto px-6 md:px-8 h-full">
           <div className="h-full grid grid-cols-1 md:grid-cols-12 items-center">
-            <article className="md:col-span-7 lg:col-span-6 max-w-3xl">
+            <article className="md:col-span-8 lg:col-span-7 max-w-4xl">
               {isTwoLine(slides[index]) ? (
                 <h1 className="font-extrabold tracking-tight leading-tight drop-shadow-md mb-1">
                   <span className="block gradient-text text-4xl md:text-5xl">
@@ -230,6 +228,7 @@ export default function Hero() {
                 </h1>
               ) : (
                 <h1 className="font-extrabold tracking-tight leading-tight drop-shadow-md mb-1">
+                  {/* One line from md+; wraps on very small screens */}
                   <span className="flex flex-wrap md:flex-nowrap md:whitespace-nowrap items-baseline gap-x-3 text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
                     <span className="gradient-text">{slides[index].h1Parts[0]}</span>
                     <span className="text-white/90">|</span>
@@ -245,22 +244,10 @@ export default function Hero() {
               </p>
 
               <div className="mt-6 flex flex-wrap gap-3">
-                <Button
-                  asChild
-                  variant="hero"
-                  ref={(el) => {
-                    if (el) focusablesRef.current[0] = el;
-                  }}
-                >
+                <Button asChild variant="hero">
                   <Link to="/contact#quote">Get a Quote</Link>
                 </Button>
-                <Button
-                  asChild
-                  variant="outline"
-                  ref={(el) => {
-                    if (el) focusablesRef.current[1] = el;
-                  }}
-                >
+                <Button asChild variant="outline">
                   <a href="tel:14379917677">Call 437-991-7677</a>
                 </Button>
               </div>
@@ -291,27 +278,29 @@ export default function Hero() {
 
       {/* Local styles */}
       <style>{`
+        /* Smooth zoom-out */
         @keyframes kenburns {
           0%   { transform: scale(1.06) translateY(0); }
           100% { transform: scale(1.0) translateY(-1%); }
         }
+        /* Animated gradient for headings: red -> dark red -> red */
         @keyframes gradientShift {
           0%   { background-position: 0% 50%; }
           50%  { background-position: 100% 50%; }
           100% { background-position: 0% 50%; }
         }
         .gradient-text {
-          background-image: linear-gradient(90deg, #C30003, #ffffff, #C30003);
+          background-image: linear-gradient(90deg, #C30003, #940400, #C30003);
           background-size: 200% 200%;
           animation: gradientShift 6s ease-in-out infinite;
           -webkit-background-clip: text;
           background-clip: text;
           color: transparent;
         }
+        /* Respect reduced motion */
         @media (prefers-reduced-motion: reduce) {
           .gradient-text { animation: none; }
-          /* No zoom for reduced motion */
-          img[style*="kenburns"] { animation: none !important; }
+          .kenburns { animation: none !important; }
         }
       `}</style>
     </section>
