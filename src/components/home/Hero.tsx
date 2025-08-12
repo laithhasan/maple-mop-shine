@@ -209,15 +209,18 @@ export default function Hero() {
                 </h1>
               ) : (
                 // Second hero: reduced size + perfect alignment above sub/CTAs
-                <h1 className="font-extrabold tracking-tight leading-tight drop-shadow-md mb-1">
-                  <span className="flex flex-wrap md:flex-nowrap items-baseline gap-x-2 text-[clamp(1.5rem,4.2vw,2.5rem)] md:text-[clamp(2rem,3.8vw,3.25rem)]">
-                    <span className="gradient-text">{slides[index].h1Parts[0]}</span>
-                    <span className="text-white/90">|</span>
-                    <span className="gradient-text">{slides[index].h1Parts[1]}</span>
-                    <span className="text-white/90">|</span>
-                    <span className="gradient-text">{slides[index].h1Parts[2]}</span>
-                  </span>
-                </h1>
+                {/* SECOND HERO (one line, Tailwind sizes only) */}
+<h1 className="font-extrabold tracking-tight leading-tight drop-shadow-md mb-1">
+  <span className="flex flex-wrap md:flex-nowrap items-baseline gap-x-3
+                   text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
+    <span className="gradient-text">{slides[index].h1Parts[0]}</span>
+    <span className="text-white/90">|</span>
+    <span className="gradient-text">{slides[index].h1Parts[1]}</span>
+    <span className="text-white/90">|</span>
+    <span className="gradient-text">{slides[index].h1Parts[2]}</span>
+  </span>
+</h1>
+
               )}
 
               <p className="mt-2 text-white/90 drop-shadow-sm text-lg md:text-xl">
