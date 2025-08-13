@@ -1,7 +1,16 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Building2, Shield, Clock3, Leaf, Star, Sparkles, CheckCircle2 } from "lucide-react";
+import {
+  Building2,
+  Shield,
+  Clock3,
+  Leaf,
+  Star,
+  Sparkles,
+  CheckCircle2,
+  ChevronDown,    // ← single custom chevron
+} from "lucide-react";
 
 const checklist = [
   { q: "Floors & Carpets", a: "Vacuum, mop, stain spot-treat; machine scrub where needed." },
@@ -88,10 +97,9 @@ export default function CommercialCleaning() {
               </p>
             </header>
 
-            {/* pill grid */}
             <ul className="relative z-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 gap-3">
               {whatWeDo.map((item, i) => (
-                <li key={item} className="h-full">
+                <li key={item}>
                   <span className="inline-flex items-center gap-2 w-full rounded-xl px-3 py-2 text-sm bg-white/[0.03] ring-1 ring-white/10 hover:ring-primary/40 hover:bg-white/[0.06] transition-all">
                     <span className="inline-flex h-6 w-6 items-center justify-center rounded-md bg-primary/15 ring-1 ring-primary/25">
                       {i % 2 === 0 ? (
@@ -106,7 +114,6 @@ export default function CommercialCleaning() {
               ))}
             </ul>
 
-            {/* subtle bottom glow */}
             <div className="pointer-events-none absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-[#02F1FF] via-[#C30003] to-[#4DAFFE] opacity-70" />
           </article>
 
@@ -117,24 +124,33 @@ export default function CommercialCleaning() {
               Typical Scope & Checklist
             </h2>
 
-            <Accordion type="single" collapsible className="w-full">
+            {/* space between items + single chevron */}
+            <Accordion type="single" collapsible className="w-full space-y-2.5">
               {checklist.map((i, idx) => (
                 <AccordionItem
                   key={idx}
                   value={`item-${idx}`}
-                  className="rounded-xl border border-white/10 bg-white/[0.02] backdrop-blur-[1px] overflow-hidden data-[state=open]:ring-1 data-[state=open]:ring-primary/30 data-[state=open]:bg-white/[0.04] transition-all"
+                  className="overflow-hidden rounded-xl ring-1 ring-white/10 bg-white/[0.02] backdrop-blur-[2px] transition-all data-[state=open]:ring-primary/30 data-[state=open]:bg-white/[0.05]"
                 >
-                  <AccordionTrigger className="px-4 md:px-5 py-3 hover:no-underline text-left [&[data-state=open]_.chev]:rotate-180">
+                  <AccordionTrigger
+                    className="
+                      group flex w-full items-center gap-3 px-4 md:px-5 py-3 text-left hover:no-underline
+                      [&>svg]:hidden  /* hide shadcn's default chevron */
+                    "
+                  >
                     <div className="flex items-center gap-3">
                       <span className="inline-flex h-6 w-6 items-center justify-center rounded-md bg-primary/15 text-primary text-xs font-semibold ring-1 ring-primary/25">
                         {idx + 1}
                       </span>
                       <span className="font-medium text-heading">{i.q}</span>
                     </div>
-                    <svg className="chev ml-auto h-4 w-4 shrink-0 transition-transform duration-300" viewBox="0 0 24 24" fill="none">
-                      <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                    </svg>
+
+                    {/* our single chevron */}
+                    <span className="ml-auto inline-flex items-center justify-center rounded-full p-1.5 bg-primary/10 ring-1 ring-primary/20 text-primary transition-transform duration-300 group-data-[state=open]:rotate-180">
+                      <ChevronDown className="h-4 w-4" />
+                    </span>
                   </AccordionTrigger>
+
                   <AccordionContent className="px-4 md:px-5 pb-4 text-foreground/80 leading-relaxed">
                     {i.a}
                   </AccordionContent>
@@ -188,6 +204,9 @@ export default function CommercialCleaning() {
                 <p className="text-white/85 mt-1">Call 437-991-7677 or request a quote now.</p>
               </div>
               <div className="flex gap-3">
+                <Button asChild variant="outline" className="border-white/30 text-white hover:bg-white/10 hover:border-white/50">
+                  <a href="tel:14379917677">Call 437-991-7677</a>
+                </Button>
                 <Button asChild variant="hero" className="group">
                   <Link to="/contact#quote" className="inline-flex items-center gap-2">
                     Get a Quote
@@ -197,7 +216,6 @@ export default function CommercialCleaning() {
               </div>
             </div>
 
-            {/* thin glow line */}
             <div className="pointer-events-none absolute inset-x-8 bottom-0 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent" />
           </div>
         </div>
