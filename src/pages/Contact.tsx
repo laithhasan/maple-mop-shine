@@ -52,10 +52,6 @@ export default function Contact() {
           <h1 className="heading text-4xl lg:text-5xl font-extrabold leading-tight bg-gradient-to-r from-white via-primary to-accent-1 bg-clip-text text-transparent">
             Contact Us
           </h1>
-          <p className="mt-2 text-white/85">
-            Call <a className="underline-offset-2 hover:underline" href="tel:14379917677">437-991-7677</a> •{" "}
-            <a className="underline-offset-2 hover:underline" href="mailto:info@maplemopcleaning.com">info@maplemopcleaning.com</a>
-          </p>
 
           {/* quick chips */}
           <div className="mt-5 flex flex-wrap gap-3">
