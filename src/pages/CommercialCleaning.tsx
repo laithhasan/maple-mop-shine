@@ -204,9 +204,6 @@ export default function CommercialCleaning() {
                 <p className="text-white/85 mt-1">Call 437-991-7677 or request a quote now.</p>
               </div>
               <div className="flex gap-3">
-                <Button asChild variant="outline" className="border-white/30 text-white hover:bg-white/10 hover:border-white/50">
-                  <a href="tel:14379917677">Call 437-991-7677</a>
-                </Button>
                 <Button asChild variant="hero" className="group">
                   <Link to="/contact#quote" className="inline-flex items-center gap-2">
                     Get a Quote
