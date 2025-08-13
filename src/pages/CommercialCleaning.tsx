@@ -1,7 +1,7 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Building2, Shield, Clock3, Leaf, Star, Sparkles } from "lucide-react";
+import { Building2, Shield, Clock3, Leaf, Star, Sparkles, CheckCircle2 } from "lucide-react";
 
 const checklist = [
   { q: "Floors & Carpets", a: "Vacuum, mop, stain spot-treat; machine scrub where needed." },
@@ -10,6 +10,23 @@ const checklist = [
   { q: "Windows & Glass", a: "Interior glass, partitions, and entryways; streak-free finish." },
   { q: "Waste & Recycling", a: "Collect, bag, and stage for pick-up; liners replaced." },
   { q: "Kitchenettes", a: "Counters, sinks, appliances exterior; sanitize tables and chairs." },
+];
+
+const whatWeDo = [
+  "Vacuuming all floors",
+  "Steaming the carpets",
+  "Dusting the furniture",
+  "Mopping hard floors",
+  "Disinfecting the cabins",
+  "Cleaning the kitchen",
+  "Vacuuming rooms",
+  "Cleaning the toilets",
+  "Emptying trash bins",
+  "Removing garbage",
+  "Tidying up the office",
+  "Cleaning hand basins",
+  "Polishing mirrors",
+  "Wiping the benches",
 ];
 
 export default function CommercialCleaning() {
@@ -23,6 +40,10 @@ export default function CommercialCleaning() {
         <div className="pointer-events-none absolute -bottom-24 -right-24 h-96 w-96 rounded-full bg-[#02F1FF]/15 blur-3xl" />
 
         <div className="relative max-w-7xl mx-auto px-6 md:px-8 py-16 lg:py-20">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 ring-1 ring-primary/20 mb-5">
+            <Building2 className="h-4 w-4 text-primary" />
+            <span className="text-sm font-medium text-primary">Commercial Service</span>
+          </div>
 
           <h1 className="heading text-4xl lg:text-5xl font-extrabold leading-tight bg-gradient-to-r from-[#FF6B6B] via-[#C30003] to-[#940400] bg-clip-text text-transparent">
             Commercial Cleaning
@@ -52,30 +73,33 @@ export default function CommercialCleaning() {
         </div>
       </section>
 
-      {/* Overview + Checklist */}
+      {/* What We Do + Checklist */}
       <section className="max-w-7xl mx-auto px-6 md:px-8 py-14">
         <div className="grid lg:grid-cols-2 gap-10 items-start">
-          {/* Spaces */}
+          {/* What We Do */}
           <article className="group relative overflow-hidden rounded-2xl p-6 bg-gradient-to-br from-slate-900/25 via-slate-800/15 to-transparent ring-1 ring-white/10 shadow-2xl shadow-[0_15px_60px_rgba(77,175,254,0.20)] hover:shadow-[0_22px_90px_rgba(77,175,254,0.32)] transition-all duration-500 supports-[backdrop-filter]:backdrop-blur-md supports-[backdrop-filter]:backdrop-saturate-150">
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-tr from-primary/10 via-transparent to-accent-1/10" />
-            <h2 className="font-heading text-2xl mb-4 bg-gradient-to-r from-[#FF6B6B] via-[#C30003] to-[#940400] bg-clip-text text-transparent">
-              Spaces we service
-            </h2>
+            <header className="relative z-10 mb-4">
+              <h2 className="font-heading text-2xl bg-gradient-to-r from-[#FF6B6B] via-[#C30003] to-[#940400] bg-clip-text text-transparent">
+                What We Do
+              </h2>
+              <p className="mt-1 text-sm text-foreground/70">
+                A meticulous, repeatable checklist for visibly cleaner spaces.
+              </p>
+            </header>
 
-            <ul className="grid grid-cols-2 md:grid-cols-3 gap-3 z-10 relative">
-              {[
-                "Offices",
-                "Retail",
-                "Education",
-                "Medical waiting areas",
-                "Restrooms",
-                "Floors & Carpets",
-                "Windows & Glass",
-                "Desks & Touchpoints",
-              ].map((item) => (
-                <li key={item}>
+            {/* pill grid */}
+            <ul className="relative z-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 gap-3">
+              {whatWeDo.map((item, i) => (
+                <li key={item} className="h-full">
                   <span className="inline-flex items-center gap-2 w-full rounded-xl px-3 py-2 text-sm bg-white/[0.03] ring-1 ring-white/10 hover:ring-primary/40 hover:bg-white/[0.06] transition-all">
-                    <Sparkles className="h-4 w-4 text-primary" />
+                    <span className="inline-flex h-6 w-6 items-center justify-center rounded-md bg-primary/15 ring-1 ring-primary/25">
+                      {i % 2 === 0 ? (
+                        <CheckCircle2 className="h-3.5 w-3.5 text-primary" />
+                      ) : (
+                        <Sparkles className="h-3.5 w-3.5 text-primary" />
+                      )}
+                    </span>
                     {item}
                   </span>
                 </li>
