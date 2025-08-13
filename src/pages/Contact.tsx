@@ -4,18 +4,20 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Phone, Mail, Calendar, Building2, Home, MapPin } from "lucide-react";
+import { Phone, Mail, Calendar, Home, MapPin, Clock3 } from "lucide-react";
+import { useMemo } from "react";
 
 const schema = z.object({
   name: z.string().min(2, "Please enter your name"),
   email: z.string().email("Enter a valid email"),
   phone: z.string().min(7, "Enter a valid phone"),
-  propertyType: z.enum(["Home", "Office"]).default("Office"),
-  serviceType: z.string().default("Commercial Cleaning"),
-  frequency: z.enum(["Daily", "Weekly", "Bi-Weekly", "Fortnightly", "One-time"]).default("One-time"),
+  frequency: z
+    .enum(["Daily", "Weekly", "Bi-Weekly", "Fortnightly", "One-time"])
+    .default("One-time"),
   rooms: z.string().optional(),
   size: z.string().optional(),
-  datetime: z.string().optional(),
+  date: z.string().optional(), // calendar selector
+  time: z.string().optional(), // time selector
   message: z.string().optional(),
 });
 
@@ -28,6 +30,15 @@ export default function Contact() {
     reset,
     formState: { errors, isSubmitSuccessful },
   } = useForm<FormData>({ resolver: zodResolver(schema) });
+
+  // today for min date on the calendar
+  const today = useMemo(() => {
+    const d = new Date();
+    const yyyy = d.getFullYear();
+    const mm = String(d.getMonth() + 1).padStart(2, "0");
+    const dd = String(d.getDate()).padStart(2, "0");
+    return `${yyyy}-${mm}-${dd}`;
+  }, []);
 
   const onSubmit = (data: FormData) => {
     // Mock submit - mailto fallback
@@ -78,122 +89,177 @@ export default function Contact() {
       </section>
 
       {/* Form + Info */}
-      <section id="quote" className="max-w-7xl mx-auto px-6 md:px-8 py-14 grid lg:grid-cols-2 gap-8 items-start">
+      <section
+        id="quote"
+        className="max-w-7xl mx-auto px-6 md:px-8 py-14 grid lg:grid-cols-2 gap-8 items-start"
+      >
         {/* Form card */}
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="group relative overflow-hidden rounded-2xl p-6 md:p-8 bg-gradient-to-br from-slate-900/25 via-slate-800/15 to-transparent ring-1 ring-white/10 shadow-2xl shadow-[0_15px_60px_rgba(77,175,254,0.20)] hover:shadow-[0_22px_90px_rgba(77,175,254,0.32)] transition-shadow duration-300 supports-[backdrop-filter]:backdrop-blur-md supports-[backdrop-filter]:backdrop-saturate-150 space-y-5"
+          className="group relative overflow-hidden rounded-2xl p-6 md:p-8 bg-gradient-to-br from-slate-900/25 via-slate-800/15 to-transparent ring-1 ring-white/10 shadow-2xl shadow-[0_15px_60px_rgba(77,175,254,0.20)] hover:shadow-[0_22px_90px_rgba(77,175,254,0.32)] transition-shadow duration-300 supports-[backdrop-filter]:backdrop-blur-md supports-[backdrop-filter]:backdrop-saturate-150 space-y-6"
           aria-label="Quote form"
         >
           <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-tr from-primary/10 via-transparent to-accent-1/10" />
 
-          <div className="grid md:grid-cols-2 gap-4 relative z-10">
-            <div>
-              <label className="text-sm font-medium flex items-center gap-2" htmlFor="name">
-                <SparklesDot /> Name <span className="text-destructive">*</span>
-              </label>
-              <Input id="name" {...register("name")} aria-invalid={!!errors.name} />
-              {errors.name && (
-                <p id="name-err" className="text-sm text-destructive mt-1">
-                  {errors.name.message}
-                </p>
-              )}
+          {/* Section: Contact Info */}
+          <div className="relative z-10">
+            <div className="mb-3 flex items-center gap-2">
+              <span className="inline-block h-2 w-2 rounded-full bg-primary" />
+              <h2 className="text-sm font-semibold uppercase tracking-wider text-white/80">
+                Contact Information
+              </h2>
+              <div className="ml-2 h-px flex-1 bg-white/10" />
             </div>
 
-            <div>
-              <label className="text-sm font-medium flex items-center gap-2" htmlFor="email">
-                <Mail className="h-4 w-4 text-primary" /> Email <span className="text-destructive">*</span>
-              </label>
-              <Input id="email" type="email" {...register("email")} aria-invalid={!!errors.email} />
-              {errors.email && (
-                <p id="email-err" className="text-sm text-destructive mt-1">
-                  {errors.email.message}
-                </p>
-              )}
+            <div className="grid md:grid-cols-2 gap-4">
+              <div>
+                <label
+                  className="text-sm font-medium flex items-center gap-2"
+                  htmlFor="name"
+                >
+                  <SparklesDot /> Name
+                  <span className="text-destructive">*</span>
+                </label>
+                <Input id="name" {...register("name")} aria-invalid={!!errors.name} />
+                {errors.name && (
+                  <p id="name-err" className="text-sm text-destructive mt-1">
+                    {errors.name.message}
+                  </p>
+                )}
+              </div>
+
+              <div>
+                <label
+                  className="text-sm font-medium flex items-center gap-2"
+                  htmlFor="email"
+                >
+                  <Mail className="h-4 w-4 text-primary" /> Email
+                  <span className="text-destructive">*</span>
+                </label>
+                <Input
+                  id="email"
+                  type="email"
+                  {...register("email")}
+                  aria-invalid={!!errors.email}
+                />
+                {errors.email && (
+                  <p id="email-err" className="text-sm text-destructive mt-1">
+                    {errors.email.message}
+                  </p>
+                )}
+              </div>
+
+              <div className="md:col-span-2">
+                <label
+                  className="text-sm font-medium flex items-center gap-2"
+                  htmlFor="phone"
+                >
+                  <Phone className="h-4 w-4 text-primary" /> Phone
+                  <span className="text-destructive">*</span>
+                </label>
+                <Input
+                  id="phone"
+                  type="tel"
+                  {...register("phone")}
+                  aria-invalid={!!errors.phone}
+                />
+                {errors.phone && (
+                  <p id="phone-err" className="text-sm text-destructive mt-1">
+                    {errors.phone.message}
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* Section: Service Details */}
+          <div className="relative z-10">
+            <div className="mb-3 flex items-center gap-2">
+              <span className="inline-block h-2 w-2 rounded-full bg-primary" />
+              <h2 className="text-sm font-semibold uppercase tracking-wider text-white/80">
+                Service Details
+              </h2>
+              <div className="ml-2 h-px flex-1 bg-white/10" />
             </div>
 
-            <div>
-              <label className="text-sm font-medium flex items-center gap-2" htmlFor="phone">
-                <Phone className="h-4 w-4 text-primary" /> Phone <span className="text-destructive">*</span>
-              </label>
-              <Input id="phone" type="tel" {...register("phone")} aria-invalid={!!errors.phone} />
-              {errors.phone && (
-                <p id="phone-err" className="text-sm text-destructive mt-1">
-                  {errors.phone.message}
-                </p>
-              )}
-            </div>
+            <div className="grid md:grid-cols-2 gap-4">
+              <div>
+                <label
+                  className="text-sm font-medium flex items-center gap-2"
+                  htmlFor="frequency"
+                >
+                  <Calendar className="h-4 w-4 text-primary" /> Frequency
+                </label>
+                <select
+                  id="frequency"
+                  className="w-full h-10 rounded-md border bg-background px-3 ring-1 ring-white/10 focus:outline-none focus:ring-2 focus:ring-primary/40 transition"
+                  {...register("frequency")}
+                >
+                  <option>Daily</option>
+                  <option>Weekly</option>
+                  <option>Bi-Weekly</option>
+                  <option>Fortnightly</option>
+                  <option>One-time</option>
+                </select>
+              </div>
 
-            <div>
-              <label className="text-sm font-medium flex items-center gap-2" htmlFor="propertyType">
-                <Building2 className="h-4 w-4 text-primary" /> Property Type
-              </label>
-              <select
-                id="propertyType"
-                className="w-full h-10 rounded-md border bg-background px-3 ring-1 ring-white/10 focus:outline-none focus:ring-2 focus:ring-primary/40 transition"
-                {...register("propertyType")}
-              >
-                <option>Home</option>
-                <option>Office</option>
-              </select>
-            </div>
+              <div>
+                <label
+                  className="text-sm font-medium flex items-center gap-2"
+                  htmlFor="rooms"
+                >
+                  <Home className="h-4 w-4 text-primary" /> Rooms/Offices
+                </label>
+                <Input id="rooms" placeholder="e.g., 6 offices" {...register("rooms")} />
+              </div>
 
-            <div>
-              <label className="text-sm font-medium flex items-center gap-2" htmlFor="serviceType">
-                <SparklesDot /> Service Type
-              </label>
-              <select
-                id="serviceType"
-                className="w-full h-10 rounded-md border bg-background px-3 ring-1 ring-white/10 focus:outline-none focus:ring-2 focus:ring-primary/40 transition"
-                {...register("serviceType")}
-              >
-                <option>Commercial Cleaning</option>
-              </select>
-            </div>
+              <div>
+                <label
+                  className="text-sm font-medium flex items-center gap-2"
+                  htmlFor="size"
+                >
+                  <MapPin className="h-4 w-4 text-primary" /> Approx. size
+                </label>
+                <Input id="size" placeholder="e.g., 2,500 sq ft" {...register("size")} />
+              </div>
 
-            <div>
-              <label className="text-sm font-medium flex items-center gap-2" htmlFor="frequency">
-                <Calendar className="h-4 w-4 text-primary" /> Frequency
-              </label>
-              <select
-                id="frequency"
-                className="w-full h-10 rounded-md border bg-background px-3 ring-1 ring-white/10 focus:outline-none focus:ring-2 focus:ring-primary/40 transition"
-                {...register("frequency")}
-              >
-                <option>Daily</option>
-                <option>Weekly</option>
-                <option>Bi-Weekly</option>
-                <option>Fortnightly</option>
-                <option>One-time</option>
-              </select>
-            </div>
+              {/* Date & Time selectors */}
+              <div>
+                <label
+                  className="text-sm font-medium flex items-center gap-2"
+                  htmlFor="date"
+                >
+                  <Calendar className="h-4 w-4 text-primary" /> Preferred date
+                </label>
+                <Input
+                  id="date"
+                  type="date"
+                  min={today}
+                  {...register("date")}
+                />
+              </div>
 
-            <div>
-              <label className="text-sm font-medium flex items-center gap-2" htmlFor="rooms">
-                <Home className="h-4 w-4 text-primary" /> Rooms/Offices
-              </label>
-              <Input id="rooms" placeholder="e.g., 6 offices" {...register("rooms")} />
-            </div>
+              <div>
+                <label
+                  className="text-sm font-medium flex items-center gap-2"
+                  htmlFor="time"
+                >
+                  <Clock3 className="h-4 w-4 text-primary" /> Preferred time
+                </label>
+                <Input
+                  id="time"
+                  type="time"
+                  step={900} // 15-min increments
+                  {...register("time")}
+                />
+              </div>
 
-            <div>
-              <label className="text-sm font-medium flex items-center gap-2" htmlFor="size">
-                <MapPin className="h-4 w-4 text-primary" /> Approx. size
-              </label>
-              <Input id="size" placeholder="e.g., 2,500 sq ft" {...register("size")} />
-            </div>
-
-            <div className="md:col-span-2">
-              <label className="text-sm font-medium flex items-center gap-2" htmlFor="datetime">
-                <Calendar className="h-4 w-4 text-primary" /> Preferred date/time
-              </label>
-              <Input id="datetime" placeholder="e.g., Tue 3pm" {...register("datetime")} />
-            </div>
-
-            <div className="md:col-span-2">
-              <label className="text-sm font-medium" htmlFor="message">
-                Message
-              </label>
-              <Textarea id="message" rows={4} {...register("message")} />
+              <div className="md:col-span-2">
+                <label className="text-sm font-medium" htmlFor="message">
+                  Message
+                </label>
+                <Textarea id="message" rows={4} {...register("message")} />
+              </div>
             </div>
           </div>
 
@@ -203,10 +269,21 @@ export default function Contact() {
                 Request Quote <span className="transition-transform group-hover:translate-x-1">→</span>
               </span>
             </Button>
+            <Button
+              asChild
+              variant="outline"
+              className="border-white/30 text-white hover:bg-white/10 hover:border-white/50"
+            >
+              <a href="tel:14379917677">Call 437-991-7677</a>
+            </Button>
           </div>
 
           {isSubmitSuccessful && (
-            <div role="status" aria-live="polite" className="relative z-10 mt-2 text-sm text-foreground/85">
+            <div
+              role="status"
+              aria-live="polite"
+              className="relative z-10 mt-2 text-sm text-foreground/85"
+            >
               Thanks! Your request was prepared in your email client. We’ll get back to you shortly.
             </div>
           )}
