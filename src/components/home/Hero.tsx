@@ -54,7 +54,8 @@ export default function Hero() {
   const [index, setIndex] = useState(0);
   const [prevIndex, setPrevIndex] = useState(0);
   const [paused, setPaused] = useState(false);
-  const [loaded, setLoaded] = useState<boolean[]>([true, false]); // first eager
+  // First slide marked loaded to avoid initial flash
+  const [loaded, setLoaded] = useState<boolean[]>([true, false]);
 
   // Refs
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -62,7 +63,7 @@ export default function Hero() {
   const touchStartX = useRef<number | null>(null);
 
   // Constants
-  const DURATION_MS = 7000;
+  const DURATION_MS = 7000; // rotate + kenburns duration
 
   // Helpers
   const scheduleNext = () => {
@@ -127,17 +128,10 @@ export default function Hero() {
 
   // Keyboard & touch
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === "ArrowRight") {
-      e.preventDefault();
-      goTo((index + 1) % slides.length);
-    } else if (e.key === "ArrowLeft") {
-      e.preventDefault();
-      goTo((index - 1 + slides.length) % slides.length);
-    }
+    if (e.key === "ArrowRight") { e.preventDefault(); goTo((index + 1) % slides.length); }
+    else if (e.key === "ArrowLeft") { e.preventDefault(); goTo((index - 1 + slides.length) % slides.length); }
   };
-  const onTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0].clientX;
-  };
+  const onTouchStart = (e: React.TouchEvent) => { touchStartX.current = e.touches[0].clientX; };
   const onTouchEnd = (e: React.TouchEvent) => {
     if (touchStartX.current == null) return;
     const dx = e.changedTouches[0].clientX - touchStartX.current;
@@ -147,6 +141,7 @@ export default function Hero() {
     touchStartX.current = null;
   };
 
+  // Visibility logic
   const isVisible = (i: number) => (i === index ? loaded[i] : i === prevIndex && !loaded[index]);
   const isActive = (i: number) => i === index;
 
@@ -163,7 +158,7 @@ export default function Hero() {
       onTouchEnd={onTouchEnd}
     >
       {/* Slides */}
-      <div className="relative w-full h-[100svh] md:h-[78vh] overflow-hidden">
+      <div className="relative w-full h-[64vh] md:h-[78vh] overflow-hidden">
         {slides.map((s, i) => {
           const visible = isVisible(i);
           const active = isActive(i);
@@ -221,16 +216,8 @@ export default function Hero() {
                   </h1>
                 ) : (
                   <h1 className="font-extrabold tracking-tight leading-[1.15] drop-shadow-md mb-2 pb-1 md:-translate-y-[2px] transform-gpu">
-                    {/* One line at all sizes; shrink gracefully on very small screens */}
-                    <span
-                      className="
-                        flex items-baseline gap-x-2 sm:gap-x-3
-                        whitespace-nowrap overflow-hidden
-                        text-[clamp(0.95rem,4.8vw,2rem)]
-                        md:text-[clamp(1.75rem,3.6vw,3rem)]
-                        lg:text-[clamp(2.25rem,3vw,3.5rem)]
-                      "
-                    >
+                    {/* One line from md+; wraps on very small screens */}
+                    <span className="flex flex-wrap md:flex-nowrap md:whitespace-nowrap items-baseline gap-x-2 sm:gap-x-3 text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
                       <span className="gradient-text title-glow">{slides[index].h1Parts[0]}</span>
                       <span aria-hidden className="sep mx-1 sm:mx-2 align-middle" />
                       <span className="gradient-text title-glow">{slides[index].h1Parts[1]}</span>
@@ -240,7 +227,7 @@ export default function Hero() {
                   </h1>
                 )}
 
-                <p className="mt-1 text-white/90 drop-shadow-sm text-base sm:text-lg md:text-xl">
+                <p className="mt-1 text-white/90 drop-shadow-sm text-lg md:text-xl">
                   {slides[index].sub}
                 </p>
 
@@ -301,7 +288,7 @@ export default function Hero() {
           color: transparent;
         }
 
-        /* Lighter red glow */
+        /* Glowing effect for title text — lighter red */
         @keyframes titleGlowPulse {
           0%   { text-shadow: 0 0 6px rgba(255,107,107,0.35), 0 0 18px rgba(255,107,107,0.20); }
           50%  { text-shadow: 0 0 14px rgba(255,107,107,0.70), 0 0 36px rgba(255,107,107,0.45); }
@@ -315,7 +302,7 @@ export default function Hero() {
           animation-direction: normal, alternate;
         }
 
-        /* Animated separators */
+        /* Animated separators (red tones) */
         @keyframes sepShift {
           0%   { background-position: 0% 0%; box-shadow: 0 0 0 rgba(0,0,0,0); }
           50%  { background-position: 0% 100%; box-shadow: 0 0 12px rgba(195,0,3,0.35); }
@@ -332,6 +319,7 @@ export default function Hero() {
           opacity: 0.95;
         }
 
+        /* Reduced motion */
         @media (prefers-reduced-motion: reduce) {
           .gradient-text { animation: none; }
           .title-glow { animation: none; text-shadow: none; }
