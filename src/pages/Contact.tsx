@@ -111,7 +111,7 @@ export default function Contact() {
               <div className="ml-2 h-px flex-1 bg-white/10" />
             </div>
 
-            <div className="grid md:grid-cols-2 gap-4">
+            <div className="grid md:grid-cols-2 gap-8">
               <div>
                 <label
                   className="text-sm font-medium flex items-center gap-2"
@@ -268,13 +268,6 @@ export default function Contact() {
               <span className="inline-flex items-center gap-2">
                 Request Quote <span className="transition-transform group-hover:translate-x-1">→</span>
               </span>
-            </Button>
-            <Button
-              asChild
-              variant="outline"
-              className="border-white/30 text-white hover:bg-white/10 hover:border-white/50"
-            >
-              <a href="tel:14379917677">Call 437-991-7677</a>
             </Button>
           </div>
 
