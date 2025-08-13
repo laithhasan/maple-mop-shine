@@ -27,9 +27,8 @@ export default function Navbar() {
   }, []);
 
   const getNavCls = ({ isActive }: { isActive: boolean }) =>
-    `px-3 py-2 rounded-md text-sm font-medium transition-colors story-link ${
-      isActive ? "text-primary" : "text-foreground/80 hover:text-foreground"
-    }`;
+    `px-3 py-2 rounded-md text-sm font-medium transition-colors story-link
+     ${isActive ? "text-primary" : "text-foreground/80 hover:text-foreground"}`;
 
   return (
     <header
@@ -39,17 +38,23 @@ export default function Navbar() {
       aria-label="Main"
     >
       <div className="glass">
-        <div className="container mx-auto flex h-16 items-center justify-between px-4">
-          <Link to="/" className="flex items-center gap-2" aria-label="Maple Mop Cleaning - Home">
+        <div className="container mx-auto px-4 lg:px-6 flex items-center justify-between h-16 md:h-20">
+          {/* Brand */}
+          <Link
+            to="/"
+            className="flex items-center gap-3 shrink-0"
+            aria-label="Maple Mop Cleaning - Home"
+          >
             <img
               src="/images/NEGOT.png"
               alt="Maple Mop Cleaning logo"
-              className="h-16 md:h-18 w-full object-contain block"
+              className="h-12 md:h-14 lg:h-16 w-auto object-contain"
               decoding="async"
             />
           </Link>
 
-          <nav className="hidden md:flex items-center gap-1" aria-label="Primary">
+          {/* Desktop nav */}
+          <nav className="hidden md:flex items-center gap-4 lg:gap-5" aria-label="Primary">
             {navItems.map((item) => (
               <NavLink key={item.to} to={item.to} className={getNavCls} end>
                 {item.label}
@@ -57,45 +62,83 @@ export default function Navbar() {
             ))}
           </nav>
 
-          <div className="hidden md:flex items-center gap-3">
-            <Button asChild variant="outline">
+          {/* Desktop actions */}
+          <div className="hidden md:flex items-center gap-3 lg:gap-4">
+            <Button asChild variant="outline" className="whitespace-nowrap">
               <a href="tel:14379917677" className="flex items-center gap-2">
-                <Phone className="h-4 w-4" /> 437-991-7677
+                <Phone className="h-4 w-4" />
+                437-991-7677
               </a>
             </Button>
-            <Button asChild variant="hero">
+            <Button asChild variant="hero" className="whitespace-nowrap">
               <Link to="/contact#quote">Get a Quote</Link>
             </Button>
           </div>
 
-          <div className="md:hidden">
+          {/* Mobile actions */}
+          <div className="md:hidden flex items-center gap-2">
+            <Button
+              asChild
+              variant="outline"
+              size="icon"
+              className="h-10 w-10"
+              aria-label="Call 437-991-7677"
+            >
+              <a href="tel:14379917677">
+                <Phone className="h-5 w-5" />
+              </a>
+            </Button>
+
             <Sheet>
               <SheetTrigger asChild>
-                <Button variant="secondary" size="icon" aria-label="Open menu">
-                  <Menu />
+                <Button variant="secondary" size="icon" className="h-10 w-10" aria-label="Open menu">
+                  <Menu className="h-5 w-5" />
                 </Button>
               </SheetTrigger>
+
               <SheetContent side="right" className="w-80">
-                <div className="mt-10 flex flex-col gap-2" role="menu">
+                <div className="mt-6">
+                  <Link
+                    to="/"
+                    className="flex items-center gap-3"
+                    aria-label="Maple Mop Cleaning - Home"
+                  >
+                    <img
+                      src="/images/NEGOT.png"
+                      alt="Maple Mop Cleaning logo"
+                      className="h-10 w-auto object-contain"
+                      decoding="async"
+                    />
+                  </Link>
+                </div>
+
+                <div className="mt-6 flex flex-col gap-2" role="menu" aria-label="Mobile navigation">
                   {navItems.map((item) => (
                     <NavLink
                       key={item.to}
                       to={item.to}
                       end
                       className={({ isActive }) =>
-                        `px-4 py-3 rounded-lg text-base ${
-                          isActive
-                            ? "bg-muted text-primary"
-                            : "hover:bg-muted/60"
+                        `px-4 py-3 rounded-lg text-base transition-colors ${
+                          isActive ? "bg-muted text-primary" : "hover:bg-muted/60"
                         }`
                       }
                     >
                       {item.label}
                     </NavLink>
                   ))}
-                  <Button asChild variant="hero" className="mt-2">
-                    <Link to="/contact#quote">Get a Quote</Link>
-                  </Button>
+
+                  <div className="mt-3 grid grid-cols-2 gap-2">
+                    <Button asChild variant="outline" className="w-full">
+                      <a href="tel:14379917677" className="flex items-center justify-center gap-2">
+                        <Phone className="h-4 w-4" />
+                        Call
+                      </a>
+                    </Button>
+                    <Button asChild variant="hero" className="w-full">
+                      <Link to="/contact#quote">Get a Quote</Link>
+                    </Button>
+                  </div>
                 </div>
               </SheetContent>
             </Sheet>
