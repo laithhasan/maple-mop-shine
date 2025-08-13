@@ -217,7 +217,8 @@ export default function Hero() {
                 ) : (
                   <h1 className="font-extrabold tracking-tight leading-[1.15] drop-shadow-md mb-2 pb-1 md:-translate-y-[2px] transform-gpu">
                     {/* One line from md+; wraps on very small screens */}
-                    <span className="flex flex-wrap md:flex-nowrap md:whitespace-nowrap items-baseline gap-x-2 sm:gap-x-3 text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
+                    <span className="flex flex-wrap md:flex-nowrap md:whitespace-nowrap items-baseline gap-x-2 sm:gap-x-3 text-3xl sm:text-4xl md:text-5xl lg:text-6xl
+">
                       <span className="gradient-text title-glow">{slides[index].h1Parts[0]}</span>
                       <span aria-hidden className="sep mx-1 sm:mx-2 align-middle" />
                       <span className="gradient-text title-glow">{slides[index].h1Parts[1]}</span>
