@@ -128,10 +128,17 @@ export default function Hero() {
 
   // Keyboard & touch
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === "ArrowRight") { e.preventDefault(); goTo((index + 1) % slides.length); }
-    else if (e.key === "ArrowLeft") { e.preventDefault(); goTo((index - 1 + slides.length) % slides.length); }
+    if (e.key === "ArrowRight") {
+      e.preventDefault();
+      goTo((index + 1) % slides.length);
+    } else if (e.key === "ArrowLeft") {
+      e.preventDefault();
+      goTo((index - 1 + slides.length) % slides.length);
+    }
   };
-  const onTouchStart = (e: React.TouchEvent) => { touchStartX.current = e.touches[0].clientX; };
+  const onTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
   const onTouchEnd = (e: React.TouchEvent) => {
     if (touchStartX.current == null) return;
     const dx = e.changedTouches[0].clientX - touchStartX.current;
@@ -148,7 +155,7 @@ export default function Hero() {
   return (
     <section
       ref={containerRef}
-      className="relative isolate"
+      className="relative isolate h-[100svh] md:h-[78vh] overflow-hidden"
       role="region"
       aria-roledescription="carousel"
       aria-label="Hero"
@@ -157,8 +164,8 @@ export default function Hero() {
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}
     >
-      {/* Slides */}
-      <div className="relative w-full h-[64vh] md:h-[78vh] overflow-hidden">
+      {/* Slides (cross-fade) — now fills the viewport on mobile */}
+      <div className="relative w-full h-full overflow-hidden">
         {slides.map((s, i) => {
           const visible = isVisible(i);
           const active = isActive(i);
@@ -273,14 +280,14 @@ export default function Hero() {
           100% { transform: scale(1.0) translateY(-1%); }
         }
 
-        /* Animated gradient for headings: red -> light red -> red */
+        /* Animated gradient for headings: light red -> red -> light red */
         @keyframes gradientShift {
           0%   { background-position: 0% 50%; }
           50%  { background-position: 100% 50%; }
           100% { background-position: 0% 50%; }
         }
         .gradient-text {
-          background-image: linear-gradient(90deg, #C30003, #FF6B6B, #C30003);
+          background-image: linear-gradient(90deg, #FF6B6B, #C30003, #FF6B6B);
           background-size: 200% 200%;
           animation: gradientShift 6s ease-in-out infinite;
           -webkit-background-clip: text;
@@ -288,7 +295,7 @@ export default function Hero() {
           color: transparent;
         }
 
-        /* Glowing effect for title text — lighter red */
+        /* Light red glowing effect for title text */
         @keyframes titleGlowPulse {
           0%   { text-shadow: 0 0 6px rgba(255,107,107,0.35), 0 0 18px rgba(255,107,107,0.20); }
           50%  { text-shadow: 0 0 14px rgba(255,107,107,0.70), 0 0 36px rgba(255,107,107,0.45); }
@@ -312,7 +319,7 @@ export default function Hero() {
           display: inline-block;
           width: 2px;
           height: 1.1em;
-          background-image: linear-gradient(180deg, #C30003, #7a0000, #C30003);
+          background-image: linear-gradient(180deg, #FF6B6B, #C30003, #FF6B6B);
           background-size: 100% 200%;
           animation: sepShift 2.8s ease-in-out infinite;
           border-radius: 9999px;
