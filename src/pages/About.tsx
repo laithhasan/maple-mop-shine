@@ -13,7 +13,7 @@ export default function About() {
         <div className="pointer-events-none absolute -bottom-24 -right-24 h-96 w-96 rounded-full bg-[#02F1FF]/15 blur-3xl" />
 
         <div className="relative max-w-7xl mx-auto px-6 md:px-8 py-16 lg:py-20">
-          <h1 className="heading text-4xl lg:text-5xl font-extrabold leading-tight bg-gradient-to-r from-white via-primary to-accent-1 bg-clip-text text-transparent">
+          <h1 className="heading text-4xl lg:text-5xl font-extrabold leading-tight bg-gradient-to-r from-[#FF6B6B] via-[#C30003] to-[#940400] bg-clip-text text-transparent">
             Your Trusted &amp; Dependable Cleaning Company.
           </h1>
 
@@ -63,14 +63,16 @@ export default function About() {
           ].map(({ title, desc, icon: Icon }) => (
             <article
               key={title}
-              className="group relative overflow-hidden rounded-2xl p-6 bg-gradient-to-br from-slate-900/25 via-slate-800/15 to-transparent ring-1 ring-white/10 shadow-2xl supports-[backdrop-filter]:backdrop-blur-md supports-[backdrop-filter]:backdrop-saturate-150 transition-all duration-500 hover:-translate-y-1"
+              className="group relative overflow-hidden rounded-2xl p-6 bg-gradient-to-br from-slate-900/25 via-slate-800/15 to-transparent ring-1 ring-white/10 shadow-2xl shadow-[0_12px_48px_rgba(77,175,254,0.18)] hover:shadow-[0_16px_64px_rgba(77,175,254,0.28)] transition-all duration-500 supports-[backdrop-filter]:backdrop-blur-md supports-[backdrop-filter]:backdrop-saturate-150 hover:-translate-y-1"
             >
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-tr from-primary/10 via-transparent to-accent-1/10" />
               <div className="relative z-10">
                 <div className="inline-flex items-center justify-center h-10 w-10 rounded-xl bg-primary/15 ring-1 ring-primary/25 text-primary mb-4">
                   <Icon className="h-5 w-5" />
                 </div>
-                <h2 className="font-heading text-xl text-heading mb-1">{title}</h2>
+                <h2 className="font-heading text-xl bg-gradient-to-r from-[#FF6B6B] via-[#C30003] to-[#940400] bg-clip-text text-transparent mb-1">
+                  {title}
+                </h2>
                 <p className="text-sm text-foreground/75">{desc}</p>
               </div>
               <div className="pointer-events-none absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-[#02F1FF] via-[#C30003] to-[#4DAFFE] opacity-70" />
@@ -81,10 +83,10 @@ export default function About() {
 
       {/* Our Story */}
       <section className="max-w-7xl mx-auto px-6 md:px-8">
-        <article className="relative overflow-hidden rounded-2xl p-6 md:p-8 bg-gradient-to-br from-slate-900/25 via-slate-800/15 to-transparent ring-1 ring-white/10 shadow-2xl supports-[backdrop-filter]:backdrop-blur-md supports-[backdrop-filter]:backdrop-saturate-150">
+        <article className="relative overflow-hidden rounded-2xl p-6 md:p-8 bg-gradient-to-br from-slate-900/25 via-slate-800/15 to-transparent ring-1 ring-white/10 shadow-2xl shadow-[0_15px_60px_rgba(77,175,254,0.20)] hover:shadow-[0_22px_90px_rgba(77,175,254,0.32)] transition-shadow duration-300 supports-[backdrop-filter]:backdrop-blur-md supports-[backdrop-filter]:backdrop-saturate-150">
           <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 via-transparent to-accent-1/10 opacity-50" />
           <div className="relative z-10">
-            <h2 className="heading text-2xl md:text-3xl font-semibold bg-gradient-to-r from-heading via-primary to-accent-1 bg-clip-text text-transparent">
+            <h2 className="heading text-2xl md:text-3xl font-semibold bg-gradient-to-r from-[#FF6B6B] via-[#C30003] to-[#940400] bg-clip-text text-transparent">
               Our Story
             </h2>
             <p className="mt-2 text-foreground/85 max-w-4xl">
@@ -113,10 +115,10 @@ export default function About() {
               ].map((s, i) => (
                 <div
                   key={s.v}
-                  className="group relative overflow-hidden rounded-xl p-4 text-center bg-white/[0.03] ring-1 ring-white/10 hover:ring-accent-1/30 transition-all"
+                  className="group relative overflow-hidden rounded-xl p-4 text-center bg-white/[0.03] ring-1 ring-white/10 shadow-[0_8px_30px_rgba(77,175,254,0.16)] hover:shadow-[0_10px_40px_rgba(77,175,254,0.26)] transition-all"
                   style={{ animationDelay: `${i * 120}ms` }}
                 >
-                  <div className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-primary to-accent-1 bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-300">
+                  <div className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-[#FF6B6B] via-[#C30003] to-[#940400] bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-300">
                     {s.k}
                   </div>
                   <div className="mt-1 text-sm text-foreground/70">{s.v}</div>
@@ -130,10 +132,10 @@ export default function About() {
 
       {/* Our Tools */}
       <section className="max-w-7xl mx-auto px-6 md:px-8 py-14">
-        <article className="relative overflow-hidden rounded-2xl p-6 md:p-8 bg-gradient-to-br from-slate-900/25 via-slate-800/15 to-transparent ring-1 ring-white/10 shadow-2xl supports-[backdrop-filter]:backdrop-blur-md supports-[backdrop-filter]:backdrop-saturate-150">
+        <article className="relative overflow-hidden rounded-2xl p-6 md:p-8 bg-gradient-to-br from-slate-900/25 via-slate-800/15 to-transparent ring-1 ring-white/10 shadow-2xl shadow-[0_15px_60px_rgba(77,175,254,0.20)] hover:shadow-[0_22px_90px_rgba(77,175,254,0.32)] transition-shadow duration-300 supports-[backdrop-filter]:backdrop-blur-md supports-[backdrop-filter]:backdrop-saturate-150">
           <div className="absolute inset-0 bg-gradient-to-tr from-accent-1/10 via-transparent to-primary/10 opacity-50" />
           <div className="relative z-10">
-            <h2 className="heading text-2xl md:text-3xl font-semibold bg-gradient-to-r from-heading via-primary to-accent-1 bg-clip-text text-transparent">
+            <h2 className="heading text-2xl md:text-3xl font-semibold bg-gradient-to-r from-[#FF6B6B] via-[#C30003] to-[#940400] bg-clip-text text-transparent">
               Our Tools
             </h2>
             <p className="mt-2 text-foreground/85 max-w-4xl">
@@ -164,7 +166,7 @@ export default function About() {
 
       {/* CTA */}
       <section className="max-w-7xl mx-auto px-6 md:px-8 pb-16">
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-900/40 via-slate-800/30 to-slate-700/40 ring-1 ring-white/15 shadow-2xl supports-[backdrop-filter]:backdrop-blur-md supports-[backdrop-filter]:backdrop-saturate-150">
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-900/40 via-slate-800/30 to-slate-700/40 ring-1 ring-white/15 shadow-2xl shadow-[0_18px_72px_rgba(77,175,254,0.22)] hover:shadow-[0_26px_110px_rgba(77,175,254,0.34)] transition-shadow duration-300 supports-[backdrop-filter]:backdrop-blur-md supports-[backdrop-filter]:backdrop-saturate-150">
           <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-transparent to-accent-1/10" />
           <div className="absolute top-0 left-1/4 w-80 h-80 bg-gradient-to-br from-primary/20 to-transparent rounded-full blur-3xl opacity-50" />
           <div className="absolute bottom-0 right-1/4 w-72 h-72 bg-gradient-to-br from-accent-1/20 to-transparent rounded-full blur-3xl opacity-50" />
@@ -172,7 +174,7 @@ export default function About() {
           <div className="relative p-6 md:p-10 lg:p-12">
             <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
               <div className="text-center lg:text-left max-w-xl">
-                <h3 className="heading text-2xl md:text-3xl font-bold bg-gradient-to-r from-white via-primary to-accent-1 bg-clip-text text-transparent">
+                <h3 className="heading text-2xl md:text-3xl font-bold bg-gradient-to-r from-[#FF6B6B] via-[#C30003] to-[#940400] bg-clip-text text-transparent">
                   Ready to work with a team you can count on?
                 </h3>
                 <p className="text-white/85 mt-1">Call 437-991-7677 or request a quote now.</p>
