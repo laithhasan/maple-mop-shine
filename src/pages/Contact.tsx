@@ -203,9 +203,6 @@ export default function Contact() {
                 Request Quote <span className="transition-transform group-hover:translate-x-1">→</span>
               </span>
             </Button>
-            <Button asChild variant="outline" className="border-white/30 text-white hover:bg-white/10 hover:border-white/50">
-              <a href="tel:14379917677">Call 437-991-7677</a>
-            </Button>
           </div>
 
           {isSubmitSuccessful && (
