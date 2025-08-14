@@ -13,7 +13,7 @@ export default function FaqSection() {
   return (
     <section className="max-w-4xl mx-auto px-6 md:px-8 py-20">
       <div className="text-center mb-12">
-        <h2 className="heading text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-heading via-primary to-accent-1 bg-clip-text text-transparent">
+        <h2 className="heading text-3xl md:text-4xl font-extrabold mb-3 bg-gradient-to-r from-[#C30003] via-[#940400] to-[#02F1FF] bg-clip-text text-transparent drop-shadow-[0_1px_8px_rgba(2,241,255,0.25)]">
           Frequently Asked Questions
         </h2>
         <p className="text-foreground/80 text-lg">Everything you need to know about our cleaning services</p>
