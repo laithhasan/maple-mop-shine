@@ -4,9 +4,18 @@ export default function CleaningSchedules() {
   return (
     <section className="max-w-7xl mx-auto px-6 md:px-8 py-20">
       <div className="text-center mb-12">
-        <h2 className="heading text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-heading via-primary to-accent-1 bg-clip-text text-transparent">
-          Flexible Cleaning Schedules
-        </h2>
+        <h2
+  className="
+    heading text-3xl md:text-4xl font-bold mb-4
+    text-heading
+    supports-[background-clip:text]:bg-clip-text
+    supports-[background-clip:text]:text-transparent
+    bg-gradient-to-r from-[#C30003] via-[#940400] to-[#02F1FF]
+    drop-shadow-[0_1px_8px_rgba(2,241,255,0.25)]
+  "
+>
+  Flexible Cleaning Schedules
+</h2>
         <p className="text-foreground/80 text-lg max-w-2xl mx-auto">
           Choose the perfect cleaning frequency that fits your lifestyle and budget
         </p>
