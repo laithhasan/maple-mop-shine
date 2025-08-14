@@ -19,6 +19,22 @@ const TESTIMONIALS: Testimonial[] = [
       "They keep our space spotless. Reliable and easy to work with. Our office has never looked better!",
     rating: 5,
   },
+   {
+    name: "Sarah M.",
+    role: "Office Manager",
+    company: "Tech Startup",
+    text:
+      "They keep our space spotless. Reliable and easy to work with. Our office has never looked better!",
+    rating: 5,
+  },
+   {
+    name: "Sarah M.",
+    role: "Office Manager",
+    company: "Tech Startup",
+    text:
+      "They keep our space spotless. Reliable and easy to work with. Our office has never looked better!",
+    rating: 5,
+  },
   {
     name: "Mike R.",
     role: "Retail Owner",
