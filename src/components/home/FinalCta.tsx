@@ -5,21 +5,28 @@ import { Shield, Star, Clock3, Leaf } from "lucide-react";
 export default function FinalCta() {
   return (
     <section className="max-w-7xl mx-auto px-6 md:px-8 py-20">
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-900/40 via-slate-800/30 to-slate-700/40 supports-[backdrop-filter]:backdrop-blur-md supports-[backdrop-filter]:backdrop-saturate-150 ring-1 ring-white/20 shadow-2xl">
-        {/* Background gradient overlays */}
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-transparent to-accent-1/10" />
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-br from-primary/20 to-transparent rounded-full blur-3xl opacity-50" />
-        <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-gradient-to-br from-accent-1/20 to-transparent rounded-full blur-3xl opacity-50" />
+      <div className="relative overflow-hidden rounded-3xl
+                      bg-gradient-to-br from-slate-900/40 via-slate-800/30 to-slate-700/40
+                      supports-[backdrop-filter]:backdrop-blur-md supports-[backdrop-filter]:backdrop-saturate-150
+                      ring-1 ring-white/20 shadow-[0_18px_60px_-20px_rgba(77,175,254,0.35)]">
+        {/* Subtle background accents */}
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-transparent to-accent-1/10 pointer-events-none" />
+        <div className="absolute -top-16 -left-10 w-72 h-72 rounded-full bg-[#C30003]/15 blur-3xl" />
+        <div className="absolute -bottom-16 -right-10 w-80 h-80 rounded-full bg-[#02F1FF]/15 blur-3xl" />
+        {/* ultra-thin top glow line */}
+        <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
 
         <div className="relative p-8 md:p-12 lg:p-16">
           <div className="text-center max-w-4xl mx-auto">
-            {/* Main heading with gradient */}
-            <h2 className="heading text-3xl md:text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-white via-primary to-accent-1 bg-clip-text text-transparent leading-tight">
+            {/* Title: red -> light red gradient */}
+            <h2 className="heading text-3xl md:text-4xl lg:text-5xl font-extrabold mb-6
+                           bg-gradient-to-r from-[#C30003] via-[#FF6B6B] to-[#C30003]
+                           bg-clip-text text-transparent leading-tight drop-shadow-[0_1px_8px_rgba(2,241,255,0.18)]">
               We deliver reliable, excellent cleaning—first time and every time.
             </h2>
 
-            <p className="text-lg md:text-xl text-white/80 mb-8 max-w-2xl mx-auto">
-              Let's make your space look its best. Professional cleaning services that exceed expectations.
+            <p className="text-lg md:text-xl text-white/85 mb-8 max-w-2xl mx-auto">
+              Let&apos;s make your space look its best. Professional cleaning services that exceed expectations.
             </p>
 
             {/* CTAs */}
@@ -36,14 +43,18 @@ export default function FinalCta() {
                 </Link>
               </Button>
 
+              {/* Call button: black text+icon, light-blue hover */}
               <Button
                 asChild
                 variant="outline"
                 size="lg"
-                className="group text-lg px-8 py-6 border-white/30 text-white hover:bg-white/10 hover:border-white/50 transition-all duration-300"
+                className="group text-lg px-8 py-6
+                           border-black/20 text-black bg-white
+                           hover:bg-[#E9FBFF] hover:border-[#82EAFF] hover:shadow-[0_10px_30px_-12px_rgba(2,241,255,0.35)]
+                           transition-all duration-300"
               >
                 <a href="tel:14379917677" className="inline-flex items-center gap-2">
-                  <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-primary/20 text-primary text-xs">
+                  <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-black/10 text-black text-xs">
                     📞
                   </span>
                   Call 437-991-7677
@@ -53,7 +64,7 @@ export default function FinalCta() {
 
             {/* Trust indicators */}
             <div className="mt-12 pt-8 border-t border-white/10">
-              <div className="flex flex-wrap justify-center items-center gap-8 text-white/60">
+              <div className="flex flex-wrap justify-center items-center gap-8 text-white/70">
                 <div className="flex items-center gap-2">
                   <Shield className="h-5 w-5 text-primary" />
                   <span className="text-sm">Fully Insured</span>
@@ -74,6 +85,9 @@ export default function FinalCta() {
             </div>
           </div>
         </div>
+
+        {/* thin bottom glow line */}
+        <div className="pointer-events-none absolute inset-x-8 bottom-0 h-px bg-gradient-to-r from-transparent via-white/18 to-transparent" />
       </div>
     </section>
   );
