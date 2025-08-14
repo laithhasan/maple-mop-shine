@@ -56,7 +56,7 @@ export default function FeaturedService() {
                     className="inline-flex items-center gap-2 rounded-xl px-3 py-2 bg-white/[0.04] ring-1 ring-white/10 hover:ring-primary/30 transition-colors"
                   >
                     <span className="inline-flex h-6 w-6 items-center justify-center rounded-md bg-primary/15 ring-1 ring-primary/25">
-                      <Icon className="h-3.5 w-3.5 text-white" />
+                      <Icon className="h-3.5 w-3.5 text-primary" />
                     </span>
                     <span className="text-sm text-foreground/85">{text}</span>
                   </li>
