@@ -38,7 +38,7 @@ export default function FeaturedService() {
                 Commercial Cleaning Excellence
               </h2>
 
-              <p className="text-foreground/80 text-lg leading-relaxed mb-6">
+              <p className="text-white text-lg leading-relaxed mb-6">
                 Late night/after hours or during the day—our teams deliver spotless,
                 stain-free surfaces that welcome customers and energize staff.
               </p>
@@ -58,7 +58,7 @@ export default function FeaturedService() {
                     <span className="inline-flex h-6 w-6 items-center justify-center rounded-md bg-primary/15 ring-1 ring-primary/25">
                       <Icon className="h-3.5 w-3.5 text-primary" />
                     </span>
-                    <span className="text-sm text-foreground/85">{text}</span>
+                    <span className="text-sm text-white">{text}</span>
                   </li>
                 ))}
               </ul>
