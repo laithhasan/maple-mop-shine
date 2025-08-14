@@ -31,10 +31,11 @@ export default function FeaturedService() {
             <div className="relative p-8">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 ring-1 ring-primary/20 mb-6">
                 <Building2 className="h-4 w-4 text-primary" />
-                <span className="text-sm font-medium text-primary">Featured Service</span>
+                <span className="text-sm font-medium text-white">Featured Service</span>
               </div>
 
-              <h2 className="heading text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-[hsl(var(--heading))] via-primary to-accent bg-clip-text text-transparent">
+              <h2 className="heading text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-[#C30003] via-[#FF6B6B] to-[#C30003]
+                           bg-clip-text text-transparent">
                 Commercial Cleaning Excellence
               </h2>
 
