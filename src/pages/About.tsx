@@ -128,6 +128,7 @@ export default function About() {
                     beneficial relationship with you.
                   </p>
                 </div>
+              </div>
 
               {/* Right: Promise card */}
               <aside className="lg:col-span-5">
