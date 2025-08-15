@@ -80,13 +80,13 @@ export default function Footer() {
                   <p className="flex items-center gap-2 text-foreground/80">
                     <Phone className="h-4 w-4 text-primary" />
                     <a className="story-link hover:text-primary transition-colors" href="tel:14379917677">
-                      437-991-7677
+                      437-991-7777
                     </a>
                   </p>
                   <p className="flex items-center gap-2 text-foreground/80">
                     <Mail className="h-4 w-4 text-primary" />
                     <a className="story-link hover:text-primary transition-colors" href="mailto:info@maplemopcleaning.com">
-                      info@maplemopcleaning.com
+                      info@negotcleaning.com
                     </a>
                   </p>
                   <p className="flex items-center gap-2 text-foreground/70">
@@ -141,7 +141,7 @@ export default function Footer() {
         <div className="pointer-events-none absolute inset-x-6 md:inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
         <div className="max-w-7xl mx-auto px-6 md:px-8 py-5 text-center text-xs text-muted-foreground">
           <span className="text-foreground/60">
-            © {year} Maple Mop Cleaning. All rights reserved.
+            © {year} NEGOT Cleaning. All rights reserved.
           </span>
         </div>
       </div>
