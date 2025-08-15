@@ -230,19 +230,6 @@ export default function Contact() {
                   {...register("time")}
                   className="h-11 ring-1 ring-white/10 focus-visible:ring-2 focus-visible:ring-cyan-300/60"
                 />
-                {/* quick time chips */}
-                <div className="flex flex-wrap gap-2">
-                  {["09:00", "13:00", "16:00", "18:00"].map((t) => (
-                    <button
-                      type="button"
-                      key={t}
-                      onClick={() => setValue("time", t)}
-                      className="px-2.5 py-1 rounded-md text-xs bg-white/5 text-white/85 ring-1 ring-white/10 hover:bg-white/10 transition"
-                    >
-                      {t}
-                    </button>
-                  ))}
-                </div>
               </div>
             </FieldWrapper>
 
@@ -269,18 +256,6 @@ export default function Contact() {
                   →
                 </span>
               </span>
-            </Button>
-            <Button
-              asChild
-              variant="outline"
-              className="border-white/30 text-white hover:bg-white/10 hover:border-white/50"
-            >
-              <a href="tel:14379917677" className="inline-flex items-center gap-2">
-                <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-primary/20 text-primary text-xs">
-                  📞
-                </span>
-                Call 437-991-7677
-              </a>
             </Button>
           </div>
 
