@@ -148,7 +148,7 @@ export default function About() {
                 <div className="relative overflow-hidden rounded-2xl p-5 sm:p-6 bg-white/[0.03] ring-1 ring-white/10 shadow-[0_8px_30px_rgba(77,175,254,0.16)]">
                   <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 via-transparent to-accent-1/10 opacity-60" />
                   <div className="relative z-10">
-                    <h3 className="font-heading text-xl bg-gradient-to-r from-[#FF6B6B] via-[#C30003] to-[#940400] bg-clip-text text-transparent">
+                    <h3 className="font-heading text-xl bg-[#C30003] bg-clip-text text-transparent">
                       Our Promise
                     </h3>
                     <p className="mt-2 text-sm text-foreground/80">
@@ -217,7 +217,7 @@ export default function About() {
         <article className="relative overflow-hidden rounded-2xl p-6 md:p-8 bg-gradient-to-br from-slate-900/25 via-slate-800/15 to-transparent ring-1 ring-white/10 shadow-2xl shadow-[0_15px_60px_rgba(77,175,254,0.20)] hover:shadow-[0_22px_90px_rgba(77,175,254,0.32)] transition-shadow duration-300 supports-[backdrop-filter]:backdrop-blur-md supports-[backdrop-filter]:backdrop-saturate-150">
           <div className="absolute inset-0 bg-gradient-to-tr from-accent-1/10 via-transparent to-primary/10 opacity-50" />
           <div className="relative z-10">
-            <h2 className="heading text-2xl md:text-3xl font-semibold bg-gradient-to-r from-[#FF6B6B] via-[#C30003] to-[#940400] bg-clip-text text-transparent">
+            <h2 className="heading text-2xl md:text-3xl font-semibold bg-[#C30003] bg-clip-text text-transparent">
               Our Tools
             </h2>
             <p className="mt-2 text-foreground/85 max-w-4xl">
@@ -265,13 +265,6 @@ export default function About() {
                 </p>
               </div>
               <div className="flex gap-3">
-                <Button
-                  asChild
-                  variant="outline"
-                  className="border-white/30 text-white hover:bg-white/10 hover:border-white/50"
-                >
-                  <a href="tel:14379917677">Call 437-991-7677</a>
-                </Button>
                 <Button asChild variant="hero" className="group">
                   <Link to="/contact#quote" className="inline-flex items-center gap-2">
                     Get a Quote
