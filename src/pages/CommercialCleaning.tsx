@@ -89,7 +89,7 @@ export default function CommercialCleaning() {
           <article className="group relative overflow-hidden rounded-2xl p-6 bg-gradient-to-br from-slate-900/25 via-slate-800/15 to-transparent ring-1 ring-white/10 shadow-2xl shadow-[0_15px_60px_rgba(77,175,254,0.20)] hover:shadow-[0_22px_90px_rgba(77,175,254,0.32)] transition-all duration-500 supports-[backdrop-filter]:backdrop-blur-md supports-[backdrop-filter]:backdrop-saturate-150">
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-tr from-primary/10 via-transparent to-accent-1/10" />
             <header className="relative z-10 mb-4">
-              <h2 className="font-heading text-2xl bg-gradient-to-r from-[#FF6B6B] via-[#C30003] to-[#940400] bg-clip-text text-transparent">
+              <h2 className="font-heading text-2xl bg-[#C30003] bg-clip-text text-transparent">
                 What We Do
               </h2>
               <p className="mt-1 text-sm text-foreground/70">
@@ -120,7 +120,7 @@ export default function CommercialCleaning() {
           {/* Checklist */}
           <article className="group relative overflow-hidden rounded-2xl p-6 bg-gradient-to-br from-slate-900/25 via-slate-800/15 to-transparent ring-1 ring-white/10 shadow-2xl shadow-[0_15px_60px_rgba(77,175,254,0.20)] hover:shadow-[0_22px_90px_rgba(77,175,254,0.32)] transition-all duration-500 supports-[backdrop-filter]:backdrop-blur-md supports-[backdrop-filter]:backdrop-saturate-150">
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-tr from-accent-1/10 via-transparent to-primary/10" />
-            <h2 className="font-heading text-2xl mb-4 bg-gradient-to-r from-[#FF6B6B] via-[#C30003] to-[#940400] bg-clip-text text-transparent">
+            <h2 className="font-heading text-2xl mb-4 bg-[#C30003] bg-clip-text text-transparent">
               Typical Scope & Checklist
             </h2>
 
