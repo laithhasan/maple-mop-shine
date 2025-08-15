@@ -244,7 +244,7 @@ export default function About() {
           <div className="relative p-6 md:p-10 lg:p-12">
             <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
               <div className="text-center lg:text-left max-w-xl">
-                <h3 className="heading text-2xl md:text-3xl font-bold bg-gradient-to-r from-[#FF6B6B] via-[#C30003] to-[#940400] bg-clip-text text-transparent">
+                <h3 className="heading text-2xl md:text-3xl font-bold bg-gradient-to-r from-[#C30003] via-[#FF6B6B] to-[#C30003] bg-clip-text text-transparent">
                   Ready to work with a team you can count on?
                 </h3>
                 <p className="text-white/85 mt-1">
