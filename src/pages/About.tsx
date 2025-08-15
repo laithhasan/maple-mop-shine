@@ -1,6 +1,15 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Shield, Leaf, Clock3, Sparkles, Building2, Star, CheckCircle2, User } from "lucide-react";
+import {
+  Shield,
+  Leaf,
+  Clock3,
+  Sparkles,
+  Building2,
+  Star,
+  CheckCircle2,
+  User,
+} from "lucide-react";
 
 export default function About() {
   return (
@@ -17,12 +26,17 @@ export default function About() {
             <User className="h-4 w-4 text-white" />
             <span className="text-sm font-medium text-white">About Us</span>
           </div>
+
           <h1 className="heading text-4xl lg:text-5xl font-extrabold leading-tight bg-gradient-to-r from-[#FF6B6B] via-[#C30003] to-[#940400] bg-clip-text text-transparent">
             Your Trusted &amp; Dependable Cleaning Company.
           </h1>
 
           <p className="mt-4 max-w-3xl text-white/85 text-lg">
-            We started Maple Mop Cleaning with a simple promise: deliver consistent, meticulous cleaning and make it easy for clients to keep their spaces looking great. Our teams are trained, insured, and focused on the details—from glass and floors to touchpoints and restrooms—so your environment stays fresh, safe, and welcoming.
+            We started Maple Mop Cleaning with a simple promise: deliver
+            consistent, meticulous cleaning and make it easy for clients to keep
+            their spaces looking great. Our teams are trained, insured, and
+            focused on the details—from glass and floors to touchpoints and
+            restrooms—so your environment stays fresh, safe, and welcoming.
           </p>
 
           {/* quick trust badges */}
@@ -74,7 +88,7 @@ export default function About() {
                 <div className="inline-flex items-center justify-center h-10 w-10 rounded-xl bg-primary/15 ring-1 ring-primary/25 text-primary mb-4">
                   <Icon className="h-5 w-5" />
                 </div>
-                <h2 className="font-heading text-xl bg-gradient-to-r from-[#FF6B6B] via-[#C30003] to-[#940400] bg-clip-text text-transparent mb-1">
+                <h2 className="font-heading text-xl bg-[#C30003] bg-clip-text text-transparent mb-1">
                   {title}
                 </h2>
                 <p className="text-sm text-foreground/75">{desc}</p>
@@ -85,33 +99,97 @@ export default function About() {
         </div>
       </section>
 
-      {/* Our Story */}
+      {/* Our Story — updated content + promise card */}
       <section className="max-w-7xl mx-auto px-6 md:px-8">
         <article className="relative overflow-hidden rounded-2xl p-6 md:p-8 bg-gradient-to-br from-slate-900/25 via-slate-800/15 to-transparent ring-1 ring-white/10 shadow-2xl shadow-[0_15px_60px_rgba(77,175,254,0.20)] hover:shadow-[0_22px_90px_rgba(77,175,254,0.32)] transition-shadow duration-300 supports-[backdrop-filter]:backdrop-blur-md supports-[backdrop-filter]:backdrop-saturate-150">
           <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 via-transparent to-accent-1/10 opacity-50" />
           <div className="relative z-10">
-            <h2 className="heading text-2xl md:text-3xl font-semibold bg-gradient-to-r from-[#FF6B6B] via-[#C30003] to-[#940400] bg-clip-text text-transparent">
-              Our Story
-            </h2>
-            <p className="mt-2 text-foreground/85 max-w-4xl">
-              From late-night clean-ups to daily service routines, we’ve grown by listening to clients and refining our process. Today, we serve offices, retail stores, clinics, schools, and more—adapting to each space while keeping our standards high.
-            </p>
+            <div className="grid lg:grid-cols-12 gap-8">
+              {/* Left: Story text */}
+              <div className="lg:col-span-7">
+                <h2 className="heading text-2xl md:text-3xl font-semibold bg-[#C30003] bg-clip-text text-transparent">
+                  Our Story
+                </h2>
 
-            {/* process chips */}
-            <div className="mt-5 flex flex-wrap gap-2">
-              {["Listen", "Refine", "Deliver"].map((step) => (
-                <span
-                  key={step}
-                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm bg-white/5 ring-1 ring-white/15 text-white/90 hover:ring-primary/40 hover:text-primary transition-colors"
-                >
-                  <CheckCircle2 className="h-4 w-4 text-primary" />
-                  {step}
-                </span>
-              ))}
+                <div className="mt-3 space-y-4 text-foreground/85 max-w-4xl leading-relaxed">
+                  <p>
+                    Maple Mop Cleaning is a leading residential and commercial
+                    cleaning company located in Ontario, with years of
+                    experience in the cleaning industry. We take pride in the
+                    hard work we put in to meet and exceed the expectations of
+                    our clients. No job is too big or too small for our
+                    cleaners—we have everything needed to solve your facility
+                    cleaning and maintenance needs.
+                  </p>
+                  <p>
+                    We continue to challenge ourselves to go beyond our
+                    achievements, industry standards, and our clients’
+                    expectations to earn and maintain a long-lasting, mutually
+                    beneficial relationship with you.
+                  </p>
+                </div>
+
+                {/* process chips */}
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {["Listen", "Refine", "Deliver"].map((step) => (
+                    <span
+                      key={step}
+                      className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm bg-white/5 ring-1 ring-white/15 text-white/90 hover:ring-primary/40 hover:text-primary transition-colors"
+                    >
+                      <CheckCircle2 className="h-4 w-4 text-primary" />
+                      {step}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Right: Promise card */}
+              <aside className="lg:col-span-5">
+                <div className="relative overflow-hidden rounded-2xl p-5 sm:p-6 bg-white/[0.03] ring-1 ring-white/10 shadow-[0_8px_30px_rgba(77,175,254,0.16)]">
+                  <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 via-transparent to-accent-1/10 opacity-60" />
+                  <div className="relative z-10">
+                    <h3 className="font-heading text-xl bg-gradient-to-r from-[#FF6B6B] via-[#C30003] to-[#940400] bg-clip-text text-transparent">
+                      Our Promise
+                    </h3>
+                    <p className="mt-2 text-sm text-foreground/80">
+                      By relying on Maple Mop Cleaning, you get a premise that
+                      is crystal clean and shines bright. We’re available for
+                      same-day and emergency cleaning services.
+                    </p>
+
+                    <div className="mt-4">
+                      <p className="text-sm font-medium text-foreground/90">
+                        Regular to periodic janitorial service:
+                      </p>
+                      <div className="mt-3 flex flex-wrap gap-2">
+                        {["Daily", "Bi-weekly", "Weekly", "Fortnightly", "Monthly"].map(
+                          (f) => (
+                            <span
+                              key={f}
+                              className="px-3 py-1.5 rounded-full text-xs font-medium bg-primary/10 text-primary ring-1 ring-primary/25"
+                            >
+                              {f}
+                            </span>
+                          )
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="mt-5">
+                      <Button asChild variant="hero" className="group">
+                        <Link to="/contact#quote" className="inline-flex items-center gap-2">
+                          Free Consultation & Quote
+                          <span className="transition-transform group-hover:translate-x-1">→</span>
+                        </Link>
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </aside>
             </div>
 
             {/* mini stats */}
-            <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-4">
               {[
                 { k: "500+", v: "Happy Clients" },
                 { k: "24h", v: "Average Response" },
@@ -143,7 +221,8 @@ export default function About() {
               Our Tools
             </h2>
             <p className="mt-2 text-foreground/85 max-w-4xl">
-              We use modern, well-maintained equipment and eco-friendly products that clean effectively without harsh residues.
+              We use modern, well-maintained equipment and eco-friendly
+              products that clean effectively without harsh residues.
             </p>
 
             {/* icon bullets */}
@@ -181,10 +260,16 @@ export default function About() {
                 <h3 className="heading text-2xl md:text-3xl font-bold bg-gradient-to-r from-[#FF6B6B] via-[#C30003] to-[#940400] bg-clip-text text-transparent">
                   Ready to work with a team you can count on?
                 </h3>
-                <p className="text-white/85 mt-1">Call 437-991-7677 or request a quote now.</p>
+                <p className="text-white/85 mt-1">
+                  Call 437-991-7677 or request a quote now.
+                </p>
               </div>
               <div className="flex gap-3">
-                <Button asChild variant="outline" className="border-white/30 text-white hover:bg-white/10 hover:border-white/50">
+                <Button
+                  asChild
+                  variant="outline"
+                  className="border-white/30 text-white hover:bg-white/10 hover:border-white/50"
+                >
                   <a href="tel:14379917677">Call 437-991-7677</a>
                 </Button>
                 <Button asChild variant="hero" className="group">
