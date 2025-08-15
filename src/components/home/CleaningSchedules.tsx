@@ -10,7 +10,7 @@ export default function CleaningSchedules() {
     text-heading
     supports-[background-clip:text]:bg-clip-text
     supports-[background-clip:text]:text-transparent
-    bg-gradient-to-r from-[#C30003] via-[#940400] to-[#02F1FF]
+    bg-[#C30003]
     drop-shadow-[0_1px_8px_rgba(2,241,255,0.25)]
   "
 >
