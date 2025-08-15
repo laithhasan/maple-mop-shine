@@ -13,6 +13,7 @@ const navItems = [
 
 export default function Navbar() {
   const [hidden, setHidden] = useState(false);
+  const [sheetOpen, setSheetOpen] = useState(false);
   const lastY = useRef(0);
 
   useEffect(() => {
@@ -48,7 +49,7 @@ export default function Navbar() {
             <img
               src="/images/NEGOT.png"
               alt="Maple Mop Cleaning logo"
-              className="h-12 md:h-14 lg:h-16 w-auto object-contain"
+              className="h-14 md:h-16 lg:h-20 w-auto object-contain"
               decoding="async"
             />
           </Link>
@@ -89,7 +90,7 @@ export default function Navbar() {
               </a>
             </Button>
 
-            <Sheet>
+            <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
               <SheetTrigger asChild>
                 <Button variant="secondary" size="icon" className="h-10 w-10" aria-label="Open menu">
                   <Menu className="h-5 w-5" />
@@ -118,6 +119,7 @@ export default function Navbar() {
                       key={item.to}
                       to={item.to}
                       end
+                      onClick={() => setSheetOpen(false)}
                       className={({ isActive }) =>
                         `px-4 py-3 rounded-lg text-base transition-colors ${
                           isActive ? "bg-muted text-primary" : "hover:bg-muted/60"
@@ -136,7 +138,7 @@ export default function Navbar() {
                       </a>
                     </Button>
                     <Button asChild variant="hero" className="w-full">
-                      <Link to="/contact#quote">Get a Quote</Link>
+                      <Link to="/contact#quote" onClick={() => setSheetOpen(false)}>Get a Quote</Link>
                     </Button>
                   </div>
                 </div>
