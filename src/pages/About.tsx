@@ -129,20 +129,6 @@ export default function About() {
                   </p>
                 </div>
 
-                {/* process chips */}
-                <div className="mt-6 flex flex-wrap gap-2">
-                  {["Listen", "Refine", "Deliver"].map((step) => (
-                    <span
-                      key={step}
-                      className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm bg-white/5 ring-1 ring-white/15 text-white/90 hover:ring-primary/40 hover:text-primary transition-colors"
-                    >
-                      <CheckCircle2 className="h-4 w-4 text-primary" />
-                      {step}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
               {/* Right: Promise card */}
               <aside className="lg:col-span-5">
                 <div className="relative overflow-hidden rounded-2xl p-5 sm:p-6 bg-white/[0.03] ring-1 ring-white/10 shadow-[0_8px_30px_rgba(77,175,254,0.16)]">
