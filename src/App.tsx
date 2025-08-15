@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import BackToTop from "./components/common/BackToTop";
+import ScrollToTop from "./components/common/ScrollToTop";
 import Index from "./pages/Index";
 import CommercialCleaning from "./pages/CommercialCleaning";
 import About from "./pages/About";
@@ -22,6 +23,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <ScrollToTop />
         <Navbar />
         <Routes>
           <Route path="/" element={<Index />} />
