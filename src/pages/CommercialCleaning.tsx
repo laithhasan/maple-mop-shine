@@ -50,8 +50,8 @@ export default function CommercialCleaning() {
 
         <div className="relative max-w-7xl mx-auto px-6 md:px-8 py-16 lg:py-20">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 ring-1 ring-primary/20 mb-5">
-            <Building2 className="h-4 w-4 text-primary" />
-            <span className="text-sm font-medium text-primary">Commercial Service</span>
+            <Building2 className="h-4 w-4 text-white" />
+            <span className="text-sm font-medium text-white">Commercial Service</span>
           </div>
 
           <h1 className="heading text-4xl lg:text-5xl font-extrabold leading-tight bg-gradient-to-r from-[#FF6B6B] via-[#C30003] to-[#940400] bg-clip-text text-transparent">
