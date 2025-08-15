@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Shield, Leaf, Clock3, Sparkles, Building2, Star, CheckCircle2 } from "lucide-react";
+import { Shield, Leaf, Clock3, Sparkles, Building2, Star, CheckCircle2, User } from "lucide-react";
 
 export default function About() {
   return (
@@ -13,7 +13,10 @@ export default function About() {
         <div className="pointer-events-none absolute -bottom-24 -right-24 h-96 w-96 rounded-full bg-[#02F1FF]/15 blur-3xl" />
 
         <div className="relative max-w-7xl mx-auto px-6 md:px-8 py-16 lg:py-20">
-          <Building2 className="h-4 w-4 text-white" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 ring-1 ring-primary/20 mb-5">
+            <User className="h-4 w-4 text-white" />
+            <span className="text-sm font-medium text-white">About Us</span>
+          </div>
           <h1 className="heading text-4xl lg:text-5xl font-extrabold leading-tight bg-gradient-to-r from-[#FF6B6B] via-[#C30003] to-[#940400] bg-clip-text text-transparent">
             Your Trusted &amp; Dependable Cleaning Company.
           </h1>
