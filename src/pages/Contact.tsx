@@ -1,11 +1,19 @@
+import { useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Phone, Mail, Calendar, Home, MapPin, Clock3 } from "lucide-react";
-import { useMemo } from "react";
+import {
+  Phone,
+  Mail,
+  Calendar,
+  Home,
+  MapPin,
+  Clock3,
+  Sparkles,
+} from "lucide-react";
 
 const schema = z.object({
   name: z.string().min(2, "Please enter your name"),
@@ -20,7 +28,6 @@ const schema = z.object({
   time: z.string().optional(), // time selector
   message: z.string().optional(),
 });
-
 type FormData = z.infer<typeof schema>;
 
 export default function Contact() {
@@ -28,6 +35,8 @@ export default function Contact() {
     register,
     handleSubmit,
     reset,
+    setValue,
+    watch,
     formState: { errors, isSubmitSuccessful },
   } = useForm<FormData>({ resolver: zodResolver(schema) });
 
@@ -41,7 +50,6 @@ export default function Contact() {
   }, []);
 
   const onSubmit = (data: FormData) => {
-    // Mock submit - mailto fallback
     const params = new URLSearchParams({
       subject: "Quote Request",
       body: JSON.stringify(data, null, 2),
@@ -49,6 +57,9 @@ export default function Contact() {
     window.open(`mailto:info@maplemopcleaning.com?${params.toString()}`);
     reset();
   };
+
+  const messageVal = watch("message") ?? "";
+  const freq = watch("frequency");
 
   return (
     <main id="main-content">
@@ -96,178 +107,180 @@ export default function Contact() {
         {/* Form card */}
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="group relative overflow-hidden rounded-2xl p-6 md:p-8 bg-gradient-to-br from-slate-900/25 via-slate-800/15 to-transparent ring-1 ring-white/10 shadow-2xl shadow-[0_15px_60px_rgba(77,175,254,0.20)] hover:shadow-[0_22px_90px_rgba(77,175,254,0.32)] transition-shadow duration-300 supports-[backdrop-filter]:backdrop-blur-md supports-[backdrop-filter]:backdrop-saturate-150 space-y-6"
+          className="group relative overflow-hidden rounded-2xl p-6 md:p-8 bg-gradient-to-br from-slate-900/25 via-slate-800/15 to-transparent ring-1 ring-white/10 shadow-2xl shadow-[0_15px_60px_rgba(77,175,254,0.20)] hover:shadow-[0_22px_90px_rgba(77,175,254,0.32)] transition-shadow duration-300 supports-[backdrop-filter]:backdrop-blur-md supports-[backdrop-filter]:backdrop-saturate-150 space-y-8"
           aria-label="Quote form"
         >
           <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-tr from-primary/10 via-transparent to-accent-1/10" />
 
           {/* Section: Contact Info */}
-          <div className="relative z-10">
-            <div className="mb-3 flex items-center gap-2">
-              <span className="inline-block h-2 w-2 rounded-full bg-primary" />
-              <h2 className="text-sm font-semibold uppercase tracking-wider text-white/80">
-                Contact Information
-              </h2>
-              <div className="ml-2 h-px flex-1 bg-white/10" />
-            </div>
+          <FormSection title="Contact Information" />
+          <div className="grid md:grid-cols-2 gap-6 relative z-10">
+            <FieldWrapper label="Name" required Icon={Sparkles}>
+              <Input
+                id="name"
+                {...register("name")}
+                aria-invalid={!!errors.name}
+                className="h-11 ring-1 ring-white/10 focus-visible:ring-2 focus-visible:ring-cyan-300/60"
+              />
+              <ErrorText msg={errors.name?.message} />
+            </FieldWrapper>
 
-            <div className="grid md:grid-cols-2 gap-8">
-              <div>
-                <label
-                  className="text-sm font-medium flex items-center gap-2"
-                  htmlFor="name"
-                >
-                  <SparklesDot /> Name
-                  <span className="text-destructive">*</span>
-                </label>
-                <Input id="name" {...register("name")} aria-invalid={!!errors.name} />
-                {errors.name && (
-                  <p id="name-err" className="text-sm text-destructive mt-1">
-                    {errors.name.message}
-                  </p>
-                )}
-              </div>
+            <FieldWrapper label="Email" required Icon={Mail}>
+              <Input
+                id="email"
+                type="email"
+                {...register("email")}
+                aria-invalid={!!errors.email}
+                className="h-11 ring-1 ring-white/10 focus-visible:ring-2 focus-visible:ring-cyan-300/60"
+              />
+              <ErrorText msg={errors.email?.message} />
+            </FieldWrapper>
 
-              <div>
-                <label
-                  className="text-sm font-medium flex items-center gap-2"
-                  htmlFor="email"
-                >
-                  <Mail className="h-4 w-4 text-primary" /> Email
-                  <span className="text-destructive">*</span>
-                </label>
-                <Input
-                  id="email"
-                  type="email"
-                  {...register("email")}
-                  aria-invalid={!!errors.email}
-                />
-                {errors.email && (
-                  <p id="email-err" className="text-sm text-destructive mt-1">
-                    {errors.email.message}
-                  </p>
-                )}
-              </div>
-
-              <div className="md:col-span-2">
-                <label
-                  className="text-sm font-medium flex items-center gap-2"
-                  htmlFor="phone"
-                >
-                  <Phone className="h-4 w-4 text-primary" /> Phone
-                  <span className="text-destructive">*</span>
-                </label>
-                <Input
-                  id="phone"
-                  type="tel"
-                  {...register("phone")}
-                  aria-invalid={!!errors.phone}
-                />
-                {errors.phone && (
-                  <p id="phone-err" className="text-sm text-destructive mt-1">
-                    {errors.phone.message}
-                  </p>
-                )}
-              </div>
-            </div>
+            <FieldWrapper
+              label="Phone"
+              required
+              Icon={Phone}
+              className="md:col-span-2"
+            >
+              <Input
+                id="phone"
+                type="tel"
+                {...register("phone")}
+                aria-invalid={!!errors.phone}
+                className="h-11 ring-1 ring-white/10 focus-visible:ring-2 focus-visible:ring-cyan-300/60"
+              />
+              <ErrorText msg={errors.phone?.message} />
+            </FieldWrapper>
           </div>
 
           {/* Section: Service Details */}
-          <div className="relative z-10">
-            <div className="mb-3 flex items-center gap-2">
-              <span className="inline-block h-2 w-2 rounded-full bg-primary" />
-              <h2 className="text-sm font-semibold uppercase tracking-wider text-white/80">
-                Service Details
-              </h2>
-              <div className="ml-2 h-px flex-1 bg-white/10" />
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-4">
-              <div>
-                <label
-                  className="text-sm font-medium flex items-center gap-2"
-                  htmlFor="frequency"
-                >
-                  <Calendar className="h-4 w-4 text-primary" /> Frequency
-                </label>
-                <select
-                  id="frequency"
-                  className="w-full h-10 rounded-md border bg-background px-3 ring-1 ring-white/10 focus:outline-none focus:ring-2 focus:ring-primary/40 transition"
-                  {...register("frequency")}
-                >
-                  <option>Daily</option>
-                  <option>Weekly</option>
-                  <option>Bi-Weekly</option>
-                  <option>Fortnightly</option>
-                  <option>One-time</option>
-                </select>
+          <FormSection title="Service Details" />
+          <div className="grid md:grid-cols-2 gap-6 relative z-10">
+            {/* Frequency chips + select fallback */}
+            <FieldWrapper label="Frequency" Icon={Calendar}>
+              <div className="flex flex-wrap gap-2">
+                {["Daily", "Weekly", "Bi-Weekly", "Fortnightly", "One-time"].map(
+                  (f) => (
+                    <button
+                      type="button"
+                      key={f}
+                      onClick={() => setValue("frequency", f as FormData["frequency"])}
+                      className={`px-3 py-1.5 rounded-full text-xs font-medium ring-1 transition ${
+                        freq === f
+                          ? "bg-primary/20 text-primary ring-primary/30"
+                          : "bg-white/5 text-white/85 ring-white/10 hover:bg-white/10"
+                      }`}
+                      aria-pressed={freq === f}
+                    >
+                      {f}
+                    </button>
+                  )
+                )}
               </div>
+              {/* accessible select for screen readers / fallback */}
+              <select
+                id="frequency"
+                className="sr-only"
+                {...register("frequency")}
+                aria-hidden
+                tabIndex={-1}
+              >
+                <option>Daily</option>
+                <option>Weekly</option>
+                <option>Bi-Weekly</option>
+                <option>Fortnightly</option>
+                <option>One-time</option>
+              </select>
+            </FieldWrapper>
 
-              <div>
-                <label
-                  className="text-sm font-medium flex items-center gap-2"
-                  htmlFor="rooms"
-                >
-                  <Home className="h-4 w-4 text-primary" /> Rooms/Offices
-                </label>
-                <Input id="rooms" placeholder="e.g., 6 offices" {...register("rooms")} />
-              </div>
+            <FieldWrapper label="Rooms/Offices" Icon={Home}>
+              <Input
+                id="rooms"
+                placeholder="e.g., 6 offices"
+                {...register("rooms")}
+                className="h-11 ring-1 ring-white/10 focus-visible:ring-2 focus-visible:ring-cyan-300/60"
+              />
+            </FieldWrapper>
 
-              <div>
-                <label
-                  className="text-sm font-medium flex items-center gap-2"
-                  htmlFor="size"
-                >
-                  <MapPin className="h-4 w-4 text-primary" /> Approx. size
-                </label>
-                <Input id="size" placeholder="e.g., 2,500 sq ft" {...register("size")} />
-              </div>
+            <FieldWrapper label="Approx. size" Icon={MapPin}>
+              <Input
+                id="size"
+                placeholder="e.g., 2,500 sq ft"
+                {...register("size")}
+                className="h-11 ring-1 ring-white/10 focus-visible:ring-2 focus-visible:ring-cyan-300/60"
+              />
+            </FieldWrapper>
 
-              {/* Date & Time selectors */}
-              <div>
-                <label
-                  className="text-sm font-medium flex items-center gap-2"
-                  htmlFor="date"
-                >
-                  <Calendar className="h-4 w-4 text-primary" /> Preferred date
-                </label>
-                <Input
-                  id="date"
-                  type="date"
-                  min={today}
-                  {...register("date")}
-                />
-              </div>
+            <FieldWrapper label="Preferred date" Icon={Calendar}>
+              <Input
+                id="date"
+                type="date"
+                min={today}
+                {...register("date")}
+                className="h-11 ring-1 ring-white/10 focus-visible:ring-2 focus-visible:ring-cyan-300/60"
+              />
+            </FieldWrapper>
 
-              <div>
-                <label
-                  className="text-sm font-medium flex items-center gap-2"
-                  htmlFor="time"
-                >
-                  <Clock3 className="h-4 w-4 text-primary" /> Preferred time
-                </label>
+            <FieldWrapper label="Preferred time" Icon={Clock3}>
+              <div className="flex flex-col gap-2">
                 <Input
                   id="time"
                   type="time"
-                  step={900} // 15-min increments
+                  step={900}
                   {...register("time")}
+                  className="h-11 ring-1 ring-white/10 focus-visible:ring-2 focus-visible:ring-cyan-300/60"
                 />
+                {/* quick time chips */}
+                <div className="flex flex-wrap gap-2">
+                  {["09:00", "13:00", "16:00", "18:00"].map((t) => (
+                    <button
+                      type="button"
+                      key={t}
+                      onClick={() => setValue("time", t)}
+                      className="px-2.5 py-1 rounded-md text-xs bg-white/5 text-white/85 ring-1 ring-white/10 hover:bg-white/10 transition"
+                    >
+                      {t}
+                    </button>
+                  ))}
+                </div>
               </div>
+            </FieldWrapper>
 
-              <div className="md:col-span-2">
-                <label className="text-sm font-medium" htmlFor="message">
-                  Message
-                </label>
-                <Textarea id="message" rows={4} {...register("message")} />
-              </div>
-            </div>
+            <FieldWrapper
+              label="Message"
+              className="md:col-span-2"
+              noIcon
+            >
+              <Textarea
+                id="message"
+                rows={5}
+                {...register("message")}
+                className="ring-1 ring-white/10 focus-visible:ring-2 focus-visible:ring-cyan-300/60"
+              />
+              <div className="mt-1 text-xs text-white/60">{messageVal.length} / 1000</div>
+            </FieldWrapper>
           </div>
 
-          <div className="relative z-10 flex flex-wrap gap-3 pt-1">
+          <div className="relative z-10 flex flex-wrap gap-3 pt-2">
             <Button type="submit" variant="hero" className="group">
               <span className="inline-flex items-center gap-2">
-                Request Quote <span className="transition-transform group-hover:translate-x-1">→</span>
+                Request Quote{" "}
+                <span className="transition-transform group-hover:translate-x-1">
+                  →
+                </span>
               </span>
+            </Button>
+            <Button
+              asChild
+              variant="outline"
+              className="border-white/30 text-white hover:bg-white/10 hover:border-white/50"
+            >
+              <a href="tel:14379917677" className="inline-flex items-center gap-2">
+                <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-primary/20 text-primary text-xs">
+                  📞
+                </span>
+                Call 437-991-7677
+              </a>
             </Button>
           </div>
 
@@ -275,7 +288,7 @@ export default function Contact() {
             <div
               role="status"
               aria-live="polite"
-              className="relative z-10 mt-2 text-sm text-foreground/85"
+              className="relative z-10 mt-1 text-sm text-foreground/85"
             >
               Thanks! Your request was prepared in your email client. We’ll get back to you shortly.
             </div>
@@ -287,42 +300,111 @@ export default function Contact() {
 
         {/* Sidebar info */}
         <aside className="space-y-4">
-          <div className="relative overflow-hidden rounded-2xl p-6 bg-gradient-to-br from-slate-900/25 via-slate-800/15 to-transparent ring-1 ring-white/10 shadow-xl shadow-[0_12px_48px_rgba(2,241,255,0.18)] hover:shadow-[0_16px_64px_rgba(2,241,255,0.28)] transition-shadow duration-300 supports-[backdrop-filter]:backdrop-blur-md supports-[backdrop-filter]:backdrop-saturate-150">
-            <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 via-transparent to-accent-1/10 opacity-50" />
+          {/* Hours */}
+          <InfoCard tint="primary">
             <div className="relative z-10">
               <div className="font-heading heading">Hours</div>
               <p className="text-sm text-foreground/80">Mon–Sat 8:00–20:00</p>
             </div>
-          </div>
+          </InfoCard>
 
-          <div className="relative overflow-hidden rounded-2xl p-6 bg-gradient-to-br from-slate-900/25 via-slate-800/15 to-transparent ring-1 ring-white/10 shadow-xl shadow-[0_12px_48px_rgba(77,175,254,0.18)] hover:shadow-[0_16px_64px_rgba(77,175,254,0.28)] transition-shadow duration-300 supports-[backdrop-filter]:backdrop-blur-md supports-[backdrop-filter]:backdrop-saturate-150">
-            <div className="absolute inset-0 bg-gradient-to-tr from-accent-1/10 via-transparent to-primary/10 opacity-50" />
+          {/* Service Area */}
+          <InfoCard tint="accent">
             <div className="relative z-10">
               <div className="font-heading heading">Service Area</div>
               <p className="text-sm text-foreground/80">Greater Toronto Area (GTA)</p>
             </div>
-          </div>
+          </InfoCard>
 
-          <div className="relative overflow-hidden rounded-2xl p-6 bg-gradient-to-br from-slate-900/25 via-slate-800/15 to-transparent ring-1 ring-white/10 shadow-xl shadow-[0_12px_48px_rgba(2,241,255,0.18)] hover:shadow-[0_16px_64px_rgba(2,241,255,0.28)] transition-shadow duration-300 supports-[backdrop-filter]:backdrop-blur-md supports-[backdrop-filter]:backdrop-saturate-150">
-            <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 via-transparent to-accent-1/10 opacity-50" />
+          {/* Map */}
+          <InfoCard tint="primary">
             <div className="relative z-10">
               <div className="font-heading heading">Map</div>
               <div className="mt-2 aspect-[16/9] w-full rounded-lg bg-white/5 ring-1 ring-white/15 grid place-items-center text-sm text-foreground/70">
                 Map embed
               </div>
             </div>
-          </div>
+          </InfoCard>
         </aside>
       </section>
     </main>
   );
 }
 
-/** Small sparkle dot for labels (keeps imports light) */
-function SparklesDot() {
+/* ---------- Reusable bits ---------- */
+
+function FormSection({ title }: { title: string }) {
   return (
-    <span className="inline-flex h-4 w-4 items-center justify-center rounded-full bg-primary/15 ring-1 ring-primary/25">
-      <span className="block h-2 w-2 rounded-full bg-primary" />
-    </span>
+    <div className="relative z-10 mb-1 flex items-center gap-2">
+      <span className="inline-block h-2 w-2 rounded-full bg-primary shadow-[0_0_12px_rgba(2,241,255,0.35)]" />
+      <h2 className="text-sm font-semibold uppercase tracking-wider bg-gradient-to-r from-[#FF6B6B] via-[#C30003] to-[#940400] bg-clip-text text-transparent">
+        {title}
+      </h2>
+      <div className="ml-2 h-px flex-1 bg-white/10" />
+    </div>
+  );
+}
+
+function FieldWrapper({
+  label,
+  required,
+  Icon,
+  children,
+  className = "",
+  noIcon = false,
+}: {
+  label: string;
+  required?: boolean;
+  Icon?: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+  children: React.ReactNode;
+  className?: string;
+  noIcon?: boolean;
+}) {
+  return (
+    <div className={className}>
+      <label className="text-sm font-medium flex items-center gap-2 mb-1.5">
+        {noIcon ? (
+          <Sparkles className="h-4 w-4 text-primary" />
+        ) : Icon ? (
+          <Icon className="h-4 w-4 text-primary" />
+        ) : (
+          <Sparkles className="h-4 w-4 text-primary" />
+        )}
+        {label} {required && <span className="text-destructive">*</span>}
+      </label>
+      {children}
+    </div>
+  );
+}
+
+function ErrorText({ msg }: { msg?: string }) {
+  if (!msg) return null;
+  return <p className="text-sm text-destructive mt-1">{msg}</p>;
+}
+
+function InfoCard({
+  children,
+  tint = "primary",
+}: {
+  children: React.ReactNode;
+  tint?: "primary" | "accent";
+}) {
+  const overlay =
+    tint === "primary"
+      ? "from-primary/10 via-transparent to-accent-1/10"
+      : "from-accent-1/10 via-transparent to-primary/10";
+
+  const shadow =
+    tint === "primary"
+      ? "shadow-[0_12px_48px_rgba(2,241,255,0.18)] hover:shadow-[0_16px_64px_rgba(2,241,255,0.28)]"
+      : "shadow-[0_12px_48px_rgba(77,175,254,0.18)] hover:shadow-[0_16px_64px_rgba(77,175,254,0.28)]";
+
+  return (
+    <div
+      className={`relative overflow-hidden rounded-2xl p-6 bg-gradient-to-br from-slate-900/25 via-slate-800/15 to-transparent ring-1 ring-white/10 ${shadow} transition-shadow duration-300 supports-[backdrop-filter]:backdrop-blur-md supports-[backdrop-filter]:backdrop-saturate-150`}
+    >
+      <div className={`absolute inset-0 bg-gradient-to-tr ${overlay} opacity-50`} />
+      {children}
+    </div>
   );
 }
