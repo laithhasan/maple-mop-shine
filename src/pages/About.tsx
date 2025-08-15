@@ -32,7 +32,7 @@ export default function About() {
           </h1>
 
           <p className="mt-4 max-w-3xl text-white/85 text-lg">
-            We started Maple Mop Cleaning with a simple promise: deliver
+            We started NEGOT Cleaning with a simple promise: deliver
             consistent, meticulous cleaning and make it easy for clients to keep
             their spaces looking great. Our teams are trained, insured, and
             focused on the details—from glass and floors to touchpoints and
@@ -113,7 +113,7 @@ export default function About() {
 
                 <div className="mt-3 space-y-4 text-foreground/85 max-w-4xl leading-relaxed">
                   <p>
-                    Maple Mop Cleaning is a leading residential and commercial
+                    NEGOT Cleaning is a leading commercial
                     cleaning company located in Ontario, with years of
                     experience in the cleaning industry. We take pride in the
                     hard work we put in to meet and exceed the expectations of
@@ -139,7 +139,7 @@ export default function About() {
                       Our Promise
                     </h3>
                     <p className="mt-2 text-sm text-foreground/80">
-                      By relying on Maple Mop Cleaning, you get a premise that
+                      By relying on NEGOT Cleaning, you get a premise that
                       is crystal clean and shines bright. We’re available for
                       same-day and emergency cleaning services.
                     </p>
