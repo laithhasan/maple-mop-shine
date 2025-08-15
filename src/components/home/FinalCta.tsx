@@ -57,7 +57,7 @@ export default function FinalCta() {
                   <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-black/10 text-black text-xs">
                     📞
                   </span>
-                  Call 437-991-7677
+                  437-991-7677
                 </a>
               </Button>
             </div>
@@ -67,19 +67,19 @@ export default function FinalCta() {
               <div className="flex flex-wrap justify-center items-center gap-8 text-white/70">
                 <div className="flex items-center gap-2">
                   <Shield className="h-5 w-5 text-primary" />
-                  <span className="text-sm">Fully Insured</span>
+                  <span className="text-sm text-primary">Fully Insured</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Star className="h-5 w-5 text-primary" />
-                  <span className="text-sm">5-Star Rated</span>
+                  <span className="text-sm text-primary">5-Star Rated</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Clock3 className="h-5 w-5 text-primary" />
-                  <span className="text-sm">24/7 Support</span>
+                  <span className="text-sm text-primary">24/7 Support</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Leaf className="h-5 w-5 text-primary" />
-                  <span className="text-sm">Eco-Friendly</span>
+                  <span className="text-sm text-primary">Eco-Friendly</span>
                 </div>
               </div>
             </div>
