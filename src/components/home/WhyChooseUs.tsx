@@ -186,6 +186,8 @@ export default function WhyChooseUs() {
               src={surfaces}
               alt="Professional cleaning results"
               className="w-full h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
+              loading="lazy"
+              decoding="async"
             />
             <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 via-transparent to-accent-1/20" />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent" />

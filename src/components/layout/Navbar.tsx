@@ -50,6 +50,7 @@ export default function Navbar() {
               src="/images/NEGOT.png"
               alt="Maple Mop Cleaning logo"
               className="h-14 md:h-16 lg:h-20 w-auto object-contain"
+              loading="eager"
               decoding="async"
             />
           </Link>
@@ -108,6 +109,7 @@ export default function Navbar() {
                       src="/images/NEGOT.png"
                       alt="Maple Mop Cleaning logo"
                       className="h-10 w-auto object-contain"
+                      loading="eager"
                       decoding="async"
                     />
                   </Link>

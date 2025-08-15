@@ -85,6 +85,8 @@ export default function FeaturedService() {
                 src={heroOffice}
                 alt="Crisp, modern office — freshly cleaned"
                 className="w-full h-[420px] object-cover transform-gpu transition duration-700 group-hover:scale-[1.03] group-hover:-rotate-[0.4deg]"
+                loading="lazy"
+                decoding="async"
               />
 
               {/* brand gradient tint */}
