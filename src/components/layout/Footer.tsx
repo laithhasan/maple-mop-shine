@@ -20,7 +20,7 @@ export default function Footer() {
                   <img
                     src="/images/NEGOT.png"
                     alt="Maple Mop Cleaning logo"
-                    className="h-16 md:h-20 w-auto drop-shadow"
+                    className="h-20 md:h-26 w-auto drop-shadow"
                     loading="lazy"
                     decoding="async"
                   />
