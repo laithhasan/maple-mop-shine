@@ -160,7 +160,7 @@ export default function WhyChooseUs() {
                 target={24}
                 suffix="h"
                 duration={1200}
-                className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-primary to-accent-1 bg-clip-text text-transparent inline-block group-hover:scale-110 transition-transform duration-300"
+                className="text-2xl md:text-3xl font-bold bg-[#C30003] bg-clip-text text-transparent inline-block group-hover:scale-110 transition-transform duration-300"
                 ariaLabel="Average Response Time: 24 hours"
               />
               <div className="text-sm text-foreground/70 mt-1">Response Time</div>
@@ -171,7 +171,7 @@ export default function WhyChooseUs() {
                 target={98}
                 suffix="%"
                 duration={1600}
-                className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-primary to-accent-1 bg-clip-text text-transparent inline-block group-hover:scale-110 transition-transform duration-300"
+                className="text-2xl md:text-3xl font-bold bg-[#C30003] bg-clip-text text-transparent inline-block group-hover:scale-110 transition-transform duration-300"
                 ariaLabel="Satisfaction Rate: 98 percent"
               />
               <div className="text-sm text-foreground/70 mt-1">Satisfaction Rate</div>
