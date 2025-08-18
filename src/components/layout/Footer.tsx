@@ -15,16 +15,20 @@ export default function Footer() {
           <div className="rounded-3xl bg-gradient-to-br from-slate-900/35 via-slate-900/20 to-slate-800/30 ring-1 ring-white/10 shadow-2xl supports-[backdrop-filter]:backdrop-blur-md supports-[backdrop-filter]:backdrop-saturate-150">
             <div className="grid gap-10 md:gap-12 p-8 md:p-12 lg:p-14 md:grid-cols-12 items-start">
               {/* Brand */}
-              <div className="md:col-span-4">
-                <Link to="/" className="inline-flex items-center gap-3 group">
-                  <img
-                    src="/images/NEGOT.png"
-                    alt="Maple Mop Cleaning logo"
-                    className="h-20 md:h-26 w-auto drop-shadow"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </Link>
+              <div className="md:col-span-4 relative">
+                {/* Logo background blur */}
+                <div className="absolute inset-0 -m-4 rounded-2xl bg-gradient-to-br from-primary/10 via-accent/5 to-primary/5 backdrop-blur-xl ring-1 ring-white/5 opacity-60" />
+                
+                <div className="relative">
+                  <Link to="/" className="inline-flex items-center gap-3 group">
+                    <img
+                      src="/images/NEGOT.png"
+                      alt="Maple Mop Cleaning logo"
+                      className="h-20 md:h-26 w-auto drop-shadow-lg"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </Link></div>
                 <p className="mt-4 text-sm text-foreground/70 max-w-sm">
                   Professional, reliable cleaning across the GTA — spotless results, flexible schedules, and service you can trust.
                 </p>
