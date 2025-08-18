@@ -33,7 +33,7 @@ export default function Footer() {
               {/* Nav */}
               <nav aria-label="Footer" className="md:col-span-3">
                 <h3 className="text-sm font-semibold text-heading/90 tracking-wide mb-4">
-                  Navigation
+                  Quick Links
                 </h3>
                 <ul className="grid gap-2 text-sm">
                   <li>
