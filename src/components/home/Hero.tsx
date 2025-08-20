@@ -219,9 +219,9 @@ export default function Hero() {
                     {/* One line from md+; wraps on very small screens */}
                     <span className="flex flex-wrap md:flex-nowrap md:whitespace-nowrap items-baseline gap-x-2 sm:gap-x-3 text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
                       <span className="text-red-500">{slides[index].h1Parts[0]}</span>
-                      <span aria-hidden className="inline-block w-0.5 h-6 bg-red-600 mx-1 sm:mx-2 align-middle" />
+                      <span aria-hidden className="inline-block w-0.5 h-6 bg-red-500 mx-1 sm:mx-2 align-middle" />
                       <span className="text-red-500">{slides[index].h1Parts[1]}</span>
-                      <span aria-hidden className="inline-block w-0.5 h-6 bg-red-600 mx-1 sm:mx-2 align-middle" />
+                      <span aria-hidden className="inline-block w-0.5 h-6 bg-red-500 mx-1 sm:mx-2 align-middle" />
                       <span className="text-red-500">{slides[index].h1Parts[2]}</span>
                     </span>
                   </h1>
