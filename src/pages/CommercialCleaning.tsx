@@ -72,7 +72,7 @@ export default function CommercialCleaning() {
             ].map(({ icon: Icon, label }) => (
               <div
                 key={label}
-                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 ring-1 ring-white/15 text-white/90 hover:text-primary hover:ring-primary/40 transition-colors"
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 ring-1 ring-white/15 text-white/90"
               >
                 <Icon className="h-4 w-4 text-white" />
                 <span className="text-sm">{label}</span>
