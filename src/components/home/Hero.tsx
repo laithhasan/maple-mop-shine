@@ -207,10 +207,10 @@ export default function Hero() {
               <div className="inline-block rounded-2xl bg-slate-900/20 supports-[backdrop-filter]:backdrop-blur-md supports-[backdrop-filter]:backdrop-saturate-150 ring-1 ring-white/10 shadow-lg p-4 sm:p-6">
                 {isTwoLine(slides[index]) ? (
                   <h1 className="font-extrabold tracking-tight leading-tight drop-shadow-md mb-2">
-                    <span className="block gradient-text title-glow text-4xl md:text-5xl">
+                    <span className="block gradient-text text-4xl md:text-5xl">
                       {slides[index].h1Top}
                     </span>
-                    <span className="block gradient-text title-glow mt-1 text-4xl md:text-5xl">
+                    <span className="block gradient-text mt-1 text-4xl md:text-5xl">
                       {slides[index].h1Bottom}
                     </span>
                   </h1>
