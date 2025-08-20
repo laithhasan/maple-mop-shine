@@ -71,7 +71,7 @@ export default function Contact() {
         <div className="pointer-events-none absolute -bottom-24 -right-24 h-96 w-96 rounded-full bg-[#02F1FF]/15 blur-3xl" />
 
         <div className="relative max-w-7xl mx-auto px-6 md:px-8 py-16 lg:py-20">
-          <h1 className="heading text-4xl lg:text-5xl font-extrabold leading-tight bg-gradient-to-r from-[#FF6B6B] via-[#C30003] to-[#940400] bg-clip-text text-transparent">
+          <h1 className="heading text-4xl lg:text-5xl font-extrabold leading-tight bg-[#C30003] bg-clip-text text-transparent">
             Contact Us
           </h1>
 
@@ -81,19 +81,19 @@ export default function Contact() {
               href="tel:14379917677"
               className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 ring-1 ring-white/15 text-white/90 hover:text-primary hover:ring-primary/40 transition-colors"
             >
-              <Phone className="h-4 w-4 text-primary" /> Call Us
+              <Phone className="h-4 w-4 text-white hover:text-primary" /> Call Us
             </a>
             <a
               href="mailto:info@maplemopcleaning.com"
               className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 ring-1 ring-white/15 text-white/90 hover:text-primary hover:ring-primary/40 transition-colors"
             >
-              <Mail className="h-4 w-4 text-primary" /> Email Us
+              <Mail className="h-4 w-4 text-white hover:text-primary" /> Email Us
             </a>
             <a
               href="#quote"
               className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 ring-1 ring-white/15 text-white/90 hover:text-primary hover:ring-primary/40 transition-colors"
             >
-              <Calendar className="h-4 w-4 text-primary" /> Request a Quote
+              <Calendar className="h-4 w-4 text-white hover:text-primary" /> Request a Quote
             </a>
           </div>
         </div>
