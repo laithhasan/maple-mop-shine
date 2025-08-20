@@ -29,7 +29,7 @@ export default function FeaturedService() {
             {/* glow sweep on hover */}
             <div className="pointer-events-none absolute -inset-[40%] translate-y-10 rotate-45 bg-gradient-to-r from-[#02F1FF]/0 via-[#02F1FF]/10 to-[#02F1FF]/0 opacity-0 group-hover:opacity-100 [animation:shine_2.2s_ease-in-out] rounded-[999px]" />
             <div className="relative p-8">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 ring-1 ring-primary/20 mb-6">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 ring-1 ring-white/20 mb-6">
                 <Building2 className="h-4 w-4 text-white" />
                 <span className="text-sm font-medium text-white">Featured Service</span>
               </div>
