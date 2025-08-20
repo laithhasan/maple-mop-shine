@@ -156,7 +156,7 @@ export default function Contact() {
                       ${
                         freq === f
                           ? "bg-primary/20 text-primary ring-primary/30"
-                          : "bg-black text-white ring-black hover:bg-black/90"
+                          : "bg-white text-black ring-black hover:bg-white/90"
                       }`}
                       aria-pressed={freq === f}
                     >
