@@ -19,7 +19,7 @@ export default function FinalCta() {
               We deliver reliable, excellent cleaning—first time and every time.
             </h2>
 
-            <p className="text-lg md:text-xl text-white/85 mb-8 max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-black/85 mb-8 max-w-2xl mx-auto">
               Let&apos;s make your space look its best. Professional cleaning services that exceed expectations.
             </p>
 
