@@ -5,15 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  Phone,
-  Mail,
-  Calendar,
-  Home,
-  MapPin,
-  Clock3,
-  Sparkles,
-} from "lucide-react";
+import { Phone, Mail, Calendar } from "lucide-react";
 
 const schema = z.object({
   name: z.string().min(2, "Please enter your name"),
@@ -24,8 +16,8 @@ const schema = z.object({
     .default("One-time"),
   rooms: z.string().optional(),
   size: z.string().optional(),
-  date: z.string().optional(), // calendar selector
-  time: z.string().optional(), // time selector
+  date: z.string().optional(),
+  time: z.string().optional(),
   message: z.string().optional(),
 });
 type FormData = z.infer<typeof schema>;
@@ -40,7 +32,6 @@ export default function Contact() {
     formState: { errors, isSubmitSuccessful },
   } = useForm<FormData>({ resolver: zodResolver(schema) });
 
-  // today for min date on the calendar
   const today = useMemo(() => {
     const d = new Date();
     const yyyy = d.getFullYear();
@@ -79,21 +70,24 @@ export default function Contact() {
           <div className="mt-5 flex flex-wrap gap-3">
             <a
               href="tel:14379917677"
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 ring-1 ring-white/15 text-white/90 hover:text-primary hover:ring-primary/40 transition-colors"
+              className="group inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 ring-1 ring-white/15 text-white/90 transition-colors hover:text-[#C30003] hover:ring-[#C30003]/40"
             >
-              <Phone className="h-4 w-4 text-white hover:text-primary" /> Call Us
+              <Phone className="h-4 w-4 text-white transition-colors group-hover:text-[#C30003]" />
+              Call Us
             </a>
             <a
               href="mailto:info@maplemopcleaning.com"
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 ring-1 ring-white/15 text-white/90 hover:text-primary hover:ring-primary/40 transition-colors"
+              className="group inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 ring-1 ring-white/15 text-white/90 transition-colors hover:text-[#C30003] hover:ring-[#C30003]/40"
             >
-              <Mail className="h-4 w-4 text-white hover:text-primary" /> Email Us
+              <Mail className="h-4 w-4 text-white transition-colors group-hover:text-[#C30003]" />
+              Email Us
             </a>
             <a
               href="#quote"
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 ring-1 ring-white/15 text-white/90 hover:text-primary hover:ring-primary/40 transition-colors"
+              className="group inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 ring-1 ring-white/15 text-white/90 transition-colors hover:text-[#C30003] hover:ring-[#C30003]/40"
             >
-              <Calendar className="h-4 w-4 text-white hover:text-primary" /> Request a Quote
+              <Calendar className="h-4 w-4 text-white transition-colors group-hover:text-[#C30003]" />
+              Request a Quote
             </a>
           </div>
         </div>
@@ -110,12 +104,10 @@ export default function Contact() {
           className="group relative overflow-hidden rounded-2xl p-6 md:p-8 bg-gradient-to-br from-slate-900/25 via-slate-800/15 to-transparent ring-1 ring-white/10 shadow-2xl shadow-[0_15px_60px_rgba(77,175,254,0.20)] hover:shadow-[0_22px_90px_rgba(77,175,254,0.32)] transition-shadow duration-300 supports-[backdrop-filter]:backdrop-blur-md supports-[backdrop-filter]:backdrop-saturate-150 space-y-8"
           aria-label="Quote form"
         >
-          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-tr from-primary/10 via-transparent to-accent-1/10" />
-
-          {/* Section: Contact Info */}
+          {/* Section: Contact Info (plain red text, no icon/gradient) */}
           <FormSection title="Contact Information" />
           <div className="grid md:grid-cols-2 gap-6 relative z-10">
-            <FieldWrapper label="Name" required Icon={Sparkles}>
+            <FieldWrapper label="Name" required>
               <Input
                 id="name"
                 {...register("name")}
@@ -125,7 +117,7 @@ export default function Contact() {
               <ErrorText msg={errors.name?.message} />
             </FieldWrapper>
 
-            <FieldWrapper label="Email" required Icon={Mail}>
+            <FieldWrapper label="Email" required>
               <Input
                 id="email"
                 type="email"
@@ -136,12 +128,7 @@ export default function Contact() {
               <ErrorText msg={errors.email?.message} />
             </FieldWrapper>
 
-            <FieldWrapper
-              label="Phone"
-              required
-              Icon={Phone}
-              className="md:col-span-2"
-            >
+            <FieldWrapper label="Phone" required className="md:col-span-2">
               <Input
                 id="phone"
                 type="tel"
@@ -153,11 +140,11 @@ export default function Contact() {
             </FieldWrapper>
           </div>
 
-          {/* Section: Service Details */}
+          {/* Section: Service Details (plain red text, no icon/gradient) */}
           <FormSection title="Service Details" />
           <div className="grid md:grid-cols-2 gap-6 relative z-10">
-            {/* Frequency chips + select fallback */}
-            <FieldWrapper label="Frequency" Icon={Calendar}>
+            {/* Frequency chips */}
+            <FieldWrapper label="Frequency">
               <div className="flex flex-wrap gap-2">
                 {["Daily", "Weekly", "Bi-Weekly", "Fortnightly", "One-time"].map(
                   (f) => (
@@ -165,10 +152,11 @@ export default function Contact() {
                       type="button"
                       key={f}
                       onClick={() => setValue("frequency", f as FormData["frequency"])}
-                      className={`px-3 py-1.5 rounded-full text-xs font-medium ring-1 transition ${
+                      className={`px-3 py-1.5 rounded-full text-xs font-medium ring-1 transition
+                      ${
                         freq === f
                           ? "bg-primary/20 text-primary ring-primary/30"
-                          : "bg-white/5 text-white/85 ring-white/10 hover:bg-white/10"
+                          : "bg-black text-black ring-black hover:bg-black/90"
                       }`}
                       aria-pressed={freq === f}
                     >
@@ -193,7 +181,7 @@ export default function Contact() {
               </select>
             </FieldWrapper>
 
-            <FieldWrapper label="Rooms/Offices" Icon={Home}>
+            <FieldWrapper label="Rooms/Offices">
               <Input
                 id="rooms"
                 placeholder="e.g., 6 offices"
@@ -202,7 +190,7 @@ export default function Contact() {
               />
             </FieldWrapper>
 
-            <FieldWrapper label="Approx. size" Icon={MapPin}>
+            <FieldWrapper label="Approx. size">
               <Input
                 id="size"
                 placeholder="e.g., 2,500 sq ft"
@@ -211,7 +199,7 @@ export default function Contact() {
               />
             </FieldWrapper>
 
-            <FieldWrapper label="Preferred date" Icon={Calendar}>
+            <FieldWrapper label="Preferred date">
               <Input
                 id="date"
                 type="date"
@@ -221,7 +209,7 @@ export default function Contact() {
               />
             </FieldWrapper>
 
-            <FieldWrapper label="Preferred time" Icon={Clock3}>
+            <FieldWrapper label="Preferred time">
               <div className="flex flex-col gap-2">
                 <Input
                   id="time"
@@ -233,11 +221,7 @@ export default function Contact() {
               </div>
             </FieldWrapper>
 
-            <FieldWrapper
-              label="Message"
-              className="md:col-span-2"
-              noIcon
-            >
+            <FieldWrapper label="Message" className="md:col-span-2">
               <Textarea
                 id="message"
                 rows={5}
@@ -252,9 +236,7 @@ export default function Contact() {
             <Button type="submit" variant="hero" className="group">
               <span className="inline-flex items-center gap-2">
                 Request Quote{" "}
-                <span className="transition-transform group-hover:translate-x-1">
-                  →
-                </span>
+                <span className="transition-transform group-hover:translate-x-1">→</span>
               </span>
             </Button>
           </div>
@@ -291,15 +273,7 @@ export default function Contact() {
             </div>
           </InfoCard>
 
-          {/* Map */}
-          <InfoCard tint="primary">
-            <div className="relative z-10">
-              <div className="font-heading heading">Map</div>
-              <div className="mt-2 aspect-[16/9] w-full rounded-lg bg-white/5 ring-1 ring-white/15 grid place-items-center text-sm text-foreground/70">
-                Map embed
-              </div>
-            </div>
-          </InfoCard>
+          {/* Map card removed as requested */}
         </aside>
       </section>
     </main>
@@ -309,10 +283,10 @@ export default function Contact() {
 /* ---------- Reusable bits ---------- */
 
 function FormSection({ title }: { title: string }) {
+  // Plain red heading, no gradient or icons
   return (
     <div className="relative z-10 mb-1 flex items-center gap-2">
-      <span className="inline-block h-2 w-2 rounded-full bg-primary shadow-[0_0_12px_rgba(2,241,255,0.35)]" />
-      <h2 className="text-sm font-semibold uppercase tracking-wider bg-gradient-to-r from-[#FF6B6B] via-[#C30003] to-[#940400] bg-clip-text text-transparent">
+      <h2 className="text-sm font-semibold uppercase tracking-wider text-[#C30003]">
         {title}
       </h2>
       <div className="ml-2 h-px flex-1 bg-white/10" />
@@ -323,28 +297,17 @@ function FormSection({ title }: { title: string }) {
 function FieldWrapper({
   label,
   required,
-  Icon,
   children,
   className = "",
-  noIcon = false,
 }: {
   label: string;
   required?: boolean;
-  Icon?: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   children: React.ReactNode;
   className?: string;
-  noIcon?: boolean;
 }) {
   return (
     <div className={className}>
-      <label className="text-sm font-medium flex items-center gap-2 mb-1.5">
-        {noIcon ? (
-          <Sparkles className="h-4 w-4 text-primary" />
-        ) : Icon ? (
-          <Icon className="h-4 w-4 text-primary" />
-        ) : (
-          <Sparkles className="h-4 w-4 text-primary" />
-        )}
+      <label className="block text-sm font-medium mb-1.5">
         {label} {required && <span className="text-destructive">*</span>}
       </label>
       {children}
