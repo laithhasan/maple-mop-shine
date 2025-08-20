@@ -43,7 +43,7 @@ export default function FinalCta() {
               </Button>
 
               {/* Call button: black text+icon, light-blue hover */}
-              <Button asChild variant="outline" className="whitespace-nowrap">
+              <Button asChild variant="outline" size="lg" className="whitespace-nowrap">
               <a href="tel:14379917677" className="flex items-center gap-2">
                 <Phone className="h-4 w-4" />
                 437-991-7677
