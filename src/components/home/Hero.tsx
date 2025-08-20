@@ -207,23 +207,22 @@ export default function Hero() {
               <div className="inline-block rounded-2xl bg-slate-900/20 supports-[backdrop-filter]:backdrop-blur-md supports-[backdrop-filter]:backdrop-saturate-150 ring-1 ring-white/10 shadow-lg p-4 sm:p-6">
                 {isTwoLine(slides[index]) ? (
                   <h1 className="font-extrabold tracking-tight leading-tight drop-shadow-md mb-2">
-                    <span className="block gradient-text text-4xl md:text-5xl">
+                    <span className="block text-red-600 text-4xl md:text-5xl">
                       {slides[index].h1Top}
                     </span>
-                    <span className="block gradient-text mt-1 text-4xl md:text-5xl">
+                    <span className="block text-red-600 mt-1 text-4xl md:text-5xl">
                       {slides[index].h1Bottom}
                     </span>
                   </h1>
                 ) : (
                   <h1 className="font-extrabold tracking-tight leading-[1.15] drop-shadow-md mb-2 pb-1 md:-translate-y-[2px] transform-gpu">
                     {/* One line from md+; wraps on very small screens */}
-                    <span className="flex flex-wrap md:flex-nowrap md:whitespace-nowrap items-baseline gap-x-2 sm:gap-x-3 text-3xl sm:text-4xl md:text-5xl lg:text-6xl
-">
-                      <span className="gradient-text title-glow">{slides[index].h1Parts[0]}</span>
-                      <span aria-hidden className="sep mx-1 sm:mx-2 align-middle" />
-                      <span className="gradient-text title-glow">{slides[index].h1Parts[1]}</span>
-                      <span aria-hidden className="sep mx-1 sm:mx-2 align-middle" />
-                      <span className="gradient-text title-glow">{slides[index].h1Parts[2]}</span>
+                    <span className="flex flex-wrap md:flex-nowrap md:whitespace-nowrap items-baseline gap-x-2 sm:gap-x-3 text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
+                      <span className="text-red-600">{slides[index].h1Parts[0]}</span>
+                      <span aria-hidden className="inline-block w-0.5 h-6 bg-red-600 mx-1 sm:mx-2 align-middle" />
+                      <span className="text-red-600">{slides[index].h1Parts[1]}</span>
+                      <span aria-hidden className="inline-block w-0.5 h-6 bg-red-600 mx-1 sm:mx-2 align-middle" />
+                      <span className="text-red-600">{slides[index].h1Parts[2]}</span>
                     </span>
                   </h1>
                 )}
@@ -274,57 +273,8 @@ export default function Hero() {
           100% { transform: scale(1.0) translateY(-1%); }
         }
 
-        /* Animated gradient for headings: red -> light red -> red */
-        @keyframes gradientShift {
-          0%   { background-position: 0% 50%; }
-          50%  { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
-        .gradient-text {
-          background-image: linear-gradient(90deg, #C30003, #FF6B6B, #C30003);
-          background-size: 200% 200%;
-          animation: gradientShift 6s ease-in-out infinite;
-          -webkit-background-clip: text;
-          background-clip: text;
-          color: transparent;
-        }
-
-        /* Glowing effect for title text — lighter red */
-        @keyframes titleGlowPulse {
-          0%   { text-shadow: 0 0 6px rgba(255,107,107,0.35), 0 0 18px rgba(255,107,107,0.20); }
-          50%  { text-shadow: 0 0 14px rgba(255,107,107,0.70), 0 0 36px rgba(255,107,107,0.45); }
-          100% { text-shadow: 0 0 6px rgba(255,107,107,0.35), 0 0 18px rgba(255,107,107,0.20); }
-        }
-        .title-glow {
-          animation-name: gradientShift, titleGlowPulse;
-          animation-duration: 6s, 3.6s;
-          animation-timing-function: ease-in-out, ease-in-out;
-          animation-iteration-count: infinite, infinite;
-          animation-direction: normal, alternate;
-        }
-
-        /* Animated separators (red tones) */
-        @keyframes sepShift {
-          0%   { background-position: 0% 0%; box-shadow: 0 0 0 rgba(0,0,0,0); }
-          50%  { background-position: 0% 100%; box-shadow: 0 0 12px rgba(195,0,3,0.35); }
-          100% { background-position: 0% 0%; box-shadow: 0 0 0 rgba(0,0,0,0); }
-        }
-        .sep {
-          display: inline-block;
-          width: 2px;
-          height: 1.1em;
-          background-image: linear-gradient(180deg, #C30003, #7a0000, #C30003);
-          background-size: 100% 200%;
-          animation: sepShift 2.8s ease-in-out infinite;
-          border-radius: 9999px;
-          opacity: 0.95;
-        }
-
         /* Reduced motion */
         @media (prefers-reduced-motion: reduce) {
-          .gradient-text { animation: none; }
-          .title-glow { animation: none; text-shadow: none; }
-          .sep { animation: none; }
           img { animation: none !important; }
         }
       `}</style>
