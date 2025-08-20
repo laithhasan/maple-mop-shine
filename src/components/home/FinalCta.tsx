@@ -20,8 +20,7 @@ export default function FinalCta() {
           <div className="text-center max-w-4xl mx-auto">
             {/* Title: red -> light red gradient */}
             <h2 className="heading text-3xl md:text-4xl lg:text-5xl font-extrabold mb-6
-                           bg-gradient-to-r from-[#C30003] via-[#FF6B6B] to-[#C30003]
-                           bg-clip-text text-transparent leading-tight drop-shadow-[0_1px_8px_rgba(2,241,255,0.18)]">
+                           bg-[#C30003] bg-clip-text text-transparent leading-tight drop-shadow-[0_1px_8px_rgba(2,241,255,0.18)]">
               We deliver reliable, excellent cleaning—first time and every time.
             </h2>
 
@@ -66,20 +65,20 @@ export default function FinalCta() {
             <div className="mt-12 pt-8 border-t border-white/10">
               <div className="flex flex-wrap justify-center items-center gap-8 text-white/70">
                 <div className="flex items-center gap-2">
-                  <Shield className="h-5 w-5 text-primary" />
-                  <span className="text-sm text-primary">Fully Insured</span>
+                  <Shield className="h-5 w-5 text-white" />
+                  <span className="text-sm text-white">Fully Insured</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Star className="h-5 w-5 text-primary" />
-                  <span className="text-sm text-primary">5-Star Rated</span>
+                  <Star className="h-5 w-5 text-white" />
+                  <span className="text-sm text-white">5-Star Rated</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Clock3 className="h-5 w-5 text-primary" />
-                  <span className="text-sm text-primary">24/7 Support</span>
+                  <Clock3 className="h-5 w-5 text-white" />
+                  <span className="text-sm text-white">24/7 Support</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Leaf className="h-5 w-5 text-primary" />
-                  <span className="text-sm text-primary">Eco-Friendly</span>
+                  <Leaf className="h-5 w-5 text-white" />
+                  <span className="text-sm text-white">Eco-Friendly</span>
                 </div>
               </div>
             </div>
