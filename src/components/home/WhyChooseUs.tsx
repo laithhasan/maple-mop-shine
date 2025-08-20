@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import surfaces from "@/assets/clean-surfaces.jpg";
+import GTA from "@/assets/GTA.png";
 import { Shield, Leaf, Clock3, Star, Calendar, Building2 } from "lucide-react";
 
 /* ---------- tiny utilities ---------- */
@@ -183,8 +183,8 @@ export default function WhyChooseUs() {
         <div className="relative group">
           <div className="relative overflow-hidden rounded-2xl shadow-2xl ring-1 ring-white/10">
             <img
-              src={surfaces}
-              alt="Professional cleaning results"
+              src={GTA}
+              alt="Professional GTA cleaning"
               className="w-full h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
               loading="lazy"
               decoding="async"
