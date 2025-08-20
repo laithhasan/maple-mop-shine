@@ -38,20 +38,21 @@ export default function FinalCta() {
               </Button>
 
               {/* Call CTA — perfectly aligned height/width/typography */}
-              <Button
-                asChild
-                variant="outline"
-                className="h-14 px-8 text-lg whitespace-nowrap border-white/30 text-white hover:bg-white/10 hover:border-white/50 transition-all duration-300"
-              >
-                <a
-                  href="tel:14379917677"
-                  className="inline-flex items-center justify-center gap-2"
-                  aria-label="Call 437-991-7677"
-                >
-                  <Phone className="h-4 w-4" />
-                  437-991-7677
-                </a>
-              </Button>
+             <Button
+  asChild
+  variant="outline"
+  className="h-14 px-8 text-lg whitespace-nowrap bg-white text-black border-black/10 hover:bg-sky-400 hover:text-black hover:border-transparent transition-all duration-300"
+>
+  <a
+    href="tel:14379917677"
+    className="inline-flex items-center justify-center gap-2"
+    aria-label="Call 437-991-7677"
+  >
+    <Phone className="h-4 w-4" />
+    437-991-7677
+  </a>
+</Button>
+
             </div>
           </div>
         </div>
