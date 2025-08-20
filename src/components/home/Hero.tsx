@@ -204,7 +204,7 @@ export default function Hero() {
         <div className="pointer-events-auto max-w-7xl mx-auto px-6 md:px-8 h-full">
           <div className="h-full grid grid-cols-1 md:grid-cols-12 items-center">
             <article className="md:col-span-8 lg:col-span-7 max-w-4xl">
-              <div className="inline-block rounded-2xl bg-slate-900/20 supports-[backdrop-filter]:backdrop-blur-md supports-[backdrop-filter]:backdrop-saturate-150 ring-1 ring-white/10 shadow-lg p-4 sm:p-6">
+              <div className="inline-block rounded-2xl bg-slate-900/40 supports-[backdrop-filter]:backdrop-blur-md supports-[backdrop-filter]:backdrop-saturate-150 ring-1 ring-white/10 shadow-lg p-4 sm:p-6">
                 {isTwoLine(slides[index]) ? (
                   <h1 className="font-extrabold tracking-tight leading-tight drop-shadow-md mb-2">
                     <span className="block text-red-500 text-4xl md:text-5xl">
@@ -219,9 +219,9 @@ export default function Hero() {
                     {/* One line from md+; wraps on very small screens */}
                     <span className="flex flex-wrap md:flex-nowrap md:whitespace-nowrap items-baseline gap-x-2 sm:gap-x-3 text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
                       <span className="text-red-500">{slides[index].h1Parts[0]}</span>
-                      <span aria-hidden className="inline-block bg-red-500 mx-1 sm:mx-2 align-middle" />
+                      <span aria-hidden className="inline-block w-1 h-6 sm:h-7 md:h-8 lg:h-10 bg-red-500 mx-1 sm:mx-2 align-middle" />
                       <span className="text-red-500">{slides[index].h1Parts[1]}</span>
-                      <span aria-hidden className="inline-block bg-red-500 mx-1 sm:mx-2 align-middle" />
+                      <span aria-hidden className="inline-block w-1 h-6 sm:h-7 md:h-8 lg:h-10 bg-red-500 mx-1 sm:mx-2 align-middle" />
                       <span className="text-red-500">{slides[index].h1Parts[2]}</span>
                     </span>
                   </h1>
