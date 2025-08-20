@@ -114,21 +114,21 @@ export default function Footer() {
                   <a
                     href="#"
                     aria-label="Facebook (coming soon)"
-                    className="group inline-flex items-center justify-center h-10 w-10 rounded-xl ring-1 ring-white/15 bg-white/5 text-white/80 hover:text-primary hover:ring-primary/40 transition-all"
+                    className="group inline-flex items-center justify-center h-10 w-10 rounded-xl ring-1 ring-black/25 bg-white/5 text-black/80 hover:text-primary hover:ring-primary/40 transition-all"
                   >
                     <Facebook className="h-5 w-5" />
                   </a>
                   <a
                     href="#"
                     aria-label="Instagram (coming soon)"
-                    className="group inline-flex items-center justify-center h-10 w-10 rounded-xl ring-1 ring-white/15 bg-white/5 text-white/80 hover:text-primary hover:ring-primary/40 transition-all"
+                    className="group inline-flex items-center justify-center h-10 w-10 rounded-xl ring-1 ring-black/25 bg-white/5 text-black/80 hover:text-primary hover:ring-primary/40 transition-all"
                   >
                     <Instagram className="h-5 w-5" />
                   </a>
                   <a
                     href="#"
                     aria-label="LinkedIn (coming soon)"
-                    className="group inline-flex items-center justify-center h-10 w-10 rounded-xl ring-1 ring-white/15 bg-white/5 text-white/80 hover:text-primary hover:ring-primary/40 transition-all"
+                    className="group inline-flex items-center justify-center h-10 w-10 rounded-xl ring-1 ring-black/25 bg-white/5 text-black/80 hover:text-primary hover:ring-primary/40 transition-all"
                   >
                     <Linkedin className="h-5 w-5" />
                   </a>
