@@ -43,22 +43,12 @@ export default function FinalCta() {
               </Button>
 
               {/* Call button: black text+icon, light-blue hover */}
-              <Button
-                asChild
-                variant="outline"
-                size="lg"
-                className="group text-lg px-8 py-6
-                           border-black/20 text-black bg-white
-                           hover:bg-[#E9FBFF] hover:border-[#82EAFF] hover:shadow-[0_10px_30px_-12px_rgba(2,241,255,0.35)]
-                           transition-all duration-300"
-              >
-                <a href="tel:14379917677" className="inline-flex items-center gap-2">
-                  <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-black/10 text-black text-xs">
-                    📞
-                  </span>
-                  437-991-7677
-                </a>
-              </Button>
+              <Button asChild variant="outline" className="whitespace-nowrap">
+              <a href="tel:14379917677" className="flex items-center gap-2">
+                <Phone className="h-4 w-4" />
+                437-991-7677
+              </a>
+            </Button>
             </div>
           </div>
         </div>
