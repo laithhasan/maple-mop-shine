@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Shield, Star, Clock3, Leaf } from "lucide-react";
+import { Shield, Star, Clock3, Leaf, Phone } from "lucide-react";
 
 export default function FinalCta() {
   return (
