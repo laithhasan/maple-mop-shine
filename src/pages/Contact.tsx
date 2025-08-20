@@ -61,8 +61,8 @@ export default function Contact() {
         <div className="pointer-events-none absolute -top-24 -left-24 h-80 w-80 rounded-full bg-[#C30003]/20 blur-3xl" />
         <div className="pointer-events-none absolute -bottom-24 -right-24 h-96 w-96 rounded-full bg-[#02F1FF]/15 blur-3xl" />
 
-        <div className="relative max-w-7xl mx-auto px-6 md:px-8 py-16 lg:py-20">
-          <h1 className="heading text-4xl lg:text-5xl font-extrabold leading-tight bg-[#C30003] bg-clip-text text-transparent">
+        <div className="relative max-w-7xl mx-auto px-6 md:px-8 py-12 md:py-16 lg:py-20">
+          <h1 className="heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight bg-[#C30003] bg-clip-text text-transparent">
             Contact Us
           </h1>
 
@@ -96,7 +96,7 @@ export default function Contact() {
       {/* Form + Info */}
       <section
         id="quote"
-        className="max-w-7xl mx-auto px-6 md:px-8 py-14 grid lg:grid-cols-2 gap-8 items-start"
+        className="max-w-7xl mx-auto px-6 md:px-8 py-12 md:py-14 grid md:grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 items-start"
       >
         {/* Form card */}
         <form
@@ -106,7 +106,7 @@ export default function Contact() {
         >
           {/* Section: Contact Info (plain red text, no icon/gradient) */}
           <FormSection title="Contact Information" />
-          <div className="grid md:grid-cols-2 gap-6 relative z-10">
+          <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 relative z-10">
             <FieldWrapper label="Name" required>
               <Input
                 id="name"
@@ -142,7 +142,7 @@ export default function Contact() {
 
           {/* Section: Service Details (plain red text, no icon/gradient) */}
           <FormSection title="Service Details" />
-          <div className="grid md:grid-cols-2 gap-6 relative z-10">
+          <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 relative z-10">
             {/* Frequency chips */}
             <FieldWrapper label="Frequency">
               <div className="flex flex-wrap gap-2">

@@ -202,15 +202,15 @@ export default function Hero() {
       {/* Text block with frosted blur panel */}
       <div className="pointer-events-none absolute inset-0">
         <div className="pointer-events-auto max-w-7xl mx-auto px-6 md:px-8 h-full">
-          <div className="h-full grid grid-cols-1 md:grid-cols-12 items-center">
-            <article className="md:col-span-8 lg:col-span-7 max-w-4xl">
-              <div className="inline-block rounded-2xl bg-slate-900/40 supports-[backdrop-filter]:backdrop-blur-md supports-[backdrop-filter]:backdrop-saturate-150 ring-1 ring-white/10 shadow-lg p-4 sm:p-6">
+      <div className="h-full grid grid-cols-1 lg:grid-cols-12 items-center">
+        <article className="lg:col-span-8 xl:col-span-7 max-w-4xl">
+          <div className="inline-block rounded-2xl bg-slate-900/40 supports-[backdrop-filter]:backdrop-blur-md supports-[backdrop-filter]:backdrop-saturate-150 ring-1 ring-white/10 shadow-lg p-4 sm:p-6 md:p-8">
                 {isTwoLine(slides[index]) ? (
                   <h1 className="font-extrabold tracking-tight leading-tight drop-shadow-md mb-2">
-                    <span className="block text-red-600 text-4xl md:text-5xl">
+                    <span className="block text-red-600 text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
                       {slides[index].h1Top}
                     </span>
-                    <span className="block text-red-600 mt-1 text-4xl md:text-5xl">
+                    <span className="block text-red-600 mt-1 text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
                       {slides[index].h1Bottom}
                     </span>
                   </h1>
@@ -227,11 +227,11 @@ export default function Hero() {
                   </h1>
                 )}
 
-                <p className="mt-1 text-white/90 drop-shadow-sm text-lg md:text-xl">
+                <p className="mt-1 text-white/90 drop-shadow-sm text-base sm:text-lg md:text-xl">
                   {slides[index].sub}
                 </p>
 
-                <div className="mt-4 flex flex-wrap gap-3">
+                <div className="mt-4 sm:mt-6 flex flex-col sm:flex-row gap-3">
                   <Button asChild variant="hero">
                     <Link to="/contact#quote">Get a Quote</Link>
                   </Button>

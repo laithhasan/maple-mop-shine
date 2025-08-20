@@ -2,11 +2,11 @@ import { Calendar } from "lucide-react";
 
 export default function CleaningSchedules() {
   return (
-    <section className="max-w-7xl mx-auto px-6 md:px-8 py-20">
-      <div className="text-center mb-12">
+    <section className="max-w-7xl mx-auto px-6 md:px-8 py-16 md:py-20">
+      <div className="text-center mb-8 md:mb-12">
         <h2
   className="
-    heading text-3xl md:text-4xl font-bold mb-4
+    heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4
     text-heading
     supports-[background-clip:text]:bg-clip-text
     supports-[background-clip:text]:text-transparent
@@ -16,12 +16,12 @@ export default function CleaningSchedules() {
 >
   Flexible Cleaning Schedules
 </h2>
-        <p className="text-foreground/80 text-lg max-w-2xl mx-auto">
+        <p className="text-foreground/80 text-base sm:text-lg max-w-2xl mx-auto">
           Choose the perfect cleaning frequency that fits your lifestyle and budget
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4 md:gap-6">
         {[
           { freq: "Daily", desc: "Ultimate maintenance", popular: false },
           { freq: "Weekly", desc: "Most popular choice", popular: true },

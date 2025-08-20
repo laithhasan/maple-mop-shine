@@ -22,8 +22,8 @@ export default function FeaturedService() {
         />
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 md:px-8 py-20">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <div className="max-w-7xl mx-auto px-6 md:px-8 py-16 md:py-20">
+        <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
           {/* Left: Feature card */}
           <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-900/25 via-slate-800/15 to-transparent ring-1 ring-white/10 shadow-2xl supports-[backdrop-filter]:backdrop-blur-md supports-[backdrop-filter]:backdrop-saturate-150 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_0_60px_rgba(2,241,255,0.18)]">
             {/* glow sweep on hover */}
@@ -34,18 +34,18 @@ export default function FeaturedService() {
                 <span className="text-sm font-medium text-white">Featured Service</span>
               </div>
 
-              <h2 className="heading text-3xl md:text-4xl font-bold mb-4 bg-[#C30003]
+              <h2 className="heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 bg-[#C30003]
                            bg-clip-text text-transparent">
                 Commercial Cleaning Excellence
               </h2>
 
-              <p className="text-white text-lg leading-relaxed mb-6">
+              <p className="text-white text-base sm:text-lg leading-relaxed mb-6">
                 Late night/after hours or during the day—our teams deliver spotless,
                 stain-free surfaces that welcome customers and energize staff.
               </p>
 
               {/* quick highlights */}
-              <ul className="mb-7 grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <ul className="mb-7 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-3">
                 {[
                   { Icon: Shield, text: "Insured & Bonded" },
                   { Icon: Leaf, text: "Eco-Friendly Products" },
@@ -84,7 +84,7 @@ export default function FeaturedService() {
               <img
                 src={heroOffice}
                 alt="Crisp, modern office — freshly cleaned"
-                className="w-full h-[420px] object-cover transform-gpu transition duration-700 group-hover:scale-[1.03] group-hover:-rotate-[0.4deg]"
+                className="w-full h-[300px] sm:h-[350px] md:h-[400px] lg:h-[420px] object-cover transform-gpu transition duration-700 group-hover:scale-[1.03] group-hover:-rotate-[0.4deg]"
                 loading="lazy"
                 decoding="async"
               />

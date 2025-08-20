@@ -104,22 +104,22 @@ export default function WhyChooseUs() {
   );
 
   return (
-    <section className="max-w-7xl mx-auto px-6 md:px-8 py-20">
-      <div className="grid lg:grid-cols-2 gap-16 items-center">
+    <section className="max-w-7xl mx-auto px-6 md:px-8 py-16 md:py-20">
+      <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-center">
         {/* Left column */}
         <div className="space-y-8">
           <div>
-            <h2 className="heading text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-[hsl(var(--heading))] via-primary to-accent-1 bg-clip-text text-transparent">
+            <h2 className="heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 bg-gradient-to-r from-[hsl(var(--heading))] via-primary to-accent-1 bg-clip-text text-transparent">
               Why Choose NEGOT
             </h2>
-            <p className="text-foreground/80 text-lg leading-relaxed">
+            <p className="text-foreground/80 text-base sm:text-lg leading-relaxed">
               Dependable teams, modern equipment, and eco-friendly products. We work around your
               schedule and deliver consistent results you can see and feel.
             </p>
           </div>
 
           {/* Interactive Feature Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 gap-4">
             {features.map((feature, index) => (
               <div
                 key={feature.title}
@@ -149,7 +149,7 @@ export default function WhyChooseUs() {
                 target={500}
                 suffix="+"
                 duration={1400}
-                className="text-2xl md:text-3xl font-bold bg-[#C30003] bg-clip-text text-transparent inline-block group-hover:scale-110 transition-transform duration-300"
+                className="text-xl sm:text-2xl md:text-3xl font-bold bg-[#C30003] bg-clip-text text-transparent inline-block group-hover:scale-110 transition-transform duration-300"
                 ariaLabel="Happy Clients: 500 plus"
               />
               <div className="text-sm text-foreground/70 mt-1">Happy Clients</div>
@@ -160,7 +160,7 @@ export default function WhyChooseUs() {
                 target={24}
                 suffix="h"
                 duration={1200}
-                className="text-2xl md:text-3xl font-bold bg-[#C30003] bg-clip-text text-transparent inline-block group-hover:scale-110 transition-transform duration-300"
+                className="text-xl sm:text-2xl md:text-3xl font-bold bg-[#C30003] bg-clip-text text-transparent inline-block group-hover:scale-110 transition-transform duration-300"
                 ariaLabel="Average Response Time: 24 hours"
               />
               <div className="text-sm text-foreground/70 mt-1">Response Time</div>
@@ -171,7 +171,7 @@ export default function WhyChooseUs() {
                 target={98}
                 suffix="%"
                 duration={1600}
-                className="text-2xl md:text-3xl font-bold bg-[#C30003] bg-clip-text text-transparent inline-block group-hover:scale-110 transition-transform duration-300"
+                className="text-xl sm:text-2xl md:text-3xl font-bold bg-[#C30003] bg-clip-text text-transparent inline-block group-hover:scale-110 transition-transform duration-300"
                 ariaLabel="Satisfaction Rate: 98 percent"
               />
               <div className="text-sm text-foreground/70 mt-1">Satisfaction Rate</div>
@@ -185,7 +185,7 @@ export default function WhyChooseUs() {
             <img
               src={GTA}
               alt="Professional GTA cleaning"
-              className="w-full h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
+              className="w-full h-[300px] sm:h-[400px] md:h-[450px] lg:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
               loading="lazy"
               decoding="async"
             />

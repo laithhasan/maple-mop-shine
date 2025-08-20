@@ -21,17 +21,17 @@ export default function About() {
         <div className="pointer-events-none absolute -top-24 -left-24 h-80 w-80 rounded-full bg-[#C30003]/20 blur-3xl" />
         <div className="pointer-events-none absolute -bottom-24 -right-24 h-96 w-96 rounded-full bg-[#02F1FF]/15 blur-3xl" />
 
-        <div className="relative max-w-7xl mx-auto px-6 md:px-8 py-16 lg:py-20">
+        <div className="relative max-w-7xl mx-auto px-6 md:px-8 py-12 md:py-16 lg:py-20">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 ring-1 ring-white/20 mb-5">
             <User className="h-4 w-4 text-white" />
             <span className="text-sm font-medium text-white">About Us</span>
           </div>
 
-          <h1 className="heading text-4xl lg:text-5xl font-extrabold leading-tight bg-[#C30003] bg-clip-text text-transparent">
+          <h1 className="heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight bg-[#C30003] bg-clip-text text-transparent">
             Your Trusted &amp; Dependable Cleaning Company.
           </h1>
 
-          <p className="mt-4 max-w-3xl text-white/85 text-lg">
+          <p className="mt-4 max-w-3xl text-white/85 text-base sm:text-lg">
             We started NEGOT Cleaning with a simple promise: deliver
             consistent, meticulous cleaning and make it easy for clients to keep
             their spaces looking great. Our teams are trained, insured, and
@@ -60,8 +60,8 @@ export default function About() {
       </section>
 
       {/* Values / Area / Assurance */}
-      <section className="max-w-7xl mx-auto px-6 md:px-8 py-14">
-        <div className="grid md:grid-cols-3 gap-6">
+      <section className="max-w-7xl mx-auto px-6 md:px-8 py-12 md:py-14">
+        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {[
             {
               title: "Our Values",
@@ -104,10 +104,10 @@ export default function About() {
         <article className="relative overflow-hidden rounded-2xl p-6 md:p-8 bg-gradient-to-br from-slate-900/25 via-slate-800/15 to-transparent ring-1 ring-white/10 shadow-2xl shadow-[0_15px_60px_rgba(77,175,254,0.20)] hover:shadow-[0_22px_90px_rgba(77,175,254,0.32)] transition-shadow duration-300 supports-[backdrop-filter]:backdrop-blur-md supports-[backdrop-filter]:backdrop-saturate-150">
           <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 via-transparent to-accent-1/10 opacity-50" />
           <div className="relative z-10">
-            <div className="grid lg:grid-cols-12 gap-8">
+            <div className="grid md:grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8">
               {/* Left: Story text */}
               <div className="lg:col-span-7">
-                <h2 className="heading text-2xl md:text-3xl font-semibold bg-[#C30003] bg-clip-text text-transparent">
+                <h2 className="heading text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold bg-[#C30003] bg-clip-text text-transparent">
                   Our Story
                 </h2>
 
@@ -176,7 +176,7 @@ export default function About() {
             </div>
 
             {/* mini stats */}
-            <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="mt-8 md:mt-10 grid grid-cols-1 sm:grid-cols-3 gap-4">
               {[
                 { k: "500+", v: "Happy Clients" },
                 { k: "24h", v: "Average Response" },
@@ -200,20 +200,20 @@ export default function About() {
       </section>
 
       {/* Our Tools */}
-      <section className="max-w-7xl mx-auto px-6 md:px-8 py-14">
+      <section className="max-w-7xl mx-auto px-6 md:px-8 py-12 md:py-14">
         <article className="relative overflow-hidden rounded-2xl p-6 md:p-8 bg-gradient-to-br from-slate-900/25 via-slate-800/15 to-transparent ring-1 ring-white/10 shadow-2xl shadow-[0_15px_60px_rgba(77,175,254,0.20)] hover:shadow-[0_22px_90px_rgba(77,175,254,0.32)] transition-shadow duration-300 supports-[backdrop-filter]:backdrop-blur-md supports-[backdrop-filter]:backdrop-saturate-150">
           <div className="absolute inset-0 bg-gradient-to-tr from-accent-1/10 via-transparent to-primary/10 opacity-50" />
           <div className="relative z-10">
-            <h2 className="heading text-2xl md:text-3xl font-semibold bg-[#C30003] bg-clip-text text-transparent">
+            <h2 className="heading text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold bg-[#C30003] bg-clip-text text-transparent">
               Our Tools
             </h2>
-            <p className="mt-2 text-foreground/85 max-w-4xl">
+            <p className="mt-2 text-foreground/85 max-w-4xl text-sm sm:text-base">
               We use modern, well-maintained equipment and eco-friendly
               products that clean effectively without harsh residues.
             </p>
 
             {/* icon bullets */}
-            <ul className="mt-5 grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            <ul className="mt-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3">
               {[
                 "HEPA vacuums & microfiber systems",
                 "Auto-scrubbers (where required)",
@@ -235,22 +235,22 @@ export default function About() {
       </section>
 
       {/* CTA */}
-      <section className="max-w-7xl mx-auto px-6 md:px-8 pb-16">
+      <section className="max-w-7xl mx-auto px-6 md:px-8 pb-12 md:pb-16">
         <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-900/40 via-slate-800/30 to-slate-700/40 ring-1 ring-white/15 shadow-2xl shadow-[0_18px_72px_rgba(77,175,254,0.22)] hover:shadow-[0_26px_110px_rgba(77,175,254,0.34)] transition-shadow duration-300 supports-[backdrop-filter]:backdrop-blur-md supports-[backdrop-filter]:backdrop-saturate-150">
           <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-transparent to-accent-1/10" />
           <div className="absolute top-0 left-1/4 w-80 h-80 bg-gradient-to-br from-primary/20 to-transparent rounded-full blur-3xl opacity-50" />
           <div className="absolute bottom-0 right-1/4 w-72 h-72 bg-gradient-to-br from-accent-1/20 to-transparent rounded-full blur-3xl opacity-50" />
 
-          <div className="relative p-6 md:p-10 lg:p-12">
-            <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
-              <div className="text-center lg:text-left max-w-xl">
-                <h3 className="heading text-2xl md:text-3xl font-bold bg-[#C30003] bg-clip-text text-transparent">
-                  Ready to work with a team you can count on?
-                </h3>
-                <p className="text-black/85 mt-1">
-                  Call 437-991-7677 or request a quote now.
-                </p>
-              </div>
+            <div className="relative p-6 md:p-8 lg:p-12">
+              <div className="flex flex-col md:flex-row lg:flex-row items-center justify-between gap-4 md:gap-6">
+                <div className="text-center md:text-left lg:text-left max-w-xl">
+                  <h3 className="heading text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold bg-[#C30003] bg-clip-text text-transparent">
+                    Ready to work with a team you can count on?
+                  </h3>
+                  <p className="text-black/85 mt-1 text-sm sm:text-base">
+                    Call 437-991-7677 or request a quote now.
+                  </p>
+                </div>
               <div className="flex gap-3">
                 <Button asChild variant="hero" className="group">
                   <Link to="/contact#quote" className="inline-flex items-center gap-2">

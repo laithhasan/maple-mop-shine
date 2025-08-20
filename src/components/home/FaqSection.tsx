@@ -11,12 +11,12 @@ const faqs = [
 
 export default function FaqSection() {
   return (
-    <section className="max-w-4xl mx-auto px-6 md:px-8 py-20">
-      <div className="text-center mb-12">
-        <h2 className="heading text-3xl md:text-4xl font-extrabold mb-3 bg-[#C30003] bg-clip-text text-transparent drop-shadow-[0_1px_8px_rgba(2,241,255,0.25)]">
+    <section className="max-w-4xl mx-auto px-6 md:px-8 py-16 md:py-20">
+      <div className="text-center mb-8 md:mb-12">
+        <h2 className="heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold mb-3 bg-[#C30003] bg-clip-text text-transparent drop-shadow-[0_1px_8px_rgba(2,241,255,0.25)]">
           Frequently Asked Questions
         </h2>
-        <p className="text-foreground/80 text-lg">Everything you need to know about our cleaning services</p>
+        <p className="text-foreground/80 text-base sm:text-lg">Everything you need to know about our cleaning services</p>
       </div>
 
       <div className="relative">

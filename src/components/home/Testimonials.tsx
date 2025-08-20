@@ -2,17 +2,17 @@ import { Star } from "lucide-react";
 
 export default function Testimonials() {
   return (
-    <section className="max-w-7xl mx-auto px-6 md:px-8 py-20">
-      <div className="text-center mb-12">
-        <h2 className="heading text-3xl md:text-4xl font-extrabold mb-3 bg-[#C30003] bg-clip-text text-transparent drop-shadow-[0_1px_8px_rgba(2,241,255,0.25)]">
+    <section className="max-w-7xl mx-auto px-6 md:px-8 py-16 md:py-20">
+      <div className="text-center mb-8 md:mb-12">
+        <h2 className="heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold mb-3 bg-[#C30003] bg-clip-text text-transparent drop-shadow-[0_1px_8px_rgba(2,241,255,0.25)]">
           What Our Clients Say
         </h2>
-        <p className="text-foreground/80 text-lg">Real experiences from satisfied customers</p>
+        <p className="text-foreground/80 text-base sm:text-lg">Real experiences from satisfied customers</p>
       </div>
 
       <div className="relative">
         {/* Testimonials Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {[
             {
               name: "Sarah M.",
