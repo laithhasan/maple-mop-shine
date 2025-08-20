@@ -49,12 +49,12 @@ export default function CommercialCleaning() {
         <div className="pointer-events-none absolute -bottom-24 -right-24 h-96 w-96 rounded-full bg-[#02F1FF]/15 blur-3xl" />
 
         <div className="relative max-w-7xl mx-auto px-6 md:px-8 py-16 lg:py-20">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 ring-1 ring-primary/20 mb-5">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 ring-1 ring-white/20 mb-5">
             <Building2 className="h-4 w-4 text-white" />
             <span className="text-sm font-medium text-white">Commercial Service</span>
           </div>
 
-          <h1 className="heading text-4xl lg:text-5xl font-extrabold leading-tight bg-gradient-to-r from-[#FF6B6B] via-[#C30003] to-[#940400] bg-clip-text text-transparent">
+          <h1 className="heading text-4xl lg:text-5xl font-extrabold leading-tight bg-[#C30003] bg-clip-text text-transparent">
             Commercial Cleaning
           </h1>
 
@@ -74,7 +74,7 @@ export default function CommercialCleaning() {
                 key={label}
                 className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 ring-1 ring-white/15 text-white/90 hover:text-primary hover:ring-primary/40 transition-colors"
               >
-                <Icon className="h-4 w-4 text-primary" />
+                <Icon className="h-4 w-4 text-white" />
                 <span className="text-sm">{label}</span>
               </div>
             ))}
@@ -198,10 +198,10 @@ export default function CommercialCleaning() {
           <div className="relative p-6 md:p-10 lg:p-12">
             <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
               <div className="text-center lg:text-left max-w-xl">
-                <h3 className="heading text-2xl md:text-3xl font-bold bg-gradient-to-r from-[#C30003] via-[#FF6B6B] to-[#C30003] bg-clip-text text-transparent">
+                <h3 className="heading text-2xl md:text-3xl font-bold bg-[#C30003] bg-clip-text text-transparent">
                   Ready for dependable cleaning?
                 </h3>
-                <p className="text-white/85 mt-1">Call 437-991-7677 or request a quote now.</p>
+                <p className="text-black/85 mt-1">Call 437-991-7677 or request a quote now.</p>
               </div>
               <div className="flex gap-3">
                 <Button asChild variant="hero" className="group">
