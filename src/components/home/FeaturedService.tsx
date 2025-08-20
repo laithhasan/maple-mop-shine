@@ -34,7 +34,7 @@ export default function FeaturedService() {
                 <span className="text-sm font-medium text-white">Featured Service</span>
               </div>
 
-              <h2 className="heading text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-[#C30003] via-[#FF6B6B] to-[#C30003]
+              <h2 className="heading text-3xl md:text-4xl font-bold mb-4 bg-[#C30003]
                            bg-clip-text text-transparent">
                 Commercial Cleaning Excellence
               </h2>
