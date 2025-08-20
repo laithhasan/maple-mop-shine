@@ -60,28 +60,6 @@ export default function FinalCta() {
                 </a>
               </Button>
             </div>
-
-            {/* Trust indicators */}
-            <div className="mt-12 pt-8 border-t border-white/10">
-              <div className="flex flex-wrap justify-center items-center gap-8 text-white/70">
-                <div className="flex items-center gap-2">
-                  <Shield className="h-5 w-5 text-white" />
-                  <span className="text-sm text-white">Fully Insured</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Star className="h-5 w-5 text-white" />
-                  <span className="text-sm text-white">5-Star Rated</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Clock3 className="h-5 w-5 text-white" />
-                  <span className="text-sm text-white">24/7 Support</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Leaf className="h-5 w-5 text-white" />
-                  <span className="text-sm text-white">Eco-Friendly</span>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
 
