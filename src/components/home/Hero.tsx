@@ -207,10 +207,10 @@ export default function Hero() {
               <div className="inline-block rounded-2xl bg-slate-900/20 supports-[backdrop-filter]:backdrop-blur-md supports-[backdrop-filter]:backdrop-saturate-150 ring-1 ring-white/10 shadow-lg p-4 sm:p-6">
                 {isTwoLine(slides[index]) ? (
                   <h1 className="font-extrabold tracking-tight leading-tight drop-shadow-md mb-2">
-                    <span className="block text-white text-4xl md:text-5xl">
+                    <span className="block text-black text-4xl md:text-5xl">
                       {slides[index].h1Top}
                     </span>
-                    <span className="block text-white mt-1 text-4xl md:text-5xl">
+                    <span className="block text-black mt-1 text-4xl md:text-5xl">
                       {slides[index].h1Bottom}
                     </span>
                   </h1>
@@ -218,11 +218,11 @@ export default function Hero() {
                   <h1 className="font-extrabold tracking-tight leading-[1.15] drop-shadow-md mb-2 pb-1 md:-translate-y-[2px] transform-gpu">
                     {/* One line from md+; wraps on very small screens */}
                     <span className="flex flex-wrap md:flex-nowrap md:whitespace-nowrap items-baseline gap-x-2 sm:gap-x-3 text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
-                      <span className="text-white">{slides[index].h1Parts[0]}</span>
+                      <span className="text-black">{slides[index].h1Parts[0]}</span>
                       <span aria-hidden className="inline-block w-0.5 h-6 bg-red-600 mx-1 sm:mx-2 align-middle" />
-                      <span className="text-white">{slides[index].h1Parts[1]}</span>
+                      <span className="text-black">{slides[index].h1Parts[1]}</span>
                       <span aria-hidden className="inline-block w-0.5 h-6 bg-red-600 mx-1 sm:mx-2 align-middle" />
-                      <span className="text-white">{slides[index].h1Parts[2]}</span>
+                      <span className="text-black">{slides[index].h1Parts[2]}</span>
                     </span>
                   </h1>
                 )}
