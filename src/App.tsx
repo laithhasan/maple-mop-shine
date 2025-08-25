@@ -8,6 +8,7 @@ import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import BackToTop from "./components/common/BackToTop";
 import ScrollToTop from "./components/common/ScrollToTop";
+import PromoBanner from "./components/common/PromoBanner";
 import Index from "./pages/Index";
 import CommercialCleaning from "./pages/CommercialCleaning";
 import About from "./pages/About";
@@ -24,6 +25,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <ScrollToTop />
+        <PromoBanner />
         <Navbar />
         <Routes>
           <Route path="/" element={<Index />} />
