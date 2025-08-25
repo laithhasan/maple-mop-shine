@@ -144,9 +144,9 @@ export default function WhyChooseUs() {
 
          {/* Statistics Counter — right aligned */}
 <div className="pt-6 border-t border-white/10">
-  <div className="w-full flex flex-col sm:flex-row items-end sm:items-center justify-end gap-2 sm:gap-3">
+  <div className="w-full flex flex-col sm:flex-row items-start sm:items-center justify-start gap-2 sm:gap-3">
     {/* Stat 1 */}
-    <div className="px-3 py-2 text-right">
+    <div className="px-3 py-2 text-left">
       <CountUp
         target={24}
         suffix="h"
@@ -161,7 +161,7 @@ export default function WhyChooseUs() {
     <span className="hidden sm:block h-6 w-px bg-white/15" aria-hidden />
 
     {/* Stat 2 */}
-    <div className="px-3 py-2 text-right">
+    <div className="px-3 py-2 text-left">
       <CountUp
         target={98}
         suffix="%"
