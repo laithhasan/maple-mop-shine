@@ -54,7 +54,7 @@ export default function CommercialCleaning() {
             <span className="text-sm font-medium text-white">Commercial Service</span>
           </div>
 
-          <h1 className="heading text-4xl lg:text-5xl font-extrabold leading-tight bg-[#C30003] bg-clip-text text-transparent">
+          <h1 className="heading text-4xl lg:text-5xl font-extrabold leading-snug bg-[#C30003] bg-clip-text text-transparent">
             Commercial Cleaning
           </h1>
 
