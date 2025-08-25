@@ -84,13 +84,13 @@ export default function Footer() {
                   <p className="flex items-center gap-2 text-foreground/80">
                     <Phone className="h-4 w-4 text-primary" />
                     <a className="story-link hover:text-primary transition-colors" href="tel:14379917677">
-                      437-991-7777
+                      437-991-7677
                     </a>
                   </p>
                   <p className="flex items-center gap-2 text-foreground/80">
                     <Mail className="h-4 w-4 text-primary" />
                     <a className="story-link hover:text-primary transition-colors" href="mailto:info@maplemopcleaning.com">
-                      info@negotcleaning.com
+                      negotcleaning@gmail.com
                     </a>
                   </p>
                   <p className="flex items-center gap-2 text-foreground/70">
@@ -99,7 +99,7 @@ export default function Footer() {
                   </p>
                   <p className="flex items-center gap-2 text-foreground/70">
                     <Clock3 className="h-4 w-4 text-primary" />
-                    Mon–Sat • 8:00–20:00
+                    Mon–Sat • 8:00 AM - 5:00 PM
                   </p>
                 </address>
               </div>
