@@ -269,7 +269,7 @@ export default function Hero() {
       <style>{`
         /* Smooth zoom-out */
         @keyframes kenburns {
-          0%   { transform: scale(1.02) translateY(0); }
+          0%   { transform: scale(1.04) translateY(0); }
           100% { transform: scale(1.0) translateY(0); }
         }
 
