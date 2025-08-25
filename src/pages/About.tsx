@@ -27,7 +27,7 @@ export default function About() {
             <span className="text-sm font-medium text-white">About Us</span>
           </div>
 
-          <h1 className="heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight bg-[#C30003] bg-clip-text text-transparent">
+          <h1 className="heading text-4xl lg:text-5xl font-extrabold leading-snug bg-[#C30003] bg-clip-text text-transparent">
             Your Trusted &amp; Dependable Cleaning Company.
           </h1>
 
