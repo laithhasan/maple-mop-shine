@@ -16,18 +16,28 @@ export default function FaqSection() {
         <h2 className="heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold mb-3 bg-[#C30003] bg-clip-text text-transparent drop-shadow-[0_1px_8px_rgba(2,241,255,0.25)]">
           Frequently Asked Questions
         </h2>
-        <p className="text-foreground/80 text-base sm:text-lg">Everything you need to know about our cleaning services</p>
+        <p className="text-foreground/80 text-base sm:text-lg">
+          Everything you need to know about our cleaning services
+        </p>
       </div>
 
       <div className="relative">
-        <Accordion type="single" collapsible className="space-y-4">
+        {/* Make the accordion sit above any decorative elements */}
+        <Accordion type="single" collapsible className="relative z-10 space-y-4">
           {faqs.map((faq, idx) => (
             <AccordionItem
               key={idx}
               value={`faq-${idx}`}
               className="group border-none rounded-2xl overflow-hidden bg-gradient-to-br from-slate-900/20 via-slate-800/10 to-transparent ring-1 ring-white/10 transition-all duration-500 hover:ring-accent-1/30 hover:shadow-lg hover:shadow-accent-1/10 data-[state=open]:ring-primary/30 data-[state=open]:shadow-lg data-[state=open]:shadow-primary/10"
             >
-              <AccordionTrigger className="px-6 py-4 text-left font-semibold text-heading hover:text-primary transition-colors duration-300 hover:no-underline data-[state=open]:text-primary [&[data-state=open]>svg]:rotate-180">
+              <AccordionTrigger
+                className="
+                  px-6 py-4 text-left font-semibold text-heading hover:text-primary
+                  transition-colors duration-300 hover:no-underline
+                  data-[state=open]:text-primary
+                  [&>svg]:transition-transform [&[data-state=open]>svg]:rotate-180
+                "
+              >
                 {faq.q}
               </AccordionTrigger>
               <AccordionContent className="px-6 pb-4 text-foreground/80 leading-relaxed">
@@ -37,9 +47,9 @@ export default function FaqSection() {
           ))}
         </Accordion>
 
-        {/* Decorative gradient orbs */}
-        <div className="absolute -top-8 -right-8 w-32 h-32 bg-gradient-to-br from-primary/5 to-accent-1/5 rounded-full blur-3xl" />
-        <div className="absolute -bottom-8 -left-8 w-24 h-24 bg-gradient-to-br from-accent-1/5 to-primary/5 rounded-full blur-3xl" />
+        {/* Decorative gradient orbs (do not block clicks) */}
+        <div className="pointer-events-none absolute -top-8 -right-8 -z-10 w-32 h-32 bg-gradient-to-br from-primary/5 to-accent-1/5 rounded-full blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-8 -left-8 -z-10 w-24 h-24 bg-gradient-to-br from-accent-1/5 to-primary/5 rounded-full blur-3xl" />
       </div>
     </section>
   );
