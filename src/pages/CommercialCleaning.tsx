@@ -162,29 +162,6 @@ export default function CommercialCleaning() {
         </div>
       </section>
 
-      {/* Highlight stats */}
-      <section className="max-w-7xl mx-auto px-6 md:px-8 pb-6">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          {[
-            { k: "98%", v: "Satisfaction Rate" },
-            { k: "24h", v: "Avg. Response Time" },
-            { k: "500+", v: "Active Clients" },
-          ].map((s, i) => (
-            <div
-              key={s.v}
-              className="group relative overflow-hidden rounded-2xl p-5 text-center bg-gradient-to-br from-slate-900/25 via-slate-800/10 to-transparent ring-1 ring-white/10 shadow-[0_8px_30px_rgba(77,175,254,0.16)] hover:shadow-[0_10px_40px_rgba(77,175,254,0.26)] hover:ring-accent-1/30 transition-all"
-              style={{ animationDelay: `${i * 120}ms` }}
-            >
-              <div className="text-3xl font-bold bg-gradient-to-r from-[#FF6B6B] via-[#C30003] to-[#940400] bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-300">
-                {s.k}
-              </div>
-              <div className="mt-1 text-sm text-foreground/70">{s.v}</div>
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-accent-1/5 via-transparent to-primary/5" />
-            </div>
-          ))}
-        </div>
-      </section>
-
       {/* CTA */}
       <section className="max-w-7xl mx-auto px-6 md:px-8 py-14">
         <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-900/40 via-slate-800/30 to-slate-700/40 ring-1 ring-white/15 shadow-2xl shadow-[0_18px_72px_rgba(77,175,254,0.22)] hover:shadow-[0_26px_110px_rgba(77,175,254,0.34)] transition-shadow duration-300 supports-[backdrop-filter]:backdrop-blur-md supports-[backdrop-filter]:backdrop-saturate-150">
