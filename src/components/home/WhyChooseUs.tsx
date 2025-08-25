@@ -143,7 +143,7 @@ export default function WhyChooseUs() {
           </div>
 
           {/* Statistics Counter (count up when in view) */}
-          <div className="grid grid-cols-3 gap-6 pt-8 border-t border-white/10">
+          <div className="grid grid-cols-2 gap-6 pt-8 border-t border-white/10">
 
             <div className="text-center group">
               <CountUp
