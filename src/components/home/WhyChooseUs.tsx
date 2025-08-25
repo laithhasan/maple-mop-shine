@@ -144,16 +144,6 @@ export default function WhyChooseUs() {
 
           {/* Statistics Counter (count up when in view) */}
           <div className="grid grid-cols-3 gap-6 pt-8 border-t border-white/10">
-            <div className="text-center group">
-              <CountUp
-                target={500}
-                suffix="+"
-                duration={1400}
-                className="text-xl sm:text-2xl md:text-3xl font-bold bg-[#C30003] bg-clip-text text-transparent inline-block group-hover:scale-110 transition-transform duration-300"
-                ariaLabel="Happy Clients: 500 plus"
-              />
-              <div className="text-sm text-foreground/70 mt-1">Happy Clients</div>
-            </div>
 
             <div className="text-center group">
               <CountUp
