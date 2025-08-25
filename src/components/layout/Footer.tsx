@@ -89,7 +89,7 @@ export default function Footer() {
                   </p>
                   <p className="flex items-center gap-2 text-foreground/80">
                     <Mail className="h-4 w-4 text-primary" />
-                    <a className="story-link hover:text-primary transition-colors" href="mailto:info@maplemopcleaning.com">
+                    <a className="story-link hover:text-primary transition-colors" href="mailto:negotcleaning@gmail.com">
                       negotcleaning@gmail.com
                     </a>
                   </p>
