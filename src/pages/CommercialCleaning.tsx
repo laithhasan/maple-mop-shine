@@ -9,7 +9,7 @@ import {
   Star,
   Sparkles,
   CheckCircle2,
-  ChevronDown,    // ← single custom chevron
+  ChevronDown, // ← single custom chevron
 } from "lucide-react";
 
 const checklist = [
@@ -84,9 +84,9 @@ export default function CommercialCleaning() {
 
       {/* What We Do + Checklist */}
       <section className="max-w-7xl mx-auto px-6 md:px-8 py-14">
-        <div className="grid lg:grid-cols-2 gap-10 items-start">
+        <div className="grid lg:grid-cols-2 gap-10 items-stretch">
           {/* What We Do */}
-          <article className="group relative overflow-hidden rounded-2xl p-6 bg-gradient-to-br from-slate-900/25 via-slate-800/15 to-transparent ring-1 ring-white/10 shadow-2xl shadow-[0_15px_60px_rgba(77,175,254,0.20)] hover:shadow-[0_22px_90px_rgba(77,175,254,0.32)] transition-all duration-500 supports-[backdrop-filter]:backdrop-blur-md supports-[backdrop-filter]:backdrop-saturate-150">
+          <article className="group relative overflow-hidden rounded-2xl p-6 bg-gradient-to-br from-slate-900/25 via-slate-800/15 to-transparent ring-1 ring-white/10 shadow-2xl shadow-[0_15px_60px_rgba(77,175,254,0.20)] hover:shadow-[0_22px_90px_rgba(77,175,254,0.32)] transition-all duration-500 supports-[backdrop-filter]:backdrop-blur-md supports-[backdrop-filter]:backdrop-saturate-150 h-full flex flex-col">
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-tr from-primary/10 via-transparent to-accent-1/10" />
             <header className="relative z-10 mb-4">
               <h2 className="font-heading text-2xl bg-[#C30003] bg-clip-text text-transparent">
@@ -97,32 +97,31 @@ export default function CommercialCleaning() {
               </p>
             </header>
 
-           <ul className="relative z-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 gap-3">
-  {whatWeDo.map((item) => (
-    <li key={item}>
-      <span className="inline-flex items-center gap-2 w-full rounded-xl px-3 py-2 text-sm bg-white/[0.03] ring-1 ring-white/10 hover:ring-primary/40 hover:bg-white/[0.06] transition-all">
-        <span className="inline-flex h-6 w-6 items-center justify-center rounded-md bg-primary/15 ring-1 ring-primary/25">
-          <CheckCircle2 className="h-3.5 w-3.5 text-primary" />
-        </span>
-        {item}
-      </span>
-    </li>
-  ))}
-</ul>
-
+            <ul className="relative z-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 gap-3 flex-1">
+              {whatWeDo.map((item) => (
+                <li key={item}>
+                  <span className="inline-flex items-center gap-2 w-full rounded-xl px-3 py-2 text-sm bg-white/[0.03] ring-1 ring-white/10 hover:ring-primary/40 hover:bg-white/[0.06] transition-all">
+                    <span className="inline-flex h-6 w-6 items-center justify-center rounded-md bg-primary/15 ring-1 ring-primary/25">
+                      <CheckCircle2 className="h-3.5 w-3.5 text-primary" />
+                    </span>
+                    {item}
+                  </span>
+                </li>
+              ))}
+            </ul>
 
             <div className="pointer-events-none absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-[#02F1FF] via-[#C30003] to-[#4DAFFE] opacity-70" />
           </article>
 
           {/* Checklist */}
-          <article className="group relative overflow-hidden rounded-2xl p-6 bg-gradient-to-br from-slate-900/25 via-slate-800/15 to-transparent ring-1 ring-white/10 shadow-2xl shadow-[0_15px_60px_rgba(77,175,254,0.20)] hover:shadow-[0_22px_90px_rgba(77,175,254,0.32)] transition-all duration-500 supports-[backdrop-filter]:backdrop-blur-md supports-[backdrop-filter]:backdrop-saturate-150">
+          <article className="group relative overflow-hidden rounded-2xl p-6 bg-gradient-to-br from-slate-900/25 via-slate-800/15 to-transparent ring-1 ring-white/10 shadow-2xl shadow-[0_15px_60px_rgba(77,175,254,0.20)] hover:shadow-[0_22px_90px_rgba(77,175,254,0.32)] transition-all duration-500 supports-[backdrop-filter]:backdrop-blur-md supports-[backdrop-filter]:backdrop-saturate-150 h-full flex flex-col">
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-tr from-accent-1/10 via-transparent to-primary/10" />
             <h2 className="font-heading text-2xl mb-4 bg-[#C30003] bg-clip-text text-transparent">
               Typical Scope & Checklist
             </h2>
 
             {/* space between items + single chevron */}
-            <Accordion type="single" collapsible className="w-full space-y-2.5">
+            <Accordion type="single" collapsible className="w-full space-y-2.5 flex-1">
               {checklist.map((i, idx) => (
                 <AccordionItem
                   key={idx}
