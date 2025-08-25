@@ -142,31 +142,35 @@ export default function WhyChooseUs() {
             ))}
           </div>
 
-          {/* Statistics Counter (2 items — perfectly aligned) */}
-          <div className="pt-8 border-t border-white/10">
-            <div className="flex flex-col sm:flex-row items-stretch justify-center rounded-xl overflow-hidden bg-white/5 sm:bg-transparent divide-y sm:divide-y-0 sm:divide-x divide-white/10">
-              {/* Stat 1 */}
-              <div className="flex-1 text-center p-5">
-                <CountUp
-                  target={24}
-                  suffix="h"
-                  duration={1200}
-                  className="text-xl sm:text-2xl md:text-3xl font-bold bg-[#C30003] bg-clip-text text-transparent inline-block"
-                  ariaLabel="Average Response Time: 24 hours"
-                />
-                <div className="text-sm text-foreground/70 mt-1">Response Time</div>
-              </div>
-              {/* Stat 2 */}
-              <div className="flex-1 text-center p-5">
-                <CountUp
-                  target={98}
-                  suffix="%"
-                  duration={1600}
-                  className="text-xl sm:text-2xl md:text-3xl font-bold bg-[#C30003] bg-clip-text text-transparent inline-block"
-                  ariaLabel="Satisfaction Rate: 98 percent"
-                />
-                <div className="text-sm text-foreground/70 mt-1">Satisfaction Rate</div>
-              </div>
+          {/* Statistics Counter — tighter spacing */}
+<div className="pt-6 border-t border-white/10">
+  <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3">
+    {/* Stat 1 */}
+    <div className="text-center px-3 py-2">
+      <CountUp
+        target={24}
+        suffix="h"
+        duration={1200}
+        className="text-xl sm:text-2xl md:text-3xl font-bold bg-[#C30003] bg-clip-text text-transparent inline-block"
+        ariaLabel="Average Response Time: 24 hours"
+      />
+      <div className="text-xs sm:text-sm text-foreground/70 mt-0.5">Response Time</div>
+    </div>
+
+    {/* Thin divider (only on larger screens) */}
+    <span className="hidden sm:block h-6 w-px bg-white/15" aria-hidden />
+
+    {/* Stat 2 */}
+    <div className="text-center px-3 py-2">
+      <CountUp
+        target={98}
+        suffix="%"
+        duration={1600}
+        className="text-xl sm:text-2xl md:text-3xl font-bold bg-[#C30003] bg-clip-text text-transparent inline-block"
+        ariaLabel="Satisfaction Rate: 98 percent"
+      />
+      <div className="text-xs sm:text-sm text-foreground/70 mt-0.5">Satisfaction Rate</div>
+    </div>
             </div>
           </div>
         </div>
