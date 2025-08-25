@@ -261,7 +261,7 @@ export default function Contact() {
           <InfoCard tint="primary">
             <div className="relative z-10">
               <div className="font-heading heading">Hours</div>
-              <p className="text-sm text-foreground/80">Mon–Sat • 8:00 AM - 5:00 PM</p>
+              <p className="text-sm text-foreground/80">Mon - Sat • 8:00 AM - 5:00 PM</p>
             </div>
           </InfoCard>
 
