@@ -109,7 +109,7 @@ export default function WhyChooseUs() {
         {/* Left column */}
         <div className="space-y-8">
           <div>
-            <h2 className="heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 bg-gradient-to-r from-[hsl(var(--heading))] via-primary to-accent-1 bg-clip-text text-transparent">
+            <h2 className="heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 bg-gradient-to-r from-[hsl(var(--heading))] via-primary to-primary bg-clip-text text-transparent">
               Why Choose NEGOT
             </h2>
             <p className="text-foreground/80 text-base sm:text-lg leading-relaxed">
