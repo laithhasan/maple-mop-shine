@@ -26,6 +26,7 @@ const App = () => (
       <BrowserRouter>
         <ScrollToTop />
         <PromoBanner />
+        <div aria-hidden className="h-10 md:h-11 lg:h-12" />
         <Navbar />
         <Routes>
           <Route path="/" element={<Index />} />
