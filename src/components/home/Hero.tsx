@@ -63,7 +63,7 @@ export default function Hero() {
   const touchStartX = useRef<number | null>(null);
 
   // Constants
-  const DURATION_MS = 7000; // rotate + kenburns duration
+  const DURATION_MS = 5000; // rotate + kenburns duration
 
   // Helpers
   const scheduleNext = () => {
