@@ -62,7 +62,7 @@ export default function Contact() {
         <div className="pointer-events-none absolute -bottom-24 -right-24 h-96 w-96 rounded-full bg-[#02F1FF]/15 blur-3xl" />
 
         <div className="relative max-w-7xl mx-auto px-6 md:px-8 py-12 md:py-16 lg:py-20">
-          <h1 className="heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight bg-[#C30003] bg-clip-text text-transparent">
+         <h1 className="heading text-4xl lg:text-5xl font-extrabold leading-snug bg-[#C30003] bg-clip-text text-transparent">
             Contact Us
           </h1>
 
