@@ -23,7 +23,7 @@ const checklist = [
 
 const whatWeDo = [
   "Vacuuming all floors",
-  "Steaming the carpets",
+  "Vacuuming the carpets",
   "Dusting the furniture",
   "Mopping hard floors",
   "Disinfecting the cabins",
@@ -97,22 +97,19 @@ export default function CommercialCleaning() {
               </p>
             </header>
 
-            <ul className="relative z-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 gap-3">
-              {whatWeDo.map((item, i) => (
-                <li key={item}>
-                  <span className="inline-flex items-center gap-2 w-full rounded-xl px-3 py-2 text-sm bg-white/[0.03] ring-1 ring-white/10 hover:ring-primary/40 hover:bg-white/[0.06] transition-all">
-                    <span className="inline-flex h-6 w-6 items-center justify-center rounded-md bg-primary/15 ring-1 ring-primary/25">
-                      {i % 2 === 0 ? (
-                        <CheckCircle2 className="h-3.5 w-3.5 text-primary" />
-                      ) : (
-                        <Sparkles className="h-3.5 w-3.5 text-primary" />
-                      )}
-                    </span>
-                    {item}
-                  </span>
-                </li>
-              ))}
-            </ul>
+           <ul className="relative z-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 gap-3">
+  {whatWeDo.map((item) => (
+    <li key={item}>
+      <span className="inline-flex items-center gap-2 w-full rounded-xl px-3 py-2 text-sm bg-white/[0.03] ring-1 ring-white/10 hover:ring-primary/40 hover:bg-white/[0.06] transition-all">
+        <span className="inline-flex h-6 w-6 items-center justify-center rounded-md bg-primary/15 ring-1 ring-primary/25">
+          <CheckCircle2 className="h-3.5 w-3.5 text-primary" />
+        </span>
+        {item}
+      </span>
+    </li>
+  ))}
+</ul>
+
 
             <div className="pointer-events-none absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-[#02F1FF] via-[#C30003] to-[#4DAFFE] opacity-70" />
           </article>
