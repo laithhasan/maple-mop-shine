@@ -142,11 +142,11 @@ export default function WhyChooseUs() {
             ))}
           </div>
 
-          {/* Statistics Counter — tighter spacing */}
+         {/* Statistics Counter — right aligned */}
 <div className="pt-6 border-t border-white/10">
-  <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3">
+  <div className="w-full flex flex-col sm:flex-row items-end sm:items-center justify-end gap-2 sm:gap-3">
     {/* Stat 1 */}
-    <div className="text-center px-3 py-2">
+    <div className="px-3 py-2 text-right">
       <CountUp
         target={24}
         suffix="h"
@@ -161,7 +161,7 @@ export default function WhyChooseUs() {
     <span className="hidden sm:block h-6 w-px bg-white/15" aria-hidden />
 
     {/* Stat 2 */}
-    <div className="text-center px-3 py-2">
+    <div className="px-3 py-2 text-right">
       <CountUp
         target={98}
         suffix="%"
@@ -171,6 +171,7 @@ export default function WhyChooseUs() {
       />
       <div className="text-xs sm:text-sm text-foreground/70 mt-0.5">Satisfaction Rate</div>
     </div>
+
             </div>
           </div>
         </div>
