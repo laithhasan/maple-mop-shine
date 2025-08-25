@@ -76,7 +76,7 @@ export default function Contact() {
               Call Us
             </a>
             <a
-              href="mailto:info@maplemopcleaning.com"
+              href="mailto:negotcleaning@gmail.com"
               className="group inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 ring-1 ring-white/15 text-white/90 transition-colors hover:text-[#C30003] hover:ring-[#C30003]/40"
             >
               <Mail className="h-4 w-4 text-white transition-colors group-hover:text-[#C30003]" />
