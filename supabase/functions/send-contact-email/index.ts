@@ -10,7 +10,7 @@ const corsHeaders = {
 
 const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
 const FROM_EMAIL = Deno.env.get("FROM_EMAIL") || "NEGOT Cleaning <onboarding@resend.dev>";
-const TO_EMAIL = Deno.env.get("TO_EMAIL") || "burin7oils@gmail.com";
+const TO_EMAIL = Deno.env.get("TO_EMAIL") || "laith57xd@gmail.com";
 
 if (!RESEND_API_KEY) {
   console.error("Missing RESEND_API_KEY secret");
