@@ -8,7 +8,6 @@ import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import BackToTop from "./components/common/BackToTop";
 import ScrollToTop from "./components/common/ScrollToTop";
-import PromoBanner from "./components/common/PromoBanner";
 import Index from "./pages/Index";
 import CommercialCleaning from "./pages/CommercialCleaning";
 import About from "./pages/About";
@@ -23,9 +22,6 @@ const AppContent = () => {
   return (
     <>
       <ScrollToTop />
-      <PromoBanner />
-      {/* Only add spacer on home page */}
-      {location.pathname === '/' && <div aria-hidden className="h-8 sm:h-9 md:h-10" />}
       <Navbar />
       <Routes>
         <Route path="/" element={<Index />} />
