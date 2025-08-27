@@ -128,10 +128,17 @@ export default function Hero() {
 
   // Keyboard & touch
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === "ArrowRight") { e.preventDefault(); goTo((index + 1) % slides.length); }
-    else if (e.key === "ArrowLeft") { e.preventDefault(); goTo((index - 1 + slides.length) % slides.length); }
+    if (e.key === "ArrowRight") {
+      e.preventDefault();
+      goTo((index + 1) % slides.length);
+    } else if (e.key === "ArrowLeft") {
+      e.preventDefault();
+      goTo((index - 1 + slides.length) % slides.length);
+    }
   };
-  const onTouchStart = (e: React.TouchEvent) => { touchStartX.current = e.touches[0].clientX; };
+  const onTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
   const onTouchEnd = (e: React.TouchEvent) => {
     if (touchStartX.current == null) return;
     const dx = e.changedTouches[0].clientX - touchStartX.current;
@@ -202,9 +209,9 @@ export default function Hero() {
       {/* Text block with frosted blur panel */}
       <div className="pointer-events-none absolute inset-0">
         <div className="pointer-events-auto max-w-7xl mx-auto px-6 md:px-8 h-full">
-      <div className="h-full grid grid-cols-1 lg:grid-cols-12 items-center">
-        <article className="lg:col-span-8 xl:col-span-7 max-w-4xl">
-          <div className="inline-block rounded-2xl bg-slate-900/40 supports-[backdrop-filter]:backdrop-blur-md supports-[backdrop-filter]:backdrop-saturate-150 ring-1 ring-white/10 shadow-lg p-4 sm:p-6 md:p-8">
+          <div className="h-full grid grid-cols-1 lg:grid-cols-12 items-center">
+            <article className="lg:col-span-8 xl:col-span-7 max-w-4xl">
+              <div className="inline-block rounded-2xl bg-slate-900/40 supports-[backdrop-filter]:backdrop-blur-md supports-[backdrop-filter]:backdrop-saturate-150 ring-1 ring-white/10 shadow-lg p-4 sm:p-6 md:p-8">
                 {isTwoLine(slides[index]) ? (
                   <h1 className="font-extrabold tracking-tight leading-tight drop-shadow-md mb-2">
                     <span className="block text-red-600 text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
@@ -218,11 +225,17 @@ export default function Hero() {
                   <h1 className="font-extrabold tracking-tight leading-[1.15] drop-shadow-md mb-2 pb-1 md:-translate-y-[2px] transform-gpu">
                     {/* One line from md+; wraps on very small screens */}
                     <span className="flex flex-wrap md:flex-nowrap md:whitespace-nowrap items-baseline gap-x-2 sm:gap-x-3 text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
-                      <span className="text-red-600">{slides[index].h1Parts[0]}</span>
-                      <span aria-hidden className="inline-block w-1 h-6 sm:h-7 md:h-8 lg:h-10 bg-red-600 mx-1 sm:mx-2 align-middle" />
-                      <span className="text-red-600">{slides[index].h1Parts[1]}</span>
-                      <span aria-hidden className="inline-block w-1 h-6 sm:h-7 md:h-8 lg:h-10 bg-red-600 mx-1 sm:mx-2 align-middle" />
-                      <span className="text-red-600">{slides[index].h1Parts[2]}</span>
+                      <span className="text-red-600">{(slides[index] as OneLineSlide).h1Parts[0]}</span>
+                      <span
+                        aria-hidden
+                        className="inline-block w-1 h-6 sm:h-7 md:h-8 lg:h-10 bg-red-600 mx-1 sm:mx-2 align-middle"
+                      />
+                      <span className="text-red-600">{(slides[index] as OneLineSlide).h1Parts[1]}</span>
+                      <span
+                        aria-hidden
+                        className="inline-block w-1 h-6 sm:h-7 md:h-8 lg:h-10 bg-red-600 mx-1 sm:mx-2 align-middle"
+                      />
+                      <span className="text-red-600">{(slides[index] as OneLineSlide).h1Parts[2]}</span>
                     </span>
                   </h1>
                 )}
@@ -230,6 +243,21 @@ export default function Hero() {
                 <p className="mt-1 text-white/90 drop-shadow-sm text-base sm:text-lg md:text-xl">
                   {slides[index].sub}
                 </p>
+
+                {/* Promo line only on slide-1, aligned under the sub text */}
+                {slides[index].id === "slide-1" && (
+                  <div className="mt-2 sm:mt-3">
+                    <span className="inline-flex items-center rounded-lg bg-white/10 ring-1 ring-white/15 px-3 py-2">
+                      <span className="hidden sm:inline text-white/90 text-sm sm:text-base">
+                        Our website helps you connect with us. Enjoy the first five days of cleaning for free
+                        and decide if we're the right fit for your business!
+                      </span>
+                      <span className="sm:hidden text-white/90 text-sm">
+                        Get 5 days free cleaning to try our services
+                      </span>
+                    </span>
+                  </div>
+                )}
 
                 <div className="mt-4 sm:mt-6 flex flex-col sm:flex-row gap-3">
                   <Button asChild variant="hero">
@@ -269,7 +297,7 @@ export default function Hero() {
       <style>{`
         /* Smooth zoom-out */
         @keyframes kenburns {
-          0%   { transform: scale(1.04) translateY(0); }
+          0% { transform: scale(1.04) translateY(0); }
           100% { transform: scale(1.0) translateY(0); }
         }
 
