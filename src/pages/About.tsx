@@ -115,7 +115,7 @@ export default function About() {
                   <p>
                     NEGOT Cleaning is a leading commercial
                     cleaning company located in Ontario, with years of
-                    experience in the cleaning industry.Our goal is to provide high-quality cleaning services across various sectors, 
+                    experience in the cleaning industry. Our goal is to provide high-quality cleaning services across various sectors, 
                     focusing on building direct relationships with our clients to effectively meet their needs.
                     No job is too big or too small for our
                     cleaners—we have everything needed to solve your facility
