@@ -94,7 +94,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     const emailResponse = await resend.emails.send({
       from: "NEGOT Cleaning <noreply@resend.dev>",
-      to: ["info@negoticleaning.com"], // Replace with your actual company email
+      to: ["laith57xd@gmail.com"], // Replace with your actual company email
       subject: `New Quote Request from ${formData.name}`,
       html: emailHTML,
       replyTo: formData.email,
