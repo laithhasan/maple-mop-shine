@@ -56,7 +56,7 @@ export default function Testimonials() {
                 </div>
 
                 {/* Quote (Row 2) — centered text between quotes with consistent min-height */}
-                <blockquote className="relative px-10 text-center flex items-start justify-start min-h-[112px] md:min-h-[128px]">
+                <blockquote className="relative px-10 text-start flex items-start justify-start min-h-[112px] md:min-h-[128px]">
                   <span className="text-4xl text-primary/30 absolute -top-2 left-2 select-none">
                     &quot;
                   </span>
