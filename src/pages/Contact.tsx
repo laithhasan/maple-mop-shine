@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -6,23 +6,27 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Phone, Mail, Calendar } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 const schema = z.object({
   name: z.string().min(2, "Please enter your name"),
   email: z.string().email("Enter a valid email"),
   phone: z.string().min(7, "Enter a valid phone"),
+  address: z.string().min(5, "Please enter your address"),
+  serviceType: z.string().min(1, "Please select a service type"),
   frequency: z
     .enum(["Daily", "Weekly", "Bi-Weekly", "Fortnightly", "One-time"])
     .default("One-time"),
-  rooms: z.string().optional(),
-  size: z.string().optional(),
-  date: z.string().optional(),
-  time: z.string().optional(),
+  preferredDate: z.string().optional(),
   message: z.string().optional(),
 });
 type FormData = z.infer<typeof schema>;
 
 export default function Contact() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { toast } = useToast();
+  
   const {
     register,
     handleSubmit,
@@ -30,7 +34,19 @@ export default function Contact() {
     setValue,
     watch,
     formState: { errors, isSubmitSuccessful },
-  } = useForm<FormData>({ resolver: zodResolver(schema) });
+  } = useForm<FormData>({ 
+    resolver: zodResolver(schema),
+    defaultValues: {
+      name: "",
+      email: "",
+      phone: "",
+      address: "",
+      serviceType: "",
+      frequency: "One-time",
+      preferredDate: "",
+      message: "",
+    }
+  });
 
   const today = useMemo(() => {
     const d = new Date();
@@ -40,13 +56,33 @@ export default function Contact() {
     return `${yyyy}-${mm}-${dd}`;
   }, []);
 
-  const onSubmit = (data: FormData) => {
-    const params = new URLSearchParams({
-      subject: "Quote Request",
-      body: JSON.stringify(data, null, 2),
-    });
-    window.open(`mailto:info@maplemopcleaning.com?${params.toString()}`);
-    reset();
+  const onSubmit = async (data: FormData) => {
+    setIsSubmitting(true);
+    
+    try {
+      const { data: result, error } = await supabase.functions.invoke('send-contact-email', {
+        body: data
+      });
+
+      if (error) {
+        throw error;
+      }
+
+      reset();
+      toast({
+        title: "Quote request sent!",
+        description: "We'll get back to you within 24 hours.",
+      });
+    } catch (error) {
+      console.error('Error sending email:', error);
+      toast({
+        title: "Error sending request",
+        description: "Please try again or contact us directly.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const messageVal = watch("message") ?? "";
@@ -128,7 +164,7 @@ export default function Contact() {
               <ErrorText msg={errors.email?.message} />
             </FieldWrapper>
 
-            <FieldWrapper label="Phone" required className="md:col-span-2">
+            <FieldWrapper label="Phone" required>
               <Input
                 id="phone"
                 type="tel"
@@ -138,11 +174,38 @@ export default function Contact() {
               />
               <ErrorText msg={errors.phone?.message} />
             </FieldWrapper>
+
+            <FieldWrapper label="Address" required>
+              <Input
+                id="address"
+                placeholder="Your service address"
+                {...register("address")}
+                aria-invalid={!!errors.address}
+                className="h-11 ring-1 ring-white/10 focus-visible:ring-2 focus-visible:ring-cyan-300/60"
+              />
+              <ErrorText msg={errors.address?.message} />
+            </FieldWrapper>
           </div>
 
           {/* Section: Service Details (plain red text, no icon/gradient) */}
           <FormSection title="Service Details" />
           <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 relative z-10">
+            <FieldWrapper label="Service Type" required>
+              <select
+                id="serviceType"
+                {...register("serviceType")}
+                className="h-11 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                <option value="">Select a service</option>
+                <option value="Office Cleaning">Office Cleaning</option>
+                <option value="Commercial Deep Clean">Commercial Deep Clean</option>
+                <option value="Post-Construction">Post-Construction</option>
+                <option value="Regular Maintenance">Regular Maintenance</option>
+                <option value="Other">Other</option>
+              </select>
+              <ErrorText msg={errors.serviceType?.message} />
+            </FieldWrapper>
+            
             {/* Frequency chips */}
             <FieldWrapper label="Frequency">
               <div className="flex flex-wrap gap-2">
@@ -181,50 +244,21 @@ export default function Contact() {
               </select>
             </FieldWrapper>
 
-            <FieldWrapper label="Rooms/Offices">
-              <Input
-                id="rooms"
-                placeholder="e.g., 6 offices"
-                {...register("rooms")}
-                className="h-11 ring-1 ring-white/10 focus-visible:ring-2 focus-visible:ring-cyan-300/60"
-              />
-            </FieldWrapper>
-
-            <FieldWrapper label="Approx. size">
-              <Input
-                id="size"
-                placeholder="e.g., 2,500 sq ft"
-                {...register("size")}
-                className="h-11 ring-1 ring-white/10 focus-visible:ring-2 focus-visible:ring-cyan-300/60"
-              />
-            </FieldWrapper>
-
             <FieldWrapper label="Preferred date">
               <Input
-                id="date"
+                id="preferredDate"
                 type="date"
                 min={today}
-                {...register("date")}
+                {...register("preferredDate")}
                 className="h-11 ring-1 ring-white/10 focus-visible:ring-2 focus-visible:ring-cyan-300/60"
               />
-            </FieldWrapper>
-
-            <FieldWrapper label="Preferred time">
-              <div className="flex flex-col gap-2">
-                <Input
-                  id="time"
-                  type="time"
-                  step={900}
-                  {...register("time")}
-                  className="h-11 ring-1 ring-white/10 focus-visible:ring-2 focus-visible:ring-cyan-300/60"
-                />
-              </div>
             </FieldWrapper>
 
             <FieldWrapper label="Message" className="md:col-span-2">
               <Textarea
                 id="message"
                 rows={5}
+                placeholder="Tell us about your cleaning needs..."
                 {...register("message")}
                 className="ring-1 ring-white/10 focus-visible:ring-2 focus-visible:ring-cyan-300/60"
               />
@@ -233,10 +267,10 @@ export default function Contact() {
           </div>
 
           <div className="relative z-10 flex flex-wrap gap-3 pt-2">
-            <Button type="submit" variant="hero" className="group">
+            <Button type="submit" variant="hero" className="group" disabled={isSubmitting}>
               <span className="inline-flex items-center gap-2">
-                Request Quote{" "}
-                <span className="transition-transform group-hover:translate-x-1">→</span>
+                {isSubmitting ? "Sending..." : "Request Quote"}{" "}
+                {!isSubmitting && <span className="transition-transform group-hover:translate-x-1">→</span>}
               </span>
             </Button>
           </div>
