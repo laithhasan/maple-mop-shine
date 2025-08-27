@@ -244,8 +244,8 @@ export default function Hero() {
                   {slides[index].sub}
                 </p>
 
-                {/* Promo line only on slide-1, aligned under the sub text */}
-                {slides[index].id === "slide-1" && (
+                {/* Promo line only on slide-2, aligned under the sub text */}
+                {slides[index].id === "slide-2" && (
                   <div className="mt-2 sm:mt-3">
                     <span className="inline-flex items-center rounded-lg bg-white/10 ring-1 ring-white/15 px-3 py-2">
                       <span className="hidden sm:inline text-white/90 text-sm sm:text-base">
