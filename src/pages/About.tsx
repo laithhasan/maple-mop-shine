@@ -114,9 +114,9 @@ export default function About() {
                 <div className="mt-3 space-y-4 text-foreground/85 max-w-4xl leading-relaxed">
                   <p>
                     For the past eight years, we have been dedicated cleaners in Toronto and the Greater Toronto Area (GTA), working as subcontractors.
-                    Throughout our experience, we have provided cleaning services to a diverse range of businesses, including daycares, dental offices, gyms, retail companies, engineering firms, law offices, design studios, marketing agencies, community buildings, and various types of offices.
-                    During our time as subcontractors, we often felt that we lacked the authority to directly address cleaning issues since we did not have a primary contact with the customers. We also observed that while large cleaning companies manage contracts, it is ultimately our cleaning skills that impact customer satisfaction.
-                    This realization inspired us to start our own cleaning business. With humble beginnings, we are supported by a dedicated and skilled team of cleaners. Our goal is to provide high-quality cleaning services across various sectors, focusing on building direct relationships with our clients to effectively meet their needs.
+                    Throughout our experience, we have provided cleaning services to a diverse range of businesses, including daycares, dental offices, gyms, retail companies, engineering firms, law offices, design studios, marketing agencies, community buildings, and various types of offices. </p>
+                    <p> During our time as subcontractors, we often felt that we lacked the authority to directly address cleaning issues since we did not have a primary contact with the customers. We also observed that while large cleaning companies manage contracts, it is ultimately our cleaning skills that impact customer satisfaction. </p>
+                    <p> This realization inspired us to start our own cleaning business. With humble beginnings, we are supported by a dedicated and skilled team of cleaners. Our goal is to provide high-quality cleaning services across various sectors, focusing on building direct relationships with our clients to effectively meet their needs.
                   </p>
                   <p>
                     We continue to challenge ourselves to go beyond our
