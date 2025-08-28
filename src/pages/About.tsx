@@ -114,9 +114,9 @@ export default function About() {
                 <div className="mt-3 space-y-4 text-foreground/85 max-w-4xl leading-relaxed">
                   <p>
                     For the past eight years, we have been dedicated cleaners in Toronto and the Greater Toronto Area (GTA), working as subcontractors.
-Throughout our experience, we have provided cleaning services to a diverse range of businesses, including daycares, dental offices, gyms, retail companies, engineering firms, law offices, design studios, marketing agencies, community buildings, and various types of offices.
-During our time as subcontractors, we often felt that we lacked the authority to directly address cleaning issues since we did not have a primary contact with the customers. We also observed that while large cleaning companies manage contracts, it is ultimately our cleaning skills that impact customer satisfaction.
-This realization inspired us to start our own cleaning business. With humble beginnings, we are supported by a dedicated and skilled team of cleaners. Our goal is to provide high-quality cleaning services across various sectors, focusing on building direct relationships with our clients to effectively meet their needs.
+                    Throughout our experience, we have provided cleaning services to a diverse range of businesses, including daycares, dental offices, gyms, retail companies, engineering firms, law offices, design studios, marketing agencies, community buildings, and various types of offices.
+                    During our time as subcontractors, we often felt that we lacked the authority to directly address cleaning issues since we did not have a primary contact with the customers. We also observed that while large cleaning companies manage contracts, it is ultimately our cleaning skills that impact customer satisfaction.
+                    This realization inspired us to start our own cleaning business. With humble beginnings, we are supported by a dedicated and skilled team of cleaners. Our goal is to provide high-quality cleaning services across various sectors, focusing on building direct relationships with our clients to effectively meet their needs.
                   </p>
                   <p>
                     We continue to challenge ourselves to go beyond our
@@ -127,8 +127,8 @@ This realization inspired us to start our own cleaning business. With humble beg
                 </div>
               </div>
 
-              {/* Right: Promise card */}
-              <aside className="lg:col-span-5">
+              {/* Right: Promise card (centered vertically) */}
+              <aside className="lg:col-span-5 self-center">
                 <div className="relative overflow-hidden rounded-2xl p-5 sm:p-6 bg-white/[0.03] ring-1 ring-white/10 shadow-[0_8px_30px_rgba(77,175,254,0.16)]">
                   <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 via-transparent to-accent-1/10 opacity-60" />
                   <div className="relative z-10">
@@ -238,16 +238,16 @@ This realization inspired us to start our own cleaning business. With humble beg
           <div className="absolute top-0 left-1/4 w-80 h-80 bg-gradient-to-br from-primary/20 to-transparent rounded-full blur-3xl opacity-50" />
           <div className="absolute bottom-0 right-1/4 w-72 h-72 bg-gradient-to-br from-accent-1/20 to-transparent rounded-full blur-3xl opacity-50" />
 
-            <div className="relative p-6 md:p-8 lg:p-12">
-              <div className="flex flex-col md:flex-row lg:flex-row items-center justify-between gap-4 md:gap-6">
-                <div className="text-center md:text-left lg:text-left max-w-xl">
-                  <h3 className="heading text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold bg-[#C30003] bg-clip-text text-transparent">
-                    Ready to work with a team you can count on?
-                  </h3>
-                  <p className="text-black/85 mt-1 text-sm sm:text-base">
-                    Call 437-991-7677 or request a quote now.
-                  </p>
-                </div>
+          <div className="relative p-6 md:p-8 lg:p-12">
+            <div className="flex flex-col md:flex-row lg:flex-row items-center justify-between gap-4 md:gap-6">
+              <div className="text-center md:text-left lg:text-left max-w-xl">
+                <h3 className="heading text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold bg-[#C30003] bg-clip-text text-transparent">
+                  Ready to work with a team you can count on?
+                </h3>
+                <p className="text-black/85 mt-1 text-sm sm:text-base">
+                  Call 437-991-7677 or request a quote now.
+                </p>
+              </div>
               <div className="flex gap-3">
                 <Button asChild variant="hero" className="group">
                   <Link to="/contact#quote" className="inline-flex items-center gap-2">
