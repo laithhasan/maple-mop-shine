@@ -101,100 +101,103 @@ export default function About() {
 
       {/* Our Story — updated content + promise card */}
       <section className="max-w-7xl mx-auto px-6 md:px-8">
-        <article className="relative overflow-hidden rounded-2xl p-6 md:p-8 bg-gradient-to-br from-slate-900/25 via-slate-800/15 to-transparent ring-1 ring-white/10 shadow-2xl shadow-[0_15px_60px_rgba(77,175,254,0.20)] hover:shadow-[0_22px_90px_rgba(77,175,254,0.32)] transition-shadow duration-300 supports-[backdrop-filter]:backdrop-blur-md supports-[backdrop-filter]:backdrop-saturate-150">
-          <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 via-transparent to-accent-1/10 opacity-50" />
-          <div className="relative z-10">
-            <div className="grid md:grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8">
-              {/* Left: Story text */}
-              <div className="lg:col-span-7">
-                <h2 className="heading text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold bg-[#C30003] bg-clip-text text-transparent">
-                  Our Story
-                </h2>
+  <article className="relative overflow-hidden rounded-2xl p-6 md:p-8 bg-gradient-to-br from-slate-900/25 via-slate-800/15 to-transparent ring-1 ring-white/10 shadow-2xl shadow-[0_15px_60px_rgba(77,175,254,0.20)] hover:shadow-[0_22px_90px_rgba(77,175,254,0.32)] transition-shadow duration-300 supports-[backdrop-filter]:backdrop-blur-md supports-[backdrop-filter]:backdrop-saturate-150">
+    <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 via-transparent to-accent-1/10 opacity-50" />
+    <div className="relative z-10">
+      <div className="grid md:grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8">
+        
+        {/* Left: Story text */}
+        <div className="lg:col-span-7">
+          <h2 className="heading text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold bg-[#C30003] bg-clip-text text-transparent">
+            Our Story
+          </h2>
 
-                <div className="mt-3 space-y-4 text-foreground/85 max-w-4xl leading-relaxed">
-                  <p>
-                    For the past eight years, we have been dedicated cleaners in Toronto and the Greater Toronto Area (GTA), working as subcontractors.
-                    Throughout our experience, we have provided cleaning services to a diverse range of businesses, including daycares, dental offices, gyms, retail companies, engineering firms, law offices, design studios, marketing agencies, community buildings, and various types of offices. </p>
-                    <p> During our time as subcontractors, we often felt that we lacked the authority to directly address cleaning issues since we did not have a primary contact with the customers. We also observed that while large cleaning companies manage contracts, it is ultimately our cleaning skills that impact customer satisfaction. </p>
-                    <p> This realization inspired us to start our own cleaning business. With humble beginnings, we are supported by a dedicated and skilled team of cleaners. Our goal is to provide high-quality cleaning services across various sectors, focusing on building direct relationships with our clients to effectively meet their needs.
-                  </p>
-                  <p>
-                    We continue to challenge ourselves to go beyond our
-                    achievements, industry standards, and our clients’
-                    expectations to earn and maintain a long-lasting, mutually
-                    beneficial relationship with you.
-                  </p>
+          <div className="mt-3 space-y-4 text-foreground/85 max-w-4xl leading-relaxed">
+            <p>
+              For the past eight years, we have been dedicated cleaners in Toronto and the Greater Toronto Area (GTA), working as subcontractors.
+              Throughout our experience, we have provided cleaning services to a diverse range of businesses, including daycares, dental offices, gyms, retail companies, engineering firms, law offices, design studios, marketing agencies, community buildings, and various types of offices.
+            </p>
+            <p>
+              During our time as subcontractors, we often felt that we lacked the authority to directly address cleaning issues since we did not have a primary contact with the customers. We also observed that while large cleaning companies manage contracts, it is ultimately our cleaning skills that impact customer satisfaction.
+            </p>
+            <p>
+              This realization inspired us to start our own cleaning business. With humble beginnings, we are supported by a dedicated and skilled team of cleaners. Our goal is to provide high-quality cleaning services across various sectors, focusing on building direct relationships with our clients to effectively meet their needs.
+            </p>
+            <p>
+              We continue to challenge ourselves to go beyond our achievements, industry standards, and our clients’ expectations to earn and maintain a long-lasting, mutually beneficial relationship with you.
+            </p>
+          </div>
+        </div>
+
+        {/* Right: Promise card + Stats stacked */}
+        <aside className="lg:col-span-5 self-center flex flex-col gap-6">
+          {/* Promise Card */}
+          <div className="relative overflow-hidden rounded-2xl p-5 sm:p-6 bg-white/[0.03] ring-1 ring-white/10 shadow-[0_8px_30px_rgba(77,175,254,0.16)]">
+            <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 via-transparent to-accent-1/10 opacity-60" />
+            <div className="relative z-10">
+              <h3 className="font-heading text-xl bg-[#C30003] bg-clip-text text-transparent">
+                Our Promise
+              </h3>
+              <p className="mt-2 text-sm text-foreground/80">
+                By relying on NEGOT Cleaning, you get a premise that
+                is crystal clean and shines bright. We’re available for
+                same-day and emergency cleaning services.
+              </p>
+
+              <div className="mt-4">
+                <p className="text-sm font-medium text-foreground/90">
+                  Regular to periodic janitorial service:
+                </p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {["Daily", "Bi-weekly", "Weekly", "Fortnightly", "Monthly"].map(
+                    (f) => (
+                      <span
+                        key={f}
+                        className="px-3 py-1.5 rounded-full text-xs font-medium bg-primary/10 text-primary ring-1 ring-primary/25"
+                      >
+                        {f}
+                      </span>
+                    )
+                  )}
                 </div>
               </div>
 
-              {/* Right: Promise card (centered vertically) */}
-              <aside className="lg:col-span-5 self-center">
-                <div className="relative overflow-hidden rounded-2xl p-5 sm:p-6 bg-white/[0.03] ring-1 ring-white/10 shadow-[0_8px_30px_rgba(77,175,254,0.16)]">
-                  <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 via-transparent to-accent-1/10 opacity-60" />
-                  <div className="relative z-10">
-                    <h3 className="font-heading text-xl bg-[#C30003] bg-clip-text text-transparent">
-                      Our Promise
-                    </h3>
-                    <p className="mt-2 text-sm text-foreground/80">
-                      By relying on NEGOT Cleaning, you get a premise that
-                      is crystal clean and shines bright. We’re available for
-                      same-day and emergency cleaning services.
-                    </p>
-
-                    <div className="mt-4">
-                      <p className="text-sm font-medium text-foreground/90">
-                        Regular to periodic janitorial service:
-                      </p>
-                      <div className="mt-3 flex flex-wrap gap-2">
-                        {["Daily", "Bi-weekly", "Weekly", "Fortnightly", "Monthly"].map(
-                          (f) => (
-                            <span
-                              key={f}
-                              className="px-3 py-1.5 rounded-full text-xs font-medium bg-primary/10 text-primary ring-1 ring-primary/25"
-                            >
-                              {f}
-                            </span>
-                          )
-                        )}
-                      </div>
-                    </div>
-
-                    <div className="mt-5">
-                      <Button asChild variant="hero" className="group">
-                        <Link to="/contact#quote" className="inline-flex items-center gap-2">
-                          Free Consultation & Quote
-                          <span className="transition-transform group-hover:translate-x-1">→</span>
-                        </Link>
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              </aside>
-            </div>
-
-            {/* mini stats */}
-            <div className="mt-8 md:mt-10 grid grid-cols-1 sm:grid-cols-3 gap-4">
-              {[
-                { k: "500+", v: "Happy Clients" },
-                { k: "24h", v: "Average Response" },
-                { k: "98%", v: "Satisfaction Rate" },
-              ].map((s, i) => (
-                <div
-                  key={s.v}
-                  className="group relative overflow-hidden rounded-xl p-4 text-center bg-white/[0.03] ring-1 ring-white/10 shadow-[0_8px_30px_rgba(77,175,254,0.16)] hover:shadow-[0_10px_40px_rgba(77,175,254,0.26)] transition-all"
-                  style={{ animationDelay: `${i * 120}ms` }}
-                >
-                  <div className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-[#FF6B6B] via-[#C30003] to-[#940400] bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-300">
-                    {s.k}
-                  </div>
-                  <div className="mt-1 text-sm text-foreground/70">{s.v}</div>
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-accent-1/5 via-transparent to-primary/5" />
-                </div>
-              ))}
+              <div className="mt-5">
+                <Button asChild variant="hero" className="group">
+                  <Link to="/contact#quote" className="inline-flex items-center gap-2">
+                    Free Consultation & Quote
+                    <span className="transition-transform group-hover:translate-x-1">→</span>
+                  </Link>
+                </Button>
+              </div>
             </div>
           </div>
-        </article>
-      </section>
+
+          {/* Mini stats under Promise */}
+          <div className="grid grid-cols-2 gap-4">
+            {[
+              { k: "24h", v: "Average Response" },
+              { k: "98%", v: "Satisfaction Rate" },
+            ].map((s, i) => (
+              <div
+                key={s.v}
+                className="group relative overflow-hidden rounded-xl p-4 text-center bg-white/[0.03] ring-1 ring-white/10 shadow-[0_8px_30px_rgba(77,175,254,0.16)] hover:shadow-[0_10px_40px_rgba(77,175,254,0.26)] transition-all"
+                style={{ animationDelay: `${i * 120}ms` }}
+              >
+                <div className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-[#FF6B6B] via-[#C30003] to-[#940400] bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-300">
+                  {s.k}
+                </div>
+                <div className="mt-1 text-sm text-foreground/70">{s.v}</div>
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-accent-1/5 via-transparent to-primary/5" />
+              </div>
+            ))}
+          </div>
+        </aside>
+      </div>
+    </div>
+  </article>
+</section>
+
 
       {/* Our Tools */}
       <section className="max-w-7xl mx-auto px-6 md:px-8 py-12 md:py-14">
