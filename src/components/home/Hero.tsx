@@ -271,13 +271,14 @@ export default function Hero() {
                   <div className="mt-2 sm:mt-3">
                     <span className="inline-flex items-center rounded-lg bg-red-600/70 backdrop-blur-md ring-1 ring-red-500/40 shadow-lg px-3 py-2">
   <span className="hidden sm:inline text-white text-sm sm:text-base font-medium">
-    Our website helps you connect with us. Enjoy the first five days of cleaning for free
+    Our website helps you connect with us. Enjoy the <span className="underline">first five days</span> of cleaning for free
     and decide if we're the right fit for your business!
   </span>
   <span className="sm:hidden text-white text-sm font-medium">
-    Get 5 days free cleaning to try our services
+    Get <span className="underline">5 days</span> free cleaning to try our services
   </span>
 </span>
+
 
                   </div>
                 )}
