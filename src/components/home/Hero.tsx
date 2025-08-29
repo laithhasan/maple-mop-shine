@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import LazyImage from "@/components/common/LazyImage";
 import heroOffice from "@/assets/hero-office-clean.jpg";
 import cleanSurfaces from "@/assets/clean-surfaces.jpg";
 
@@ -181,21 +182,42 @@ export default function Hero() {
                 visible ? "opacity-100" : "opacity-0"
               }`}
             >
-              <img
-                src={s.img}
-                alt={s.alt}
-                onLoad={() => markLoaded(i)}
-                className="block h-full w-full object-cover will-change-[transform] [backface-visibility:hidden] [transform:translateZ(0)]"
-                style={{
-                  animationName: active && loaded[i] ? "kenburns" : "none",
-                  animationDuration: `${DURATION_MS}ms`,
-                  animationTimingFunction: "ease-in-out",
-                  animationFillMode: "both",
-                  animationPlayState: paused ? ("paused" as const) : ("running" as const),
-                }}
-                loading={i === 0 ? "eager" : "lazy"}
-                decoding="async"
-              />
+              {i === 0 ? (
+                // First image loads eagerly for LCP optimization
+                <img
+                  src={s.img}
+                  alt={s.alt}
+                  onLoad={() => markLoaded(i)}
+                  className="block h-full w-full object-cover will-change-[transform] [backface-visibility:hidden] [transform:translateZ(0)]"
+                  style={{
+                    animationName: active && loaded[i] ? "kenburns" : "none",
+                    animationDuration: `${DURATION_MS}ms`,
+                    animationTimingFunction: "ease-in-out",
+                    animationFillMode: "both",
+                    animationPlayState: paused ? ("paused" as const) : ("running" as const),
+                  }}
+                  loading="eager"
+                  decoding="async"
+                  fetchPriority="high"
+                />
+              ) : (
+                // Subsequent images use lazy loading
+                <LazyImage
+                  src={s.img}
+                  alt={s.alt}
+                  onLoad={() => markLoaded(i)}
+                  className="block h-full w-full object-cover will-change-[transform] [backface-visibility:hidden] [transform:translateZ(0)]"
+                  style={{
+                    animationName: active && loaded[i] ? "kenburns" : "none",
+                    animationDuration: `${DURATION_MS}ms`,
+                    animationTimingFunction: "ease-in-out",
+                    animationFillMode: "both",
+                    animationPlayState: paused ? ("paused" as const) : ("running" as const),
+                  }}
+                  loading="lazy"
+                  decoding="async"
+                />
+              )}
               {/* Exact-bounds gradient tint */}
               <div
                 className="absolute inset-0 bg-gradient-to-tr from-[#940400]/25 via-transparent to-transparent pointer-events-none"

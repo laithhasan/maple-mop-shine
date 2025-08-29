@@ -98,7 +98,28 @@
     html, body, #root { overflow-x: clip; }
   }
 
-  body { @apply bg-background text-foreground font-sans antialiased; }
+  body { 
+    @apply bg-background text-foreground font-sans antialiased; 
+    /* Optimize text rendering for performance */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeSpeed;
+  }
+
+  /* Performance optimizations */
+  * {
+    /* Use hardware acceleration for transforms and animations */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+  /* Optimize images */
+  img {
+    /* Improve image rendering performance */
+    image-rendering: optimizeQuality;
+    /* Prevent layout shifts during loading */
+    height: auto;
+  }
 }
 
 /* Component-level utilities bound to design tokens */

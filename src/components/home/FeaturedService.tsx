@@ -1,7 +1,8 @@
-import heroOffice from "@/assets/hero-office-clean.jpg"; // cooler visual for this block
 import { Button } from "@/components/ui/button";
 import { Building2, Sparkles, Shield, Leaf } from "lucide-react";
 import { Link } from "react-router-dom";
+import LazyImage from "@/components/common/LazyImage";
+import heroOffice from "@/assets/hero-office-clean.jpg";
 
 export default function FeaturedService() {
   return (
@@ -81,7 +82,7 @@ export default function FeaturedService() {
           {/* Right: Interactive image panel */}
           <div className="group relative">
             <div className="relative overflow-hidden rounded-2xl ring-1 ring-white/10 shadow-2xl">
-              <img
+              <LazyImage
                 src={heroOffice}
                 alt="Crisp, modern office — freshly cleaned"
                 className="w-full h-[300px] sm:h-[350px] md:h-[400px] lg:h-[420px] object-cover transform-gpu transition duration-700 group-hover:scale-[1.03] group-hover:-rotate-[0.4deg]"

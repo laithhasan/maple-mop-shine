@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import GTA from "@/assets/GTA.png";
 import { Shield, Leaf, Clock3, Star, Calendar, Building2 } from "lucide-react";
+import LazyImage from "@/components/common/LazyImage";
+import GTA from "@/assets/GTA.png";
 
 /* ---------- tiny utilities ---------- */
 function usePrefersReducedMotion() {
@@ -179,7 +180,7 @@ export default function WhyChooseUs() {
         {/* Right column — Enhanced Image with Overlay */}
         <div className="relative group">
           <div className="relative overflow-hidden rounded-2xl shadow-2xl ring-1 ring-white/10">
-            <img
+            <LazyImage
               src={GTA}
               alt="Professional GTA cleaning"
               className="w-full h-[300px] sm:h-[400px] md:h-[450px] lg:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
